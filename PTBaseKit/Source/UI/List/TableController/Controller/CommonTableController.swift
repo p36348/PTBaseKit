@@ -61,6 +61,7 @@ public class CommonTableController: BaseController, TableController {
     }
     
     public override func performSetup() {
+        super.performSetup()
         self.performReload()
     }
     
