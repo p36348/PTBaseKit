@@ -56,8 +56,8 @@ open class BaseController: UIViewController {
         {
             self.navigationController?.navigationBar.barTintColor = UIColor.tk.white
             self.navigationController?.navigationBar.tintColor = UIColor.tk.black
-            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.tk.black,
-                                                                            NSAttributedStringKey.font: 18.5.customRegularFont]
+            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.tk.black,
+                                                                            NSFontAttributeName: 18.5.customRegularFont]
             self.navigationController?.navigationBar.isTranslucent = false
             self.navigationController?.navigationBar.shadowImage = UIImage()
             
