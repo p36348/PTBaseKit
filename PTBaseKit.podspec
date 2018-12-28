@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/p36348/PTBaseKit.git", :branch => 'master', :tag => "#{s.version}" }
   s.source_files  = "PTBaseKit/Source/*.swift", "PTBaseKit/Source/**/*.swift"
 
-  s.dependency 'SnapKit'
+  s.dependency 'SnapKit', '~> 3.0.0'
   s.dependency 'RxCocoa'
   s.dependency 'RxSwift'
   s.dependency 'MJRefresh'
