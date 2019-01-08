@@ -87,6 +87,8 @@ open class DefaultTableCell: UITableViewCell, TableCell {
         
         self.tail.contentHorizontalAlignment = .right
         
+        self.tail.titleLabel?.numberOfLines = 0
+        
         self.contentView += [self.titleLabel, self.head, self.accessory, self.tail]
         
     }

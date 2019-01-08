@@ -16,12 +16,26 @@ extension BaseController {
     }
 }
 
+//public protocol RxViewController {
+//    associatedtype E
+//    func lifeCycleEvent(with lifeCycleEvent: UIViewController.LifeCycleEvent) -> Observable<E>
+//}
+//
+//extension UIViewController {
+//    public enum LifeCycleEvent {
+//        case viewDidload, viewWillAppear, viewDidAppear, viewWillDisappear, viewDidDisappear
+//    }
+//}
+
+
 /**
  * 基础控制器
  * 为了增加流畅性, 使用 performSetup 函数替代 viewDidLoad 去执行界面初始化工作
  * 接入facebook的texture框架, 进一步提高滑动性能 (暂时去掉)
  */
-open class BaseController: UIViewController {
+open class BaseController: UIViewController { //}, RxViewController {
+    
+//    public typealias E = BaseController
     
     public fileprivate(set) lazy var disposeBags: [String: DisposeBag] = [BaseController.DisposeIdentifiers.default: self.defaultDisposeBag]
     
@@ -30,6 +44,23 @@ open class BaseController: UIViewController {
     
     /// 用于配置viewDidLoad行为, 在不继承的场景下可以使用, 相当于继承之后重载performSetup
     public var performOnViewDidLoad: (BaseController)->Void = { _ in }
+    
+//    public func lifeCycleEvent(with lifeCycleEvent: LifeCycleEvent) -> Observable<BaseController> {
+//        switch lifeCycleEvent {
+//        case .viewDidload:
+//
+//        case .viewDidAppear:
+//        case .viewWillAppear:
+//        case .viewDidDisappear:
+//        case .viewWillDisappear:
+//
+//        }
+//        return Observable.create({ (observer) -> Disposable in
+//
+//
+//            return Disposables.create()
+//        })
+//    }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
