@@ -8,7 +8,7 @@
 
 import UIKit
 import RxSwift
-//import AsyncDisplayKit
+import RxCocoa
 
 extension BaseController {
     public struct DisposeIdentifiers {
@@ -16,26 +16,12 @@ extension BaseController {
     }
 }
 
-//public protocol RxViewController {
-//    associatedtype E
-//    func lifeCycleEvent(with lifeCycleEvent: UIViewController.LifeCycleEvent) -> Observable<E>
-//}
-//
-//extension UIViewController {
-//    public enum LifeCycleEvent {
-//        case viewDidload, viewWillAppear, viewDidAppear, viewWillDisappear, viewDidDisappear
-//    }
-//}
-
-
 /**
  * 基础控制器
  * 为了增加流畅性, 使用 performSetup 函数替代 viewDidLoad 去执行界面初始化工作
  * 接入facebook的texture框架, 进一步提高滑动性能 (暂时去掉)
  */
-open class BaseController: UIViewController { //}, RxViewController {
-    
-//    public typealias E = BaseController
+open class BaseController: UIViewController {
     
     public fileprivate(set) lazy var disposeBags: [String: DisposeBag] = [BaseController.DisposeIdentifiers.default: self.defaultDisposeBag]
     
@@ -44,24 +30,7 @@ open class BaseController: UIViewController { //}, RxViewController {
     
     /// 用于配置viewDidLoad行为, 在不继承的场景下可以使用, 相当于继承之后重载performSetup
     public var performOnViewDidLoad: (BaseController)->Void = { _ in }
-    
-//    public func lifeCycleEvent(with lifeCycleEvent: LifeCycleEvent) -> Observable<BaseController> {
-//        switch lifeCycleEvent {
-//        case .viewDidload:
-//
-//        case .viewDidAppear:
-//        case .viewWillAppear:
-//        case .viewDidDisappear:
-//        case .viewWillDisappear:
-//
-//        }
-//        return Observable.create({ (observer) -> Disposable in
-//
-//
-//            return Disposables.create()
-//        })
-//    }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
         self.disposeBags.removeAll()
@@ -86,22 +55,6 @@ open class BaseController: UIViewController { //}, RxViewController {
     open func performPreSetup() {
         self.view.backgroundColor = UIColor.tk.background
         self.automaticallyAdjustsScrollViewInsets = true
-        
-        //        if
-        //            self.navigationController != nil
-        //        {
-        //            self.navigationController?.navigationBar.barTintColor = UIColor.tk.white
-        //            self.navigationController?.navigationBar.tintColor = UIColor.tk.black
-        //            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.tk.black,
-        //                                                                            NSAttributedString.Key.font: 18.5.customRegularFont]
-        //            self.navigationController?.navigationBar.isTranslucent = false
-        //            self.navigationController?.navigationBar.shadowImage = UIImage()
-        //
-        //            self.navigationController?.navigationBar.backIndicatorImage = PTBaseKit.Resource.backIndicatorImage
-        //            self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = PTBaseKit.Resource.backIndicatorTransitionMaskImage
-        //
-        //            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        //        }
     }
     
     /**
