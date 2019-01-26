@@ -92,7 +92,7 @@ extension UIViewController {
     
     /// UIViewController的生命周期事件
     public enum LifeCycleEvent {
-        case viewDidload, viewWillAppear, viewDidAppear, viewWillDisappear, viewDidDisappear
+        case viewDidLoad, viewWillAppear, viewDidAppear, viewWillDisappear, viewDidDisappear
     }
 }
 // MARK: - 增加rx拓展, 方便在响应式结构中使用.
@@ -103,7 +103,7 @@ extension Reactive where Base: UIViewController {
     public func controlEvent(with lifeCycleEvent: UIViewController.LifeCycleEvent) -> ControlEvent<Void> {
         
         switch lifeCycleEvent {
-        case .viewDidload:
+        case .viewDidLoad:
             return ControlEvent(events: sentMessage(#selector(UIViewController.viewDidLoad)).map({_ in}))
         case .viewDidAppear:
             return ControlEvent(events: sentMessage(#selector(UIViewController.viewDidAppear)).map({_ in}))

@@ -48,6 +48,13 @@ class IndexController: BaseController {
     
     override func performSetup() {
         
+        uikitTable.rx
+            .controlEvent(with: .viewDidLoad)
+            .subscribe(onNext: {
+                print("uikitTable view did load")
+            })
+            .disposed(by: self)
+        
         self.setup(controller: self.uikitTable, segmentIndex: 0)
         self.setup(controller: self.asdkTable, segmentIndex: 1)
         self.setup(controller: self.map, segmentIndex: 2)
