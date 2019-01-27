@@ -14,7 +14,7 @@ private var internal_rx_refreshing_key = "internal_rx_refreshing_key"
 
 extension UIScrollView {
     
-    var rx_refreshing: Observable<Bool> {
+    public var rx_refreshing: Observable<Bool> {
         return self.internal_rx_refreshing
     }
     
@@ -29,7 +29,7 @@ extension UIScrollView {
         }
     }
     
-    var rx_pullToRefresh: Observable<UIScrollView?> {
+    public var rx_pullToRefresh: Observable<UIScrollView?> {
         
         return Observable.create({ [weak self] (observer) -> Disposable in
             
@@ -48,7 +48,7 @@ extension UIScrollView {
             })
     }
     
-    var rx_pullToLoadMore: Observable<UIScrollView?> {
+    public var rx_pullToLoadMore: Observable<UIScrollView?> {
         
         return Observable.create({ [weak self] (observer) -> Disposable in
             
@@ -67,7 +67,7 @@ extension UIScrollView {
             })
     }
     
-    func rx_beginReload() -> Observable<UIScrollView> {
+    public func rx_beginReload() -> Observable<UIScrollView> {
         if let header = self.mj_header, !header.isRefreshing {
             header.beginRefreshing()
             return Observable.just(self)
@@ -77,7 +77,7 @@ extension UIScrollView {
         }
     }
     
-    func rx_beginLoadMore() -> Observable<UIScrollView>  {
+    public func rx_beginLoadMore() -> Observable<UIScrollView>  {
         if let footer = self.mj_footer, !footer.isRefreshing {
             footer.beginRefreshing()
             return Observable.just(self)
@@ -87,12 +87,12 @@ extension UIScrollView {
         }
     }
     
-    func rx_stopLoading() -> Observable<UIScrollView> {
+    public func rx_stopLoading() -> Observable<UIScrollView> {
         self.stopLoading()
         return Observable.just(self)
     }
     
-    func stopLoading() {
+    public func stopLoading() {
         if self.mj_header?.isRefreshing == true {
             self.mj_header.endRefreshing()
         }

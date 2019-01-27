@@ -27,6 +27,25 @@ extension UIViewController {
     
     // 顶部位移(controller全屏幕的时候才适用)
     public var topOffset: CGFloat {
-        return self.navigationController?.navigationBar.isTranslucent == true ? (kSafeAreInsets.top + self.navigationBarHeight) : kSafeAreInsets.top
+        
+        var result: CGFloat = custom_safeAreaInsets.top
+        
+        if self.navigationController?.navigationBar.isTranslucent == false {
+            result -= self.navigationBarHeight
+        }
+        
+        return result
+    }
+    
+    public var custom_safeAreaInsets: UIEdgeInsets {
+        get {
+            let insets: UIEdgeInsets
+            if #available(iOS 11.0, *) {
+                insets = self.view.safeAreaInsets
+            } else {
+                insets = UIEdgeInsets(top: UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0)
+            }
+            return insets
+        }
     }
 }

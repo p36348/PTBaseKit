@@ -8,7 +8,7 @@
 
 import UIKit
 import RxSwift
-//import AsyncDisplayKit
+import RxCocoa
 
 extension BaseController {
     public struct DisposeIdentifiers {
@@ -30,7 +30,7 @@ open class BaseController: UIViewController {
     
     /// 用于配置viewDidLoad行为, 在不继承的场景下可以使用, 相当于继承之后重载performSetup
     public var performOnViewDidLoad: (BaseController)->Void = { _ in }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
         self.disposeBags.removeAll()
@@ -55,22 +55,6 @@ open class BaseController: UIViewController {
     open func performPreSetup() {
         self.view.backgroundColor = UIColor.tk.background
         self.automaticallyAdjustsScrollViewInsets = true
-        
-        //        if
-        //            self.navigationController != nil
-        //        {
-        //            self.navigationController?.navigationBar.barTintColor = UIColor.tk.white
-        //            self.navigationController?.navigationBar.tintColor = UIColor.tk.black
-        //            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.tk.black,
-        //                                                                            NSAttributedString.Key.font: 18.5.customRegularFont]
-        //            self.navigationController?.navigationBar.isTranslucent = false
-        //            self.navigationController?.navigationBar.shadowImage = UIImage()
-        //
-        //            self.navigationController?.navigationBar.backIndicatorImage = PTBaseKit.Resource.backIndicatorImage
-        //            self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = PTBaseKit.Resource.backIndicatorTransitionMaskImage
-        //
-        //            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        //        }
     }
     
     /**

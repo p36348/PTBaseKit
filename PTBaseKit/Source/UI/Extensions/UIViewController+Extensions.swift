@@ -84,47 +84,35 @@ extension UIViewController{
     }
 }
 
-//extension UIViewController {
-//    open override class func initialize() {
-//        guard self === UIViewController.self else {
-//            return
-//        }
-//        
-//        // if using swift3.0+
-//        let dispatchOnce: Void = {
-//            replaceViewWillAppear()
-//        }()
-//        _ = dispatchOnce
-//    }
-//    
-//    // 替换系统的 ViewWillAppear
-//    private class func replaceViewWillAppear() {
-//        let originSel = #selector(UIViewController.viewWillAppear(_:))
-//        let swizzlSel = #selector(UIViewController.cgy_viewWillAppear(_:))
-//        
-//        let originMethod = class_getInstanceMethod(self, originSel)
-//        let swizzlMethod = class_getInstanceMethod(self, swizzlSel)
-//        
-//        let addMethod = class_addMethod(self, originSel,
-//                                        method_getImplementation(swizzlMethod),
-//                                        method_getTypeEncoding(swizzlMethod))
-//        
-//        if addMethod {
-//            class_replaceMethod(self, swizzlSel,
-//                                method_getImplementation(originMethod),
-//                                method_getTypeEncoding(originMethod))
-//        } else {
-//            method_exchangeImplementations(originMethod, swizzlMethod)
-//        }
-//    }
-//    
-//    func cgy_viewWillAppear(_ animated: Bool) {
-//        self.cgy_viewWillAppear(animated)
-//        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "",
-//                                                                style: .plain,
-//                                                                target: nil,
-//                                                                action: nil)
-//        
-//        
-//    }
-//}
+
+import RxCocoa
+import RxSwift
+
+extension UIViewController {
+    
+    /// UIViewController的生命周期事件
+    public enum LifeCycleEvent {
+        case viewDidLoad, viewWillAppear, viewDidAppear, viewWillDisappear, viewDidDisappear
+    }
+}
+// MARK: - 增加rx拓展, 方便在响应式结构中使用.
+extension Reactive where Base: UIViewController {
+    /// 用于获取生命周期事件的observable
+    ///
+    /// - Parameter lifeCycleEvent: 生命周期事件
+    public func controlEvent(with lifeCycleEvent: UIViewController.LifeCycleEvent) -> ControlEvent<Void> {
+        
+        switch lifeCycleEvent {
+        case .viewDidLoad:
+            return ControlEvent(events: sentMessage(#selector(UIViewController.viewDidLoad)).map({_ in}))
+        case .viewDidAppear:
+            return ControlEvent(events: sentMessage(#selector(UIViewController.viewDidAppear)).map({_ in}))
+        case .viewWillAppear:
+            return ControlEvent(events: sentMessage(#selector(UIViewController.viewWillAppear)).map({_ in}))
+        case .viewDidDisappear:
+            return ControlEvent(events: sentMessage(#selector(UIViewController.viewDidDisappear)).map({_ in}))
+        case .viewWillDisappear:
+            return ControlEvent(events: sentMessage(#selector(UIViewController.viewWillDisappear)).map({_ in}))
+        }
+    }
+}

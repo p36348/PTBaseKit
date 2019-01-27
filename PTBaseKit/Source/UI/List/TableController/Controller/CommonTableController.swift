@@ -60,7 +60,8 @@ public class CommonTableController: BaseController, TableController {
         self.bindObservables()
     }
     
-    public override func performSetup() {
+    @objc public override func performSetup() {
+        super.performSetup()
         self.performReload()
     }
     

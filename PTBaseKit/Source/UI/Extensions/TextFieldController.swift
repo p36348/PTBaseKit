@@ -32,8 +32,9 @@ public class TextFieldController: BaseController {
     
     var doneAction: ((TextFieldController, String?)->Void)? = nil
     
-    public override func performPreSetup() {
-        super.performPreSetup()
+    
+    public override func performSetup() {
+        super.performSetup()
         self.setupUI()
         self.bindObservable()
     }

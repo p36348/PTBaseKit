@@ -23,6 +23,7 @@ public enum AttributedStringOptions {
     case lineBreakMode(NSLineBreakMode)
     case indent(head: CGFloat, tail: CGFloat)
     case underLine(NSUnderlineStyle?,  UIColor?)
+    case spacing(CGFloat)
 }
 
 extension String {
@@ -39,6 +40,8 @@ extension String {
         
         options.forEach { (option) in
             switch option {
+            case .spacing(let spacing):
+                attributes[NSAttributedString.Key.kern] = spacing
             case .textColor(let color):
                 textColor = color
             case .font(let font):
@@ -92,9 +95,11 @@ public func +<T: NSMutableAttributedString>(left: T, option: AttributedStringOpt
     left.enumerateAttributes(in: NSRange(location: 0, length: left.string.count), options: []) { [weak left] (originalAttribute, range, ptr) in
         var newAttribute = originalAttribute
         
-        var paragraphStyle = (newAttribute[NSAttributedString.Key.paragraphStyle] as? NSMutableParagraphStyle) ?? NSMutableParagraphStyle()
+        let paragraphStyle = (newAttribute[NSAttributedString.Key.paragraphStyle] as? NSMutableParagraphStyle) ?? NSMutableParagraphStyle()
         
         switch option {
+        case .spacing(let spacing):
+            newAttribute[NSAttributedString.Key.kern] = spacing
         case .textColor(let color):
             newAttribute[NSAttributedString.Key.foregroundColor] = color
         case .font(let font):
