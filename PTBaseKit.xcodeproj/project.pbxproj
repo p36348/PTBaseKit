@@ -12,6 +12,7 @@
 		95353D1F2153C85100E8436E /* BaiduMap+MapAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95353D1E2153C85100E8436E /* BaiduMap+MapAdapter.swift */; };
 		95409114212C098D00A82C7F /* IndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95409113212C098D00A82C7F /* IndexController.swift */; };
 		956CAB4A212D51BB00020D6E /* UtilsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956CAB49212D51BB00020D6E /* UtilsController.swift */; };
+		95927C3F221A9C68009CA9D4 /* IGListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95927C3E221A9C68009CA9D4 /* IGListViewController.swift */; };
 		9593002C2154D4070084AF9C /* OtherOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959300202154D4070084AF9C /* OtherOperator.swift */; };
 		9593002D2154D4070084AF9C /* CssOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959300212154D4070084AF9C /* CssOperator.swift */; };
 		9593002E2154D4070084AF9C /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959300222154D4070084AF9C /* UIColor.swift */; };
@@ -50,7 +51,6 @@
 		959BBF392111F4B500106646 /* DefaultTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBEE82111F4B400106646 /* DefaultTableCell.swift */; };
 		959BBF3A2111F4B500106646 /* CommonTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBEEA2111F4B400106646 /* CommonTableController.swift */; };
 		959BBF3B2111F4B500106646 /* DefaultTableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBEEC2111F4B400106646 /* DefaultTableSection.swift */; };
-		959BBF3C2111F4B500106646 /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBEEE2111F4B400106646 /* ListController.swift */; };
 		959BBF3D2111F4B500106646 /* TableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBEEF2111F4B400106646 /* TableController.swift */; };
 		959BBF3F2111F4B500106646 /* DefaultTableCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBEF42111F4B400106646 /* DefaultTableCellNode.swift */; };
 		959BBF402111F4B500106646 /* DefaultTableSectionNodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBEF52111F4B400106646 /* DefaultTableSectionNodeModel.swift */; };
@@ -72,7 +72,6 @@
 		959BBF5C2111F4B500106646 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBF1E2111F4B400106646 /* AppDelegate.swift */; };
 		959BBF5E2111F4F300106646 /* UIKitTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBF5D2111F4F300106646 /* UIKitTableController.swift */; };
 		95A4526B212EB3AA00325960 /* WebURLController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A4526A212EB3AA00325960 /* WebURLController.swift */; };
-		95AB4636219B1FD2001C31D2 /* ListController+IGListKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AB4635219B1FD2001C31D2 /* ListController+IGListKit.swift */; };
 		95B373C82186D49900608E53 /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B373C72186D49900608E53 /* Date+Utils.swift */; };
 		95BA686B2121F3A300FDB7FD /* MJRefresh+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BA686A2121F3A300FDB7FD /* MJRefresh+Extension.swift */; };
 		95D0F21F2198573000F74187 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D0F21E2198573000F74187 /* Global.swift */; };
@@ -99,6 +98,7 @@
 		95353D1E2153C85100E8436E /* BaiduMap+MapAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaiduMap+MapAdapter.swift"; sourceTree = "<group>"; };
 		95409113212C098D00A82C7F /* IndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexController.swift; sourceTree = "<group>"; };
 		956CAB49212D51BB00020D6E /* UtilsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsController.swift; sourceTree = "<group>"; };
+		95927C3E221A9C68009CA9D4 /* IGListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGListViewController.swift; sourceTree = "<group>"; };
 		959300202154D4070084AF9C /* OtherOperator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherOperator.swift; sourceTree = "<group>"; };
 		959300212154D4070084AF9C /* CssOperator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CssOperator.swift; sourceTree = "<group>"; };
 		959300222154D4070084AF9C /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -141,7 +141,6 @@
 		959BBEE82111F4B400106646 /* DefaultTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableCell.swift; sourceTree = "<group>"; };
 		959BBEEA2111F4B400106646 /* CommonTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonTableController.swift; sourceTree = "<group>"; };
 		959BBEEC2111F4B400106646 /* DefaultTableSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableSection.swift; sourceTree = "<group>"; };
-		959BBEEE2111F4B400106646 /* ListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
 		959BBEEF2111F4B400106646 /* TableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableController.swift; sourceTree = "<group>"; };
 		959BBEF42111F4B400106646 /* DefaultTableCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableCellNode.swift; sourceTree = "<group>"; };
 		959BBEF52111F4B400106646 /* DefaultTableSectionNodeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableSectionNodeModel.swift; sourceTree = "<group>"; };
@@ -163,7 +162,6 @@
 		959BBF1E2111F4B400106646 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		959BBF5D2111F4F300106646 /* UIKitTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitTableController.swift; sourceTree = "<group>"; };
 		95A4526A212EB3AA00325960 /* WebURLController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebURLController.swift; sourceTree = "<group>"; };
-		95AB4635219B1FD2001C31D2 /* ListController+IGListKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListController+IGListKit.swift"; sourceTree = "<group>"; };
 		95B373C72186D49900608E53 /* Date+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
 		95BA686A2121F3A300FDB7FD /* MJRefresh+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MJRefresh+Extension.swift"; sourceTree = "<group>"; };
 		95D0F21E2198573000F74187 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
@@ -201,11 +199,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		95927C3D221A9C5C009CA9D4 /* IGListViewController */ = {
+			isa = PBXGroup;
+			children = (
+				95927C3E221A9C68009CA9D4 /* IGListViewController.swift */,
+			);
+			path = IGListViewController;
+			sourceTree = "<group>";
+		};
 		9593001D2154C0710084AF9C /* Processing */ = {
 			isa = PBXGroup;
 			children = (
-				959BBEEE2111F4B400106646 /* ListController.swift */,
-				95AB4635219B1FD2001C31D2 /* ListController+IGListKit.swift */,
 				959BBEF22111F4B400106646 /* ASDisplayKit */,
 			);
 			path = Processing;
@@ -393,6 +397,7 @@
 		959BBEE12111F4B400106646 /* List */ = {
 			isa = PBXGroup;
 			children = (
+				95927C3D221A9C5C009CA9D4 /* IGListViewController */,
 				959BBEE22111F4B400106646 /* TableController */,
 				959BBEED2111F4B400106646 /* Protocol */,
 			);
@@ -820,6 +825,7 @@
 				959300352154D4070084AF9C /* UIImageViewCss.swift in Sources */,
 				959300302154D4070084AF9C /* UIViewCss.swift in Sources */,
 				959BBF302111F4B400106646 /* UIButton+Extension.swift in Sources */,
+				95927C3F221A9C68009CA9D4 /* IGListViewController.swift in Sources */,
 				959BBF492111F4B500106646 /* BlockOpreation+Utils.swift in Sources */,
 				95353D1F2153C85100E8436E /* BaiduMap+MapAdapter.swift in Sources */,
 				959BBF3D2111F4B500106646 /* TableController.swift in Sources */,
@@ -836,7 +842,6 @@
 				959BBF452111F4B500106646 /* BaseController.swift in Sources */,
 				959BBF3F2111F4B500106646 /* DefaultTableCellNode.swift in Sources */,
 				959BBF5A2111F4B500106646 /* SystemInfo.swift in Sources */,
-				959BBF3C2111F4B500106646 /* ListController.swift in Sources */,
 				959BBF592111F4B500106646 /* MapAdapter.swift in Sources */,
 				95A4526B212EB3AA00325960 /* WebURLController.swift in Sources */,
 				959BBF432111F4B500106646 /* TipsController.swift in Sources */,
@@ -862,7 +867,6 @@
 				959BBF2E2111F4B400106646 /* UIViewController+Extensions.swift in Sources */,
 				959BBF262111F4B400106646 /* GlobalValues.swift in Sources */,
 				959BBF312111F4B400106646 /* UIImage+Extensions.swift in Sources */,
-				95AB4636219B1FD2001C31D2 /* ListController+IGListKit.swift in Sources */,
 				95D0F21F2198573000F74187 /* Global.swift in Sources */,
 				959BBF232111F4B400106646 /* AMap+MapAdapter.swift in Sources */,
 				959300342154D4070084AF9C /* UIFont.swift in Sources */,

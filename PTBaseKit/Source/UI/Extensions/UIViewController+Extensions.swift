@@ -100,19 +100,19 @@ extension Reactive where Base: UIViewController {
     /// 用于获取生命周期事件的observable
     ///
     /// - Parameter lifeCycleEvent: 生命周期事件
-    public func controlEvent(with lifeCycleEvent: UIViewController.LifeCycleEvent) -> ControlEvent<Void> {
+    public func controlEvent(with lifeCycleEvent: UIViewController.LifeCycleEvent) -> ControlEvent<Base> {
         
         switch lifeCycleEvent {
         case .viewDidLoad:
-            return ControlEvent(events: sentMessage(#selector(UIViewController.viewDidLoad)).map({_ in}))
+            return ControlEvent(events: sentMessage(#selector(UIViewController.viewDidLoad)).map({ _ in self.base}))
         case .viewDidAppear:
-            return ControlEvent(events: sentMessage(#selector(UIViewController.viewDidAppear)).map({_ in}))
+            return ControlEvent(events: sentMessage(#selector(UIViewController.viewDidAppear)).map({ _ in self.base}))
         case .viewWillAppear:
-            return ControlEvent(events: sentMessage(#selector(UIViewController.viewWillAppear)).map({_ in}))
+            return ControlEvent(events: sentMessage(#selector(UIViewController.viewWillAppear)).map({ _ in self.base}))
         case .viewDidDisappear:
-            return ControlEvent(events: sentMessage(#selector(UIViewController.viewDidDisappear)).map({_ in}))
+            return ControlEvent(events: sentMessage(#selector(UIViewController.viewDidDisappear)).map({ _ in self.base}))
         case .viewWillDisappear:
-            return ControlEvent(events: sentMessage(#selector(UIViewController.viewWillDisappear)).map({_ in}))
+            return ControlEvent(events: sentMessage(#selector(UIViewController.viewWillDisappear)).map({ _ in self.base}))
         }
     }
 }

@@ -50,7 +50,7 @@ class IndexController: BaseController {
         
         uikitTable.rx
             .controlEvent(with: .viewDidLoad)
-            .subscribe(onNext: {
+            .subscribe(onNext: { controller in
                 print("uikitTable view did load")
             })
             .disposed(by: self)
