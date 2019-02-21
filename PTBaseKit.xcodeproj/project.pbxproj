@@ -330,7 +330,6 @@
 		959BBECB2111F4B400106646 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				95C7A10C215A0AE600775C7C /* CycleScroll */,
 				959BBECC2111F4B400106646 /* GlobalValues */,
 				959BBECF2111F4B400106646 /* Loading */,
 				959BBED12111F4B400106646 /* Web */,
@@ -559,13 +558,6 @@
 				959BBEE82111F4B400106646 /* DefaultTableCell.swift */,
 			);
 			path = TableCell;
-			sourceTree = "<group>";
-		};
-		95C7A10C215A0AE600775C7C /* CycleScroll */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CycleScroll;
 			sourceTree = "<group>";
 		};
 		95FAFBC4211339CF00FEA6F5 /* Views */ = {

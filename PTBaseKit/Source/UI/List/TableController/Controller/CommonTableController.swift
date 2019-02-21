@@ -29,8 +29,6 @@ public class CommonTableController: BaseController, TableController {
     
     fileprivate var loadMoreAction: ((CommonTableController)->Void)? = nil
     
-    fileprivate var tableDidScrollAction: ((CommonTableController)->Void)? = nil
-    
     fileprivate var tableDidCommitEditing: ((CommonTableController, UITableViewCell.EditingStyle, IndexPath) -> Void)? = nil
     
     fileprivate var loadAutomaticlly: Bool = true
@@ -151,7 +149,7 @@ public class CommonTableController: BaseController, TableController {
     
     public func bindObservables() {
         if let _ = self.reloadAction {
-            self.tableView.rx_pullToRefresh
+            self.tableView.rx.pullToRefresh
                 .subscribe(onNext: {[weak self] _ in
                     guard let weakSelf = self else {return}
                     weakSelf.reloadAction?(weakSelf)
@@ -171,10 +169,6 @@ extension CommonTableController {
 }
 
 extension CommonTableController: UITableViewDelegate {
-    
-    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.tableDidScrollAction?(self)
-    }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return self.sectionViewModels[indexPath.section].cellViewModels[indexPath.row].height
@@ -309,15 +303,8 @@ extension CommonTableController {
         return self
     }
     
-    public func performWhenTableScrollDidScroll(action: @escaping (CommonTableController) -> Void) -> CommonTableController {
-        self.tableDidScrollAction = action
-        return self
-    }
-    
     public func setupHeader(_ header: UIView) -> CommonTableController {
-        
         self.header = header
-        
         return self
     }
     
@@ -410,7 +397,7 @@ extension CommonTableController {
         // MARK: 只插入到最后一行section, 不另外添加section, 为了兼容已经接入了的项目
         switch self.sectionViewModels.count {
         case 0: // error, not gonna happen
-            break
+            fatalError()
         default: // one row, insert
             let section = CommonTableSectionViewModel(header: self.sectionViewModels.last!.header,
                                                       footer: self.sectionViewModels.last!.footer,

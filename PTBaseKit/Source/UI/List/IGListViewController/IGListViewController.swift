@@ -163,7 +163,7 @@ class IGListViewController: BaseController {
         }
         
         if let _ = self.reloadAction {
-            self.collectionView.rx_pullToRefresh
+            self.collectionView.rx.pullToRefresh
                 .subscribe(onNext: { [weak self] _ in
                     guard let weakSelf = self else {return}
                     weakSelf.reloadAction?(weakSelf)

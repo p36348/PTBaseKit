@@ -15,3 +15,11 @@ public var kSafeAreInsets: UIEdgeInsets {
         return UIEdgeInsets(top: UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0)
     }
 }
+
+public let windowsFrame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight)
+
+public let onepixel: CGFloat = 1 / UIScreen.main.scale
+
+public let kScreenHeight: CGFloat = UIScreen.main.bounds.height
+
+public let kScreenWidth: CGFloat  = UIScreen.main.bounds.width

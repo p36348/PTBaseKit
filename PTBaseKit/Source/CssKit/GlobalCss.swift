@@ -105,13 +105,6 @@ extension UIColor {
     }
 }
 
-// MARK: - additional css
-
-//edges
-public private(set) var small:CGFloat = 12
-
-public private(set) var normal:CGFloat = 25
-
 // uiview css
 public private(set) var spliteCss: UIViewCss = UIColor.tk.splite.bgCss + CGRect(x: 0, y: 0, width: kScreenWidth, height: onepixel).css
 
@@ -158,13 +151,3 @@ extension Int {
         return UIColor(red:CGFloat((self & 0xFF0000) >> 16) / 255 , green: CGFloat((self & 0x00FF00) >> 8) / 255, blue: CGFloat((self & 0x0000FF) ) / 255, alpha: 1.0)
     }
 }
-
-public let windowsFrame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight)
-
-public let onepixel: CGFloat = 1 / UIScreen.main.scale
-
-public let kScreenHeight: CGFloat = UIScreen.main.bounds.height
-
-public let kScreenWidth: CGFloat  = UIScreen.main.bounds.width
-
-

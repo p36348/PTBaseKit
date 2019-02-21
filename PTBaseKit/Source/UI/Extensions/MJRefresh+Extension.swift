@@ -11,94 +11,101 @@ import MJRefresh
 import RxSwift
 
 private var internal_rx_refreshing_key = "internal_rx_refreshing_key"
+private var internal_rx_pullToRefresh_key = "internal_rx_pullToRefresh_key"
+private var internal_rx_pullToLoadMore_key = "internal_rx_pullToLoadMore_key"
 
-extension UIScrollView {
+extension Reactive where Base: UIScrollView {
     
-    public var rx_refreshing: Observable<Bool> {
-        return self.internal_rx_refreshing
+    public var refreshing: Observable<Bool> {
+        return Observable.of(false)
     }
     
     private var internal_rx_refreshing: PublishSubject<Bool> {
         get {
-            guard let item = objc_getAssociatedObject(self, &internal_rx_refreshing_key) as? PublishSubject<Bool> else {
+            guard let item = objc_getAssociatedObject(base, &internal_rx_refreshing_key) as? PublishSubject<Bool> else {
                 let item = PublishSubject<Bool>()
-                objc_setAssociatedObject(self, &internal_rx_refreshing_key, item, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+                objc_setAssociatedObject(base, &internal_rx_refreshing_key, item, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
                 return item
             }
             return item
         }
     }
     
-    public var rx_pullToRefresh: Observable<UIScrollView?> {
-        
-        return Observable.create({ [weak self] (observer) -> Disposable in
-            
-            if let _self = self, _self.mj_header == nil {
-                _self.mj_header = MJRefreshNormalHeader()
+    private var internal_rx_pullToRefresh: PublishSubject<Base> {
+        get {
+            guard let item = objc_getAssociatedObject(base, &internal_rx_pullToRefresh_key) as? PublishSubject<Base> else {
+                let item = PublishSubject<Base>()
+                objc_setAssociatedObject(base, &internal_rx_pullToRefresh_key, item, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+                return item
             }
-            
-            self?.mj_header.refreshingBlock = {
-                self?.internal_rx_refreshing.onNext(true)
-                observer.onNext(self)
-            }
-            return Disposables.create()
-        })
-            .do(onDispose: { [weak self] in
-                self?.mj_header = nil
-            })
-    }
-    
-    public var rx_pullToLoadMore: Observable<UIScrollView?> {
-        
-        return Observable.create({ [weak self] (observer) -> Disposable in
-            
-            if let _self = self, _self.mj_footer == nil {
-                _self.mj_footer = MJRefreshAutoStateFooter()
-            }
-            
-            self?.mj_footer.refreshingBlock = {
-                self?.internal_rx_refreshing.onNext(true)
-                observer.onNext(self)
-            }
-            return Disposables.create()
-        })
-            .do(onDispose: { [weak self] in
-                self?.mj_footer = nil
-            })
-    }
-    
-    public func rx_beginReload() -> Observable<UIScrollView> {
-        if let header = self.mj_header, !header.isRefreshing {
-            header.beginRefreshing()
-            return Observable.just(self)
-        }
-        else {
-            return Observable.error(NSError(domain: "没有定义刷新操作", code: 0, userInfo: nil))
+            return item
         }
     }
     
-    public func rx_beginLoadMore() -> Observable<UIScrollView>  {
-        if let footer = self.mj_footer, !footer.isRefreshing {
+    private var internal_rx_pullToLoadMore: PublishSubject<Base> {
+        get {
+            guard let item = objc_getAssociatedObject(base, &internal_rx_pullToLoadMore_key) as? PublishSubject<Base> else {
+                let item = PublishSubject<Base>()
+                objc_setAssociatedObject(base, &internal_rx_pullToLoadMore_key, item, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+                return item
+            }
+            return item
+        }
+    }
+
+    
+    public func beginReload() -> Observable<Base> {
+        if let footer = base.mj_footer, !footer.isRefreshing {
             footer.beginRefreshing()
-            return Observable.just(self)
+            return Observable.just(base)
         }
         else {
             return Observable.error(NSError(domain: "没有定义刷新操作", code: 0, userInfo: nil))
         }
     }
     
-    public func rx_stopLoading() -> Observable<UIScrollView> {
-        self.stopLoading()
-        return Observable.just(self)
+    public func beginLoadMore() -> Observable<Base> {
+        if let footer = base.mj_footer, !footer.isRefreshing {
+            footer.beginRefreshing()
+            return Observable.just(base)
+        }
+        else {
+            return Observable.error(NSError(domain: "没有定义刷新操作", code: 0, userInfo: nil))
+        }
     }
     
-    public func stopLoading() {
-        if self.mj_header?.isRefreshing == true {
-            self.mj_header.endRefreshing()
+    public func stopLoading() -> Observable<Base> {
+        if base.mj_header?.isRefreshing == true {
+            base.mj_header.endRefreshing()
         }
-        if self.mj_footer?.isRefreshing == true {
-            self.mj_footer.endRefreshing()
+        if base.mj_footer?.isRefreshing == true {
+            base.mj_footer.endRefreshing()
         }
         self.internal_rx_refreshing.onNext(false)
+        return Observable.of(base)
+    }
+    
+    public var pullToRefresh: Observable<Base> {
+        if base.mj_header == nil {
+            base.mj_header = MJRefreshNormalHeader()
+            base.mj_header.refreshingBlock = {
+                self.internal_rx_refreshing.onNext(true)
+                self.internal_rx_pullToRefresh.onNext(self.base)
+            }
+        }
+        
+        return internal_rx_pullToRefresh.share()
+    }
+    
+    public var pullToLoadMore: Observable<Base> {
+        if base.mj_footer == nil {
+            base.mj_footer = MJRefreshAutoStateFooter()
+            base.mj_footer.refreshingBlock = {
+                self.internal_rx_refreshing.onNext(true)
+                self.internal_rx_pullToLoadMore.onNext(self.base)
+            }
+        }
+        
+        return internal_rx_pullToLoadMore.share()
     }
 }
