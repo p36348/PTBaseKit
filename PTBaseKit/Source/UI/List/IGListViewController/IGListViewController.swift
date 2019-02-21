@@ -30,12 +30,12 @@ extension CollectionCellViewModel {
 }
 
 
-protocol CollectionSectionViewModel {
+public protocol CollectionSectionViewModel {
     var cellViewModels: [CollectionCellViewModel] {get}
 }
 
 
-protocol IGListSectionViewModel: ListDiffable {
+public protocol IGListSectionViewModel: ListDiffable {
     var header: IGListSectionHeaderFooterViewModel? {get}
     var footer: IGListSectionHeaderFooterViewModel? {get}
     var cellItems: [CollectionCellViewModel] {get}
@@ -68,12 +68,12 @@ extension IGListSectionViewModel {
     }
 }
 
-protocol IGListSectionHeaderFooter: class {
+public protocol IGListSectionHeaderFooter: class {
     var viewModel: IGListSectionHeaderFooterViewModel? {get set}
     func setup(viewModel: IGListSectionHeaderFooterViewModel)
 }
 
-protocol IGListSectionHeaderFooterViewModel {
+public protocol IGListSectionHeaderFooterViewModel {
     var viewClass: AnyClass {get}
     var size: CGSize {get}
     var performWhenSelect: ((Int)->Void)? {get}
@@ -87,7 +87,7 @@ extension IGListSectionHeaderFooterViewModel {
 
 typealias IGListUpdateParams = (items: [IGListSectionViewModel], isLast: Bool)
 
-class IGListViewController: BaseController {
+public class IGListViewController: BaseController {
     
     // views
     
@@ -116,7 +116,7 @@ class IGListViewController: BaseController {
     
     private var backgroundColor: UIColor = UIColor.tk.background
     
-    var items: [IGListSectionViewModel] = []
+    public var items: [IGListSectionViewModel] = []
     
     private var reloadAction: ((IGListViewController) -> Void)? = nil
     
@@ -129,7 +129,7 @@ class IGListViewController: BaseController {
         self.collectionView.mj_footer = nil
     }
     
-    override func performPreSetup() {
+    override public func performPreSetup() {
         super.performPreSetup()
         
         if let _header = self.header {
@@ -172,7 +172,7 @@ class IGListViewController: BaseController {
         }
     }
     
-    override func performSetup() {
+    override public func performSetup() {
         super.performSetup()
         
         if self.items.count != 0 {
@@ -202,7 +202,7 @@ class IGListViewController: BaseController {
         }
     }
     
-    func reload(items: [IGListSectionViewModel], isLast: Bool = true, finished: ((IGListViewController)->Void)? = nil) {
+    public func reload(items: [IGListSectionViewModel], isLast: Bool = true, finished: ((IGListViewController)->Void)? = nil) {
         if
             self.collectionView.mj_header?.state == .refreshing
         {
@@ -222,7 +222,7 @@ class IGListViewController: BaseController {
         self.updateList(items: items, finished: finished)
     }
     
-    func loadMore(items: [IGListSectionViewModel], isLast: Bool) {
+    public func loadMore(items: [IGListSectionViewModel], isLast: Bool) {
         if self.collectionView.mj_footer.state == .refreshing {
             (items.count == 0 || isLast) ? self.collectionView.mj_footer.endRefreshingWithNoMoreData() : self.collectionView.mj_footer.endRefreshing()
         }
@@ -230,7 +230,7 @@ class IGListViewController: BaseController {
         self.updateList(items: newItems)
     }
     
-    func reloadList() {
+    public func reloadList() {
         self.adapter.reloadData(completion: nil)
     }
     
@@ -244,11 +244,11 @@ class IGListViewController: BaseController {
 
 
 extension IGListViewController: ListAdapterDataSource {
-    func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
+    public func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
         return self.items
     }
     
-    func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
+    public func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
         
         guard let item = object as? IGListSectionViewModel else
         {
@@ -257,7 +257,7 @@ extension IGListViewController: ListAdapterDataSource {
         return item.sectionController
     }
     
-    func emptyView(for listAdapter: ListAdapter) -> UIView? {
+    public func emptyView(for listAdapter: ListAdapter) -> UIView? {
         return nil
     }
 }
@@ -299,17 +299,17 @@ extension IGListViewController {
 }
 
 
-class DefaultIGListSectionController: ListSectionController, ListDisplayDelegate, ListSupplementaryViewSource {
+public class DefaultIGListSectionController: ListSectionController, ListDisplayDelegate, ListSupplementaryViewSource {
     
-    var viewModel: IGListSectionViewModel!
+   public var viewModel: IGListSectionViewModel!
     
-    override init() {
+    override public init() {
         super.init()
         self.displayDelegate = self
         self.supplementaryViewSource = self
     }
     
-    override func didUpdate(to object: Any) {
+    override public func didUpdate(to object: Any) {
         guard let _item = object as? IGListSectionViewModel else {return}
         self.viewModel = _item
         self.minimumLineSpacing = _item.minimumLineSpacing
@@ -317,11 +317,11 @@ class DefaultIGListSectionController: ListSectionController, ListDisplayDelegate
         self.inset = _item.inset
     }
     
-    override func numberOfItems() -> Int {
+    override public func numberOfItems() -> Int {
         return self.viewModel.cellItems.count
     }
     
-    override func sizeForItem(at index: Int) -> CGSize {
+    override public func sizeForItem(at index: Int) -> CGSize {
         if viewModel.cellItems[index].size == .zero {
             return CGSize(width: collectionContext!.containerSize.width, height: 10)
         }else {
@@ -329,12 +329,12 @@ class DefaultIGListSectionController: ListSectionController, ListDisplayDelegate
         }
     }
     
-    override func cellForItem(at index: Int) -> UICollectionViewCell {
+    override public func cellForItem(at index: Int) -> UICollectionViewCell {
         let item = self.viewModel.cellItems[index]
         return collectionContext!.dequeueReusableCell(of: item.cellClass, withReuseIdentifier: item.cellClass.description(), for: self, at: index)
     }
     
-    func supportedElementKinds() -> [String] {
+    public func supportedElementKinds() -> [String] {
         var items: [String] = []
         if viewModel.header != nil {
             items.append(UICollectionView.elementKindSectionHeader)
@@ -345,7 +345,7 @@ class DefaultIGListSectionController: ListSectionController, ListDisplayDelegate
         return items
     }
     
-    func viewForSupplementaryElement(ofKind elementKind: String, at index: Int) -> UICollectionReusableView {
+    public func viewForSupplementaryElement(ofKind elementKind: String, at index: Int) -> UICollectionReusableView {
         switch elementKind {
         case UICollectionView.elementKindSectionHeader:
             let view = collectionContext!.dequeueReusableSupplementaryView(ofKind: elementKind, for: self, class: viewModel.header!.viewClass, at: index)
@@ -360,7 +360,7 @@ class DefaultIGListSectionController: ListSectionController, ListDisplayDelegate
         }
     }
     
-    func sizeForSupplementaryView(ofKind elementKind: String, at index: Int) -> CGSize {
+    public func sizeForSupplementaryView(ofKind elementKind: String, at index: Int) -> CGSize {
         switch elementKind {
         case UICollectionView.elementKindSectionHeader:
             return viewModel.header!.size
@@ -371,23 +371,23 @@ class DefaultIGListSectionController: ListSectionController, ListDisplayDelegate
         }
     }
     
-    func listAdapter(_ listAdapter: ListAdapter, willDisplay sectionController: ListSectionController) {
+    public func listAdapter(_ listAdapter: ListAdapter, willDisplay sectionController: ListSectionController) {
         
     }
     
-    func listAdapter(_ listAdapter: ListAdapter, didEndDisplaying sectionController: ListSectionController) {
+    public func listAdapter(_ listAdapter: ListAdapter, didEndDisplaying sectionController: ListSectionController) {
         
     }
     
-    override func didSelectItem(at index: Int) {
+    override public func didSelectItem(at index: Int) {
         self.viewModel.cellItems[index].performWhenSelect?(IndexPath(row: index, section: self.section))
     }
     
-    func listAdapter(_ listAdapter: ListAdapter, willDisplay sectionController: ListSectionController, cell: UICollectionViewCell, at index: Int) {
+    public func listAdapter(_ listAdapter: ListAdapter, willDisplay sectionController: ListSectionController, cell: UICollectionViewCell, at index: Int) {
         (cell as? CollectionCell)?.setup(viewModel: self.viewModel.cellItems[index])
     }
     
-    func listAdapter(_ listAdapter: ListAdapter, didEndDisplaying sectionController: ListSectionController, cell: UICollectionViewCell, at index: Int) {
+    public func listAdapter(_ listAdapter: ListAdapter, didEndDisplaying sectionController: ListSectionController, cell: UICollectionViewCell, at index: Int) {
         
     }
 }
