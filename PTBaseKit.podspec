@@ -1,8 +1,8 @@
 Pod::Spec.new do |s|
   s.name         = "PTBaseKit"
-  s.version      = "0.2.0"
+  s.version      = "0.2.1"
   s.summary      = "便利iOS开发的封装s"
-  s.description  = "在thinker vc工作期间, 为了方便同时更新维护多个项目, 把一些通用和标准化了的内容封装起来."
+  s.description  = "thinker 轮子集合"
   s.homepage     = "https://github.com/p36348/PTBaseKit.git"
   s.license      = "Apache License, Version 2.0"
   s.author       = { "Oreo" => "p36348@gmail.com" }
