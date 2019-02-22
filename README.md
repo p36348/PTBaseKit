@@ -66,27 +66,27 @@ customLabel += "custom label".css
  *UIKitTableController.swift*文件中有一个调用`CommonTableController`的例子:
 
  ```swift
-let table = CommonTableController()
-        .setBackgroungColor(UIColor.tk.background)
-        .setAutoLoading(false)
-        .setupHeader(UILabel() + "Header for table".css)
-        .setupFooter(UILabel() + "Footer for table".css)
-        .setupTableView(with: .sepratorStyle(.singleLine), .allowMultiSelection(true), .automaticallyAdjustsScrollViewInsets(false))
-        .setupEmptyPlaceHolder(image: UIImage(named: "empty_tips"), title: "No data yet".attributed())
-        .performWhenReload { (_table) in
-            Observable.just(fakeFetchData())
-                .subscribeOn(ConcurrentDispatchQueueScheduler(qos: DispatchQoS.default))
-                .observeOn(MainScheduler.asyncInstance)
-                .subscribe(onNext: { _table.reload(withSectionViewModels: $0) })
-                .disposed(by: _table)
-        }
-        .performWhenLoadMore { (_table) in
-            Observable.just(fakeFetchData())
-                .subscribeOn(ConcurrentDispatchQueueScheduler(qos: DispatchQoS.default))
-                .observeOn(MainScheduler.asyncInstance)
-                .subscribe(onNext: { _table.loadMore(withSectionViewModels: $0, isLast: true) })
-                .disposed(by: _table)
-    }
+CommonTableController()
+	.setBackgroungColor(UIColor.tk.background)
+	.setAutoLoading(false)
+	.setupHeader(UILabel() + "Header for table".css)
+	.setupFooter(UILabel() + "Footer for table".css)
+	.setupTableView(with: .sepratorStyle(.singleLine), .allowMultiSelection(true), .automaticallyAdjustsScrollViewInsets(false))
+	.setupEmptyPlaceHolder(image: UIImage(named: "empty_tips"), title: "No data yet".attributed())
+	.performWhenReload { (_table) in
+		Observable.just(fakeFetchData())
+			.subscribeOn(ConcurrentDispatchQueueScheduler(qos: DispatchQoS.default))
+			.observeOn(MainScheduler.asyncInstance)
+			.subscribe(onNext: { _table.reload(withSectionViewModels: $0) })
+			.disposed(by: _table)
+	}
+	.performWhenLoadMore { (_table) in
+		Observable.just(fakeFetchData())
+			.subscribeOn(ConcurrentDispatchQueueScheduler(qos: DispatchQoS.default))
+			.observeOn(MainScheduler.asyncInstance)
+			.subscribe(onNext: { _table.loadMore(withSectionViewModels: $0, isLast: true) })
+			.disposed(by: _table)
+}
  ```
  其中`performWhenReload`和`performWhenLoadMore`分别用于传入加载操作, 需要调用者自己结束加载. 回调闭包中有一个参数正是`CommonTableController`本身.例子中使用了`RxSwift`三方框架配合展示了这个加载过程, `fakeFetchData`替代了项目中的网络请求以及Model->ViewModel的操作, 实际上thinker的项目中就是按照这个方式实现, 实现这一步操作的是各个业务模块对应的`Service`.
 
