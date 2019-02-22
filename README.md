@@ -32,20 +32,27 @@ Thinker系列项目通用模块，适用于Thinker开发的iOS客户端全系列
   - 函数`dispose(identifier:)`
     - 当部分订阅需要提前手动销毁时，调用此函数。
 
-## TableController
+## ListController
 
- TableController是针对列表功能抽象出来的协议, 与之关联的还有TableCell, TableSectionViewModel和TableCellViewModel协议. 整体上是一个MVVM的设计, 把TableCell的适配从Controller分离出来, TableController专注于Table的加载动作, TableCellViewModel用于中转Model->Cell的数据以及持有Cell的一些交互回调, 而TableCell则提供更新函数.
+目前Thinker的项目使用了**UITableView**和**UICollectionView**实现列表界面。为了方便快捷，本模块预先封装了基础的列表功能和配置入口，并根据MVVM设计模式做了协议规定：
 
-## CommonTableController
+- 抽象协议ListController
+  - 声明了列表界面必需具备的行为`reload`和`loadMore`函数。
+  - 声明列表类型，列表数据类型。
 
- thinker vc开发项目中的列表页面几乎都是`CommonTableController`类, 它遵守`TableController`协议. 通过TableView和RJRefresh组合成基本的上下拉加载逻辑, 而内部处理和UITableViewCell有关的操作都是面向TableCell以及TableCellViewModel协议的, 所以它与TableViewCell的实现以及适配不存在耦合. 
+而实际上开发中真正用到的是以下两个类型：
 
-  - 使用者需要创建一个列表界面的时候可以直接使用`CommonTableController`, 它提供的接口可以应付大部分使用场景. 这样有利于避免创建多个ViewController带来的维护高成本和低代码复用.
-  - 专注`SectionViewModel/TableCellViewModel`的产生和变化, 它们以数组的形式传入`CommonTableController`, 根据数组中元素顺序的不同, `CommonTableController`的显示内容就会有相应变化.
-  - 它的 数据加载逻辑/组件加载逻辑/组件刷新逻辑 都通过了(作者本人)验证.
-  - 提供简单的配置函数来给使用者对页面的顶部和底部添加UI组件, 以及数据为空时候的UI提示.
+1. `CommonTableController`
+2. `IGListViewController`
 
- UIKitTableController.swift文件中有一个调用`CommonTableController`的例子:
+### CommonTableController
+
+  - 使用者需要创建一个**UITableView**列表界面的时候可以直接使用`CommonTableController`, 它提供的接口可以应付大部分使用场景. 这样有利于避免创建多个ViewController带来的维护高成本和低代码复用。
+  - 专注`SectionViewModel/TableCellViewModel`的产生和变化，它们以数组的形式传入`CommonTableController`, 根据数组中元素顺序的不同，`CommonTableController`的显示内容就会有相应变化。
+  - 它的 `数据加载逻辑/组件加载逻辑/组件刷新逻辑` 都通过了验证。
+  - 提供简单的配置函数来给使用者对页面的顶部和底部添加UI组件，以及数据为空时候的UI提示。
+
+ *UIKitTableController.swift*文件中有一个调用`CommonTableController`的例子:
 
  ```swift
 CommonTableController()
@@ -67,6 +74,10 @@ CommonTableController()
  ```
  其中`performWhenReload`和`performWhenLoadMore`分别用于传入加载操作, 需要调用者自己结束加载. 回调闭包中有一个参数正是`CommonTableController`本身.例子中使用了`RxSwift`三方框架配合展示了这个加载过程, `fakeFetchData`替代了项目中的网络请求以及Model->ViewModel的操作, 实际上thinker的项目中就是按照这个方式实现, 实现这一步操作的是各个业务模块对应的`Service`.
 
+### IGListViewController
+
+
+
 ## CommonTableCell
 
   `CommonTableCell`是在`TableController`协议基础上实现的一个UITableViewCell子类, 根据thinker项目总结而来. 
@@ -76,8 +87,6 @@ CommonTableController()
   - 由于iOS 12以后增强了Autolayout的性能，日后可以更省心了。: P
 
   为了遵守高内聚低耦合, 在使用的时候应该把Model->ViewModel这一步操作抽出，不要添加`init`函数到`CommonTableCell`的ViewModel代码中。
-
-
 
 ## Reactive extensions
 
@@ -93,3 +102,5 @@ RxSwift框架的核心类型，Thinker项目中大量使用了该框架，此模
     - 上拉加载事件
   - `refreshing`
     - 刷新状态
+
+`To be continued...`
