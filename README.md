@@ -26,9 +26,9 @@ Thinker系列项目通用模块，适用于Thinker开发的iOS客户端全系列
 作为项目所有界面控制器的基类，有以下主要作用：
 
 - 部分情景下，一个界面会有较多UI元素，某些旧设备在navigate或者present的过程中会有些许卡顿，BaseController把`viewDidLoad`函数做了拆分，分别是`performPreSetup`和`performPreSetup`，其中前者在`viewDidLoad`函数中同步调用，而后者则是通过**RunLoop**特性延迟了调用，调用时机就是界面转场动画完结之时。
-- 为了方便配合***RxSwift***框架使用，集成了用于管理`DisposeBag`的功能：
+- 为了方便配合**RxSwift**框架使用，集成了用于管理`DisposeBag`的功能：
   - 函数`disposed(by:identifier:)`
-    - 把Observable的销毁绑定到`BaseController`上，在***deinit***的时候，BaseController内部会自己销毁绑定的订阅
+    - 把Observable的销毁绑定到`BaseController`上，在**deinit**的时候，BaseController内部会自己销毁绑定的订阅
   - 函数`dispose(identifier:)`
     - 当部分订阅需要提前手动销毁时，调用此函数。
 
