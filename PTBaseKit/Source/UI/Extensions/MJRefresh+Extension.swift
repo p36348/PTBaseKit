@@ -17,7 +17,7 @@ private var internal_rx_pullToLoadMore_key = "internal_rx_pullToLoadMore_key"
 extension Reactive where Base: UIScrollView {
     
     public var refreshing: Observable<Bool> {
-        return Observable.of(false)
+        return internal_rx_refreshing.share()
     }
     
     private var internal_rx_refreshing: PublishSubject<Bool> {

@@ -87,7 +87,17 @@ extension IGListSectionHeaderFooterViewModel {
 
 typealias IGListUpdateParams = (items: [IGListSectionViewModel], isLast: Bool)
 
-public class IGListViewController: BaseController {
+public class IGListViewController: BaseController, ListController {
+    
+    public typealias ListView = UICollectionView
+    
+    public typealias ListSectionViewModel = IGListSectionViewModel
+    
+    public typealias ListCellViewModel = CollectionCellViewModel
+    
+    public var listView: UICollectionView {
+        return self.collectionView
+    }
     
     // views
     
@@ -230,6 +240,22 @@ public class IGListViewController: BaseController {
         self.updateList(items: newItems)
     }
     
+    public func reload(withCellViewModels viewModels: [CollectionCellViewModel], isLast: Bool) {
+        fatalError("暂未实现")
+    }
+    
+    public func loadMore(withCellViewModels viewModels: [CollectionCellViewModel], isLast: Bool) {
+        fatalError("暂未实现")
+    }
+    
+    public func reload(withSectionViewModels viewModels: [IGListSectionViewModel], isLast: Bool) {
+        self.reload(items: viewModels, isLast: isLast, finished: nil)
+    }
+    
+    public func loadMore(withSectionViewModels viewModels: [IGListSectionViewModel], isLast: Bool) {
+        self.loadMore(items: viewModels, isLast: isLast)
+    }
+    
     public func reloadList() {
         self.adapter.reloadData(completion: nil)
     }
@@ -301,7 +327,7 @@ extension IGListViewController {
 
 public class DefaultIGListSectionController: ListSectionController, ListDisplayDelegate, ListSupplementaryViewSource {
     
-   public var viewModel: IGListSectionViewModel!
+    public var viewModel: IGListSectionViewModel!
     
     override public init() {
         super.init()

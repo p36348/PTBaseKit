@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8EE511AA73D1471191099AA0 /* Pods_PTBaseKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71585BF9C9A025414CE03955 /* Pods_PTBaseKitTests.framework */; };
+		951520EB221F96DF0020B80A /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951520EA221F96DE0020B80A /* ListController.swift */; };
 		95313C1621A3B67900920B09 /* UIViewController+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95313C1521A3B67900920B09 /* UIViewController+Navigation.swift */; };
 		95353D1F2153C85100E8436E /* BaiduMap+MapAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95353D1E2153C85100E8436E /* BaiduMap+MapAdapter.swift */; };
 		95409114212C098D00A82C7F /* IndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95409113212C098D00A82C7F /* IndexController.swift */; };
@@ -51,7 +52,6 @@
 		959BBF392111F4B500106646 /* DefaultTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBEE82111F4B400106646 /* DefaultTableCell.swift */; };
 		959BBF3A2111F4B500106646 /* CommonTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBEEA2111F4B400106646 /* CommonTableController.swift */; };
 		959BBF3B2111F4B500106646 /* DefaultTableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBEEC2111F4B400106646 /* DefaultTableSection.swift */; };
-		959BBF3D2111F4B500106646 /* TableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBEEF2111F4B400106646 /* TableController.swift */; };
 		959BBF3F2111F4B500106646 /* DefaultTableCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBEF42111F4B400106646 /* DefaultTableCellNode.swift */; };
 		959BBF402111F4B500106646 /* DefaultTableSectionNodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBEF52111F4B400106646 /* DefaultTableSectionNodeModel.swift */; };
 		959BBF412111F4B500106646 /* DefaultTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBEF62111F4B400106646 /* DefaultTableController.swift */; };
@@ -94,6 +94,7 @@
 		57221EA4330FE88D61459B1F /* Pods-PTBaseKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PTBaseKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PTBaseKit/Pods-PTBaseKit.debug.xcconfig"; sourceTree = "<group>"; };
 		71585BF9C9A025414CE03955 /* Pods_PTBaseKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PTBaseKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D6903A5DCB37FA0825753C3 /* Pods-PTBaseKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PTBaseKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PTBaseKitTests/Pods-PTBaseKitTests.release.xcconfig"; sourceTree = "<group>"; };
+		951520EA221F96DE0020B80A /* ListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
 		95313C1521A3B67900920B09 /* UIViewController+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Navigation.swift"; sourceTree = "<group>"; };
 		95353D1E2153C85100E8436E /* BaiduMap+MapAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaiduMap+MapAdapter.swift"; sourceTree = "<group>"; };
 		95409113212C098D00A82C7F /* IndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexController.swift; sourceTree = "<group>"; };
@@ -141,7 +142,6 @@
 		959BBEE82111F4B400106646 /* DefaultTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableCell.swift; sourceTree = "<group>"; };
 		959BBEEA2111F4B400106646 /* CommonTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonTableController.swift; sourceTree = "<group>"; };
 		959BBEEC2111F4B400106646 /* DefaultTableSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableSection.swift; sourceTree = "<group>"; };
-		959BBEEF2111F4B400106646 /* TableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableController.swift; sourceTree = "<group>"; };
 		959BBEF42111F4B400106646 /* DefaultTableCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableCellNode.swift; sourceTree = "<group>"; };
 		959BBEF52111F4B400106646 /* DefaultTableSectionNodeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableSectionNodeModel.swift; sourceTree = "<group>"; };
 		959BBEF62111F4B400106646 /* DefaultTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableController.swift; sourceTree = "<group>"; };
@@ -197,6 +197,14 @@
 				71585BF9C9A025414CE03955 /* Pods_PTBaseKitTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		951520E9221F96DE0020B80A /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				951520EA221F96DE0020B80A /* ListController.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		95927C3D221A9C5C009CA9D4 /* IGListViewController */ = {
@@ -396,9 +404,9 @@
 		959BBEE12111F4B400106646 /* List */ = {
 			isa = PBXGroup;
 			children = (
+				951520E9221F96DE0020B80A /* Protocol */,
 				95927C3D221A9C5C009CA9D4 /* IGListViewController */,
 				959BBEE22111F4B400106646 /* TableController */,
-				959BBEED2111F4B400106646 /* Protocol */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -427,14 +435,6 @@
 				959BBEEC2111F4B400106646 /* DefaultTableSection.swift */,
 			);
 			path = TableSection;
-			sourceTree = "<group>";
-		};
-		959BBEED2111F4B400106646 /* Protocol */ = {
-			isa = PBXGroup;
-			children = (
-				959BBEEF2111F4B400106646 /* TableController.swift */,
-			);
-			path = Protocol;
 			sourceTree = "<group>";
 		};
 		959BBEF22111F4B400106646 /* ASDisplayKit */ = {
@@ -820,7 +820,6 @@
 				95927C3F221A9C68009CA9D4 /* IGListViewController.swift in Sources */,
 				959BBF492111F4B500106646 /* BlockOpreation+Utils.swift in Sources */,
 				95353D1F2153C85100E8436E /* BaiduMap+MapAdapter.swift in Sources */,
-				959BBF3D2111F4B500106646 /* TableController.swift in Sources */,
 				959BBF402111F4B500106646 /* DefaultTableSectionNodeModel.swift in Sources */,
 				959BBF412111F4B500106646 /* DefaultTableController.swift in Sources */,
 				95B373C82186D49900608E53 /* Date+Utils.swift in Sources */,
@@ -863,6 +862,7 @@
 				959BBF232111F4B400106646 /* AMap+MapAdapter.swift in Sources */,
 				959300342154D4070084AF9C /* UIFont.swift in Sources */,
 				959BBF4A2111F4B500106646 /* DispatchQueue+RxSwift.swift in Sources */,
+				951520EB221F96DF0020B80A /* ListController.swift in Sources */,
 				959BBF392111F4B500106646 /* DefaultTableCell.swift in Sources */,
 				959BBF3A2111F4B500106646 /* CommonTableController.swift in Sources */,
 				95FB4E07215A36C200518489 /* DynamicNavigationBar.swift in Sources */,

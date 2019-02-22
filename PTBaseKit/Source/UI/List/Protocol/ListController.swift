@@ -1,5 +1,5 @@
 //
-//  TableController.swift
+//  ListController.swift
 //  PTBaseKit
 //
 //  Created by P36348 on 13/12/2017.
@@ -64,20 +64,21 @@ extension TableCellViewModel {
     public var editActions: [UITableViewRowAction]? {return nil}
 }
 
-public protocol TableController: class {
-        
-    var tableView: UITableView {get}
+public protocol ListController: class {
     
-    var header: UIView? {get set}
+    associatedtype ListView: UIScrollView
     
-    var footer: UIView? {get set}
+    associatedtype ListSectionViewModel
     
-    func reload(withCellViewModels viewModels: [TableCellViewModel], isLast: Bool) -> Void
+    associatedtype ListCellViewModel
     
-    func loadMore(withCellViewModels viewModels: [TableCellViewModel], isLast: Bool) -> Void
+    var listView: ListView {get}
     
-    func reload(withSectionViewModels viewModels: [TableSectionViewModel], isLast: Bool) -> Void
+    func reload(withCellViewModels viewModels: [ListCellViewModel], isLast: Bool) -> Void
     
-    func loadMore(withSectionViewModels viewModels: [TableSectionViewModel], isLast: Bool) -> Void
+    func loadMore(withCellViewModels viewModels: [ListCellViewModel], isLast: Bool) -> Void
     
+    func reload(withSectionViewModels viewModels: [ListSectionViewModel], isLast: Bool) -> Void
+    
+    func loadMore(withSectionViewModels viewModels: [ListSectionViewModel], isLast: Bool) -> Void
 }

@@ -17,7 +17,9 @@ public enum TableViewOptions {
     case sepratorStyle(UITableViewCell.SeparatorStyle)
 }
 
-public class CommonTableController: BaseController, TableController {
+public class CommonTableController: BaseController, ListController {
+    
+    public typealias ListView = UITableView
     
     public var sectionViewModels: [TableSectionViewModel] = []
     
@@ -38,6 +40,10 @@ public class CommonTableController: BaseController, TableController {
     fileprivate var tableViewSetupAction: ((CommonTableController) -> Void)? = nil
     
     // view
+    
+    public var listView: UITableView {
+        return self.tableView
+    }
     
     public let tableView: UITableView = UITableView(frame: CGRect.zero, style: UITableView.Style.grouped)
     
@@ -147,12 +153,12 @@ public class CommonTableController: BaseController, TableController {
         }
     }
     
-    public func bindObservables() {
-        if let _ = self.reloadAction {
+    private func bindObservables() {
+        if let _action = self.reloadAction {
             self.tableView.rx.pullToRefresh
                 .subscribe(onNext: {[weak self] _ in
                     guard let weakSelf = self else {return}
-                    weakSelf.reloadAction?(weakSelf)
+                    _action(weakSelf)
                 })
                 .disposed(by: self)
         }
@@ -418,14 +424,16 @@ extension CommonTableController {
         }
         
         if
-            let _ = self.loadMoreAction,
+            let _action = self.loadMoreAction,
             self.tableView.mj_footer == nil,
             !isLast
         {
-            self.tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: { [weak self] in
-                guard let weakSelf = self else {return}
-                weakSelf.loadMoreAction?(weakSelf)
-            })
+            self.tableView.rx.pullToLoadMore
+                .subscribe(onNext: {[weak self] _ in
+                    guard let weakSelf = self else {return}
+                    _action(weakSelf)
+                })
+                .disposed(by: self)
         }
         self.sectionViewModels = viewModels
         self.reloadTableView()

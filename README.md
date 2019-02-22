@@ -4,7 +4,9 @@ Thinker系列项目通用模块，适用于Thinker开发的iOS客户端全系列
 
 ## CssKit
 
-### 一般给UILabel赋值的做法:
+用运算符"+"、"+="把CssKit对象添加给UIKit组件，
+
+### 传统UILabel赋值的做法:
 
  ```swift
  let customLabel: UILabel = UILabel()
@@ -19,8 +21,16 @@ Thinker系列项目通用模块，适用于Thinker开发的iOS客户端全系列
  let customLabel: UILabel = UILabel() + 13.customFont.css + UIColor.tk.main.textColorCss + "custom label".css
  ```
 
-
 ## BaseController
+
+作为项目所有界面控制器的基类，有以下主要作用：
+
+- 部分情景下，一个界面会有较多UI元素，某些旧设备在navigate或者present的过程中会有些许卡顿，BaseController把`viewDidLoad`函数做了拆分，分别是`performPreSetup`和`performPreSetup`，其中前者在`viewDidLoad`函数中同步调用，而后者则是通过**RunLoop**特性延迟了调用，调用时机就是界面转场动画完结之时。
+- 为了方便配合***RxSwift***框架使用，集成了用于管理`DisposeBag`的功能：
+  - 函数`disposed(by controller: BaseController, identifier: String = BaseController.DisposeIdentifiers.default)`
+    - 把Observable的销毁绑定到`BaseController`上，在***deinit***的时候，BaseController内部会自己销毁绑定的订阅
+  - 函数`func dispose(identifier: String = BaseController.DisposeIdentifiers.default)`
+    - 当部分订阅需要提前手动销毁时，调用此函数。
 
 ## TableController
 
@@ -32,7 +42,7 @@ Thinker系列项目通用模块，适用于Thinker开发的iOS客户端全系列
 
   - 使用者需要创建一个列表界面的时候可以直接使用`CommonTableController`, 它提供的接口可以应付大部分使用场景. 这样有利于避免创建多个ViewController带来的维护高成本和低代码复用.
   - 专注`SectionViewModel/TableCellViewModel`的产生和变化, 它们以数组的形式传入`CommonTableController`, 根据数组中元素顺序的不同, `CommonTableController`的显示内容就会有相应变化.
-  - 它的 数据加载逻辑/组件加载逻辑/组件刷新逻辑 都经过了thinker(其实就是本人)验证.
+  - 它的 数据加载逻辑/组件加载逻辑/组件刷新逻辑 都通过了(作者本人)验证.
   - 提供简单的配置函数来给使用者对页面的顶部和底部添加UI组件, 以及数据为空时候的UI提示.
 
  UIKitTableController.swift文件中有一个调用`CommonTableController`的例子:
@@ -123,3 +133,18 @@ extension SomeModel {
 }
   ```
   并且每个Model对ViewModel的转换, 最好都是在子线程中完成, 就像用例里的一样.
+
+## Reactive extensions
+
+RxSwift框架的核心类型，Thinker项目中大量使用了该框架，此模块对`Reactive`做了一些常用的封装：
+
+- UIViewController
+  - `func controlEvent(with lifeCycleEvent: UIViewController.LifeCycleEvent) -> ControlEvent<Base>`
+    - 返回控制器生命周期的事件回调
+- UIScrollView+MJRefresh
+  - `pullToRefresh`
+    - 下拉刷新事件
+  - `pullToLoadMore`
+    - 上拉加载事件
+  - `refreshing`
+    - 刷新状态
