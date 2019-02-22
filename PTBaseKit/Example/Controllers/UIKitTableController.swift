@@ -27,9 +27,14 @@ class UIKitTableController: BaseController {
 
 private func testTableController(on controller: UIKitTableController) {
     let table = CommonTableController()
-        .setupTableView(with: .sepratorStyle(.singleLine))
+        .setBackgroungColor(UIColor.tk.background)
+        .setAutoLoading(false)
+        .setupHeader(UILabel() + "Header for table".css)
+        .setupFooter(UILabel() + "Footer for table".css)
+        .setupTableView(with: .sepratorStyle(.singleLine), .allowMultiSelection(true), .automaticallyAdjustsScrollViewInsets(false))
+        .setupEmptyPlaceHolder(image: UIImage(named: "empty_tips"), title: "No data yet".attributed())
         .performWhenReload { (_table) in
-                Observable.just(fakeFetchData())
+            Observable.just(fakeFetchData())
                 .subscribeOn(ConcurrentDispatchQueueScheduler(qos: DispatchQoS.default))
                 .observeOn(MainScheduler.asyncInstance)
                 .subscribe(onNext: { _table.reload(withSectionViewModels: $0) })

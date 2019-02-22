@@ -10,9 +10,9 @@ Thinker系列项目通用模块，适用于Thinker开发的iOS客户端全系列
 
  ```swift
  let customLabel: UILabel = UILabel()
- label.font = 13.customFont
- label.textColor = UIColor.tk.main
- label.text = "custom label"
+ customLabel.font = 13.customFont
+ customLabel.textColor = UIColor.tk.main
+ customLabel.text = "custom label"
  ```
 
 ### 使用CssKit赋值：
@@ -20,6 +20,17 @@ Thinker系列项目通用模块，适用于Thinker开发的iOS客户端全系列
  ```swift
  let customLabel: UILabel = UILabel() + 13.customFont.css + UIColor.tk.main.textColorCss + "custom label".css
  ```
+
+or：
+
+```swift
+let customLabel: UILabel = UILabel()
+customLabel += 13.customFont.css
+customLabel += UIColor.tk.main.textColorCss
+customLabel += "custom label".css
+```
+
+
 
 ## BaseController
 
@@ -55,10 +66,15 @@ Thinker系列项目通用模块，适用于Thinker开发的iOS客户端全系列
  *UIKitTableController.swift*文件中有一个调用`CommonTableController`的例子:
 
  ```swift
-CommonTableController()
-        .setupTableView(with: .sepratorStyle(.singleLine))
+let table = CommonTableController()
+        .setBackgroungColor(UIColor.tk.background)
+        .setAutoLoading(false)
+        .setupHeader(UILabel() + "Header for table".css)
+        .setupFooter(UILabel() + "Footer for table".css)
+        .setupTableView(with: .sepratorStyle(.singleLine), .allowMultiSelection(true), .automaticallyAdjustsScrollViewInsets(false))
+        .setupEmptyPlaceHolder(image: UIImage(named: "empty_tips"), title: "No data yet".attributed())
         .performWhenReload { (_table) in
-                Observable.just(fakeFetchData())
+            Observable.just(fakeFetchData())
                 .subscribeOn(ConcurrentDispatchQueueScheduler(qos: DispatchQoS.default))
                 .observeOn(MainScheduler.asyncInstance)
                 .subscribe(onNext: { _table.reload(withSectionViewModels: $0) })
@@ -83,7 +99,7 @@ CommonTableController()
   `CommonTableCell`是在`TableController`协议基础上实现的一个UITableViewCell子类, 根据thinker项目总结而来. 
   - 它已经几乎兼容thinker目前所有列表的显示需要, 订单, 用户信息, 活动, 设置, 消息等。
   - 只需要传入不同的参数来创建ViewModel, 并传入`CommonTableController`，就可以得到各种自适应高度的界面，这个高度是其`ViewModel`初始化的时候实现的，并不需要使用者自己计算。
-  - 使用了比较好理解的fram计算来实现layout。 这样除了提供不错的滑动性能， 也让使用者根据项目变更的情况较快修改，比起ASDK这种滑动性能极佳可是又难上手的框架，或者直接使用`SnapKit`来牺牲性能要来得好。
+  - 使用了比较好理解的fram计算来实现layout。 这样除了提供不错的滑动性能， 也让使用者根据项目变更的情况较快修改，比起[Texture](https://github.com/texturegroup/texture)这种滑动性能极佳可是又难上手的框架，或者直接使用`SnapKit`来牺牲性能要来得好。
   - 由于iOS 12以后增强了Autolayout的性能，日后可以更省心了。: P
 
   为了遵守高内聚低耦合, 在使用的时候应该把Model->ViewModel这一步操作抽出，不要添加`init`函数到`CommonTableCell`的ViewModel代码中。
