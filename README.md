@@ -6,7 +6,7 @@ Thinker系列项目通用模块，适用于Thinker开发的iOS客户端全系列
 
 用运算符"+"、"+="把CssKit对象添加给UIKit组件，
 
-### 传统UILabel赋值的做法:
+### 传统UILabel赋值：
 
  ```swift
  let customLabel: UILabel = UILabel()
@@ -15,7 +15,7 @@ Thinker系列项目通用模块，适用于Thinker开发的iOS客户端全系列
  label.text = "custom label"
  ```
 
-### 使用CssKit给UILabel赋值的做法:
+### 使用CssKit赋值：
 
  ```swift
  let customLabel: UILabel = UILabel() + 13.customFont.css + UIColor.tk.main.textColorCss + "custom label".css
@@ -27,9 +27,9 @@ Thinker系列项目通用模块，适用于Thinker开发的iOS客户端全系列
 
 - 部分情景下，一个界面会有较多UI元素，某些旧设备在navigate或者present的过程中会有些许卡顿，BaseController把`viewDidLoad`函数做了拆分，分别是`performPreSetup`和`performPreSetup`，其中前者在`viewDidLoad`函数中同步调用，而后者则是通过**RunLoop**特性延迟了调用，调用时机就是界面转场动画完结之时。
 - 为了方便配合***RxSwift***框架使用，集成了用于管理`DisposeBag`的功能：
-  - 函数`disposed(by controller: BaseController, identifier: String = BaseController.DisposeIdentifiers.default)`
+  - 函数`disposed(by:identifier:)`
     - 把Observable的销毁绑定到`BaseController`上，在***deinit***的时候，BaseController内部会自己销毁绑定的订阅
-  - 函数`func dispose(identifier: String = BaseController.DisposeIdentifiers.default)`
+  - 函数`dispose(identifier:)`
     - 当部分订阅需要提前手动销毁时，调用此函数。
 
 ## TableController
@@ -48,22 +48,19 @@ Thinker系列项目通用模块，适用于Thinker开发的iOS客户端全系列
  UIKitTableController.swift文件中有一个调用`CommonTableController`的例子:
 
  ```swift
- CommonTableController()
+CommonTableController()
         .setupTableView(with: .sepratorStyle(.singleLine))
         .performWhenReload { (_table) in
-            // 进入global队列获取数据, 并回到主线程结束刷新动画, 更新列表
-            DispatchQueue.global()
-                .rx_async(with: ())
-                .flatMap { Observable.just(fakeFetchData()) }
-                .flatMap { DispatchQueue.main.rx_async(with: $0) }
+                Observable.just(fakeFetchData())
+                .subscribeOn(ConcurrentDispatchQueueScheduler(qos: DispatchQoS.default))
+                .observeOn(MainScheduler.asyncInstance)
                 .subscribe(onNext: { _table.reload(withSectionViewModels: $0) })
                 .disposed(by: _table)
         }
         .performWhenLoadMore { (_table) in
-            DispatchQueue.global()
-                .rx_async(with: ())
-                .flatMap { Observable.just(fakeFetchData()) }
-                .flatMap { DispatchQueue.main.rx_async(with: $0) }
+            Observable.just(fakeFetchData())
+                .subscribeOn(ConcurrentDispatchQueueScheduler(qos: DispatchQoS.default))
+                .observeOn(MainScheduler.asyncInstance)
                 .subscribe(onNext: { _table.loadMore(withSectionViewModels: $0, isLast: true) })
                 .disposed(by: _table)
     }
@@ -73,66 +70,14 @@ Thinker系列项目通用模块，适用于Thinker开发的iOS客户端全系列
 ## CommonTableCell
 
   `CommonTableCell`是在`TableController`协议基础上实现的一个UITableViewCell子类, 根据thinker项目总结而来. 
-  - 它已经几乎兼容thinker目前所有列表的显示需要, 订单, 用户信息, 活动, 设置, 消息等.
-  - 只需要传入不同的参数来创建ViewModel, 并传入`CommonTableController`, 就可以得到各种自适应高度的界面, 这个高度是其`ViewModel`初始化的时候实现的, 并不需要使用者自己计算.
-  - 使用了比较好理解的fram计算来实现layout. 这样除了提供不错的滑动性能, 也让使用者根据项目变更的情况较快修改, 比起ASDK这种滑动性能极佳可是又难上手的框架, 或者直接使用`SnapKit`来牺牲性能要来得好.
+  - 它已经几乎兼容thinker目前所有列表的显示需要, 订单, 用户信息, 活动, 设置, 消息等。
+  - 只需要传入不同的参数来创建ViewModel, 并传入`CommonTableController`，就可以得到各种自适应高度的界面，这个高度是其`ViewModel`初始化的时候实现的，并不需要使用者自己计算。
+  - 使用了比较好理解的fram计算来实现layout。 这样除了提供不错的滑动性能， 也让使用者根据项目变更的情况较快修改，比起ASDK这种滑动性能极佳可是又难上手的框架，或者直接使用`SnapKit`来牺牲性能要来得好。
+  - 由于iOS 12以后增强了Autolayout的性能，日后可以更省心了。: P
 
-  为了遵守高内聚低耦合, 在使用的时候应该把Model->ViewModel这一步操作抽出, 不要添加`init`函数到`CommonTableCell`的ViewModel代码中, 用例里面由于没有业务Model, 只是写了一个单独函数产生ViewModel:
-  ```swift
-  private func createCellViewModels() -> [TableCellViewModel] {
-    return
-        (0...Int(arc4random_uniform(4)))
-            .map { index -> TableCellViewModel in
-                let imageIndex = Int(arc4random_uniform(4))
-                // let cellHiehgt = (images[imageIndex]?.size.height ?? 45) + 20
-                var viewModel = CommonTableCellViewModel(head: images[imageIndex],
-                                                              title: cellTitles[Int(arc4random_uniform(4))].appending(subTitles[Int(arc4random_uniform(4))]),
-                                                              tail: genButtonContentOptions(),
-                                                              accessorable: index%2 == 1,
-                                                              boundsOption: .fitsToWidth(kScreenWidth)) // .constant(CGSize(width: kScreenWidth, height: cellHiehgt))
-                viewModel.tailClicked = {_ = UIApplication.shared.keyWindow?.rootViewController?.presentAlert(title: "cell tail button clicked", message: "", force: true)}
-                viewModel.performWhenSelect = {(table, indexpath) in table.deselectRow(at: indexpath, animated: true)}
-                return viewModel
-    }
-}
-  ```
+  为了遵守高内聚低耦合, 在使用的时候应该把Model->ViewModel这一步操作抽出，不要添加`init`函数到`CommonTableCell`的ViewModel代码中。
 
-  实际操作可以是这样:
 
-  ```swift
- class SomeModel {
-    ...
-    ...
-    ...
-}
-
-extension SomeModel {
-    func toCommonTableCellViewModel() -> CommonTableCellViewModel {
-        
-        // 实行self -> CommonTableCellViewModel的转换
-        
-        let head = ...
-        
-        let title = ...
-        
-        let tail = ...
-        
-        let background = ...
-        
-        let accessorable = ...
-        
-        let boundsOption = ...
-        
-        return CommonTableCellViewModel(head: head,
-                                        title: title,
-                                        tail: tail,
-                                        backgroundCss: background,
-                                        accessorable: accessorable,
-                                        boundsOption: boundsOption)
-    }
-}
-  ```
-  并且每个Model对ViewModel的转换, 最好都是在子线程中完成, 就像用例里的一样.
 
 ## Reactive extensions
 

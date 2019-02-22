@@ -29,18 +29,16 @@ private func testTableController(on controller: UIKitTableController) {
     let table = CommonTableController()
         .setupTableView(with: .sepratorStyle(.singleLine))
         .performWhenReload { (_table) in
-            DispatchQueue.global()
-                .rx_async(with: ())
-                .flatMap { Observable.just(fakeFetchData()) }
-                .flatMap { DispatchQueue.main.rx_async(with: $0) }
+                Observable.just(fakeFetchData())
+                .subscribeOn(ConcurrentDispatchQueueScheduler(qos: DispatchQoS.default))
+                .observeOn(MainScheduler.asyncInstance)
                 .subscribe(onNext: { _table.reload(withSectionViewModels: $0) })
                 .disposed(by: _table)
         }
         .performWhenLoadMore { (_table) in
-            DispatchQueue.global()
-                .rx_async(with: ())
-                .flatMap { Observable.just(fakeFetchData()) }
-                .flatMap { DispatchQueue.main.rx_async(with: $0) }
+            Observable.just(fakeFetchData())
+                .subscribeOn(ConcurrentDispatchQueueScheduler(qos: DispatchQoS.default))
+                .observeOn(MainScheduler.asyncInstance)
                 .subscribe(onNext: { _table.loadMore(withSectionViewModels: $0, isLast: true) })
                 .disposed(by: _table)
     }
@@ -63,20 +61,19 @@ private func fakeFetchData() -> [TableSectionViewModel] {
 }
 
 private func createCellViewModels() -> [TableCellViewModel] {
-    return
-        (0...Int(arc4random_uniform(4)))
-            .map { index -> TableCellViewModel in
-                let imageIndex = Int(arc4random_uniform(4))
-                // let cellHiehgt = (images[imageIndex]?.size.height ?? 45) + 20
-                var viewModel = DefaultTableCellViewModel(head: images[imageIndex],
-                                                              title: cellTitles[Int(arc4random_uniform(4))].appending(subTitles[Int(arc4random_uniform(4))]),
-                                                              tail: genButtonContentOptions(),
-                                                              accessorable: index%2 == 1,
-                                                              boundsOption: .fitsToWidth(kScreenWidth)) // .constant(CGSize(width: kScreenWidth, height: cellHiehgt))
-                viewModel.tailClicked = {_ = UIApplication.shared.keyWindow?.rootViewController?.presentAlert(title: "cell tail button clicked", message: "", force: true)}
-                viewModel.performWhenSelect = {(table, indexpath) in table.deselectRow(at: indexpath, animated: true)}
-                return viewModel
-    }
+    return (0...Int(arc4random_uniform(4))).map(createViewModel)
+}
+
+private func createViewModel(index: Int) -> TableCellViewModel {
+    let imageIndex = Int(arc4random_uniform(4))
+    var viewModel = DefaultTableCellViewModel(head: images[imageIndex],
+                                              title: cellTitles[Int(arc4random_uniform(4))].appending(subTitles[Int(arc4random_uniform(4))]),
+                                              tail: genButtonContentOptions(),
+                                              accessorable: index%2 == 1,
+                                              boundsOption: .fitsToWidth(kScreenWidth))
+    viewModel.tailClicked = {_ = UIApplication.shared.keyWindow?.rootViewController?.presentAlert(title: "cell tail button clicked", message: "", force: true)}
+    viewModel.performWhenSelect = {(table, indexpath) in table.deselectRow(at: indexpath, animated: true)}
+    return viewModel
 }
 
 var images: [UIImage?] {
