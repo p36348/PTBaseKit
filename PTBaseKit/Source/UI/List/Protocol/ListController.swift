@@ -23,6 +23,7 @@ public protocol TableSectionViewModel {
 }
 
 public protocol TableSectionHeaderFooter: class {
+    
     var viewModel: TableSectionHeaderFooterViewModel? {get}
     
     func setup(with viewModel: TableSectionHeaderFooterViewModel)
@@ -56,9 +57,11 @@ public protocol TableCellViewModel {
 }
 
 extension TableCellViewModel {
+    
     public var performWhenSelect: ((UITableView, IndexPath)->Void)? {
         return nil
     }
+    
     public var canEdit: Bool { return false }
     
     public var editActions: [UITableViewRowAction]? {return nil}

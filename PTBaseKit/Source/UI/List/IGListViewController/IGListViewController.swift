@@ -36,25 +36,36 @@ public protocol CollectionSectionViewModel {
 
 
 public protocol IGListSectionViewModel: ListDiffable {
+    
     var header: IGListSectionHeaderFooterViewModel? {get}
+    
     var footer: IGListSectionHeaderFooterViewModel? {get}
+    
     var cellItems: [CollectionCellViewModel] {get}
-    var sectionController: ListSectionController { get }
+    
+    var sectionController: ListSectionController {get}
+    
     var minimumLineSpacing: CGFloat {get}
+    
     var minimumInteritemSpacing: CGFloat {get}
+    
     var inset: UIEdgeInsets {get}
 }
 
 extension IGListSectionViewModel {
+    
     var minimumLineSpacing: CGFloat {
         return 0
     }
+    
     var minimumInteritemSpacing: CGFloat {
         return 0
     }
+    
     var inset: UIEdgeInsets {
         return .zero
     }
+    
     var header: IGListSectionHeaderFooterViewModel? {
         return nil
     }
@@ -69,13 +80,18 @@ extension IGListSectionViewModel {
 }
 
 public protocol IGListSectionHeaderFooter: class {
+    
     var viewModel: IGListSectionHeaderFooterViewModel? {get set}
+    
     func setup(viewModel: IGListSectionHeaderFooterViewModel)
 }
 
 public protocol IGListSectionHeaderFooterViewModel {
+    
     var viewClass: AnyClass {get}
+    
     var size: CGSize {get}
+    
     var performWhenSelect: ((Int)->Void)? {get}
 }
 
