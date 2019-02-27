@@ -21,13 +21,13 @@ class IndexController: BaseController {
         return item
     }()
     
-    lazy var uikitTable: UIKitTableController = UIKitTableController()
+    var uikitTable: UIViewController = createTableController()
     
-    lazy var asdkTable: CustomTableNodeController = CustomTableNodeController()
+    var asdkTable: CustomTableNodeController = CustomTableNodeController()
     
-    lazy var map: MapController = MapController()
+    var map: UIViewController = createMapController()
     
-    lazy var utils: UtilsController = UtilsController()
+    var utils: UtilsController = UtilsController()
     
     lazy var web: WebURLController = WebURLController()
 
@@ -68,7 +68,7 @@ class IndexController: BaseController {
         self.navigationController?.pushViewController(WebController().setupURL(URL(string: url)), animated: true)
     }
     
-    private func setup(controller: BaseController, segmentIndex: Int) {
+    private func setup(controller: UIViewController, segmentIndex: Int) {
         // 添加到背景上
         self.view.addSubview(controller.view)
         controller.view.snp.makeConstraints{$0.edges.equalToSuperview()}

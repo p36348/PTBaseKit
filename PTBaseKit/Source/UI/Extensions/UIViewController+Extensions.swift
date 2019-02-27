@@ -115,4 +115,24 @@ extension Reactive where Base: UIViewController {
             return ControlEvent(events: sentMessage(#selector(UIViewController.viewWillDisappear)).map({ _ in self.base}))
         }
     }
+    
+    public var viewDidLoad: ControlEvent<Base> {
+        return controlEvent(with: .viewDidLoad)
+    }
+    
+    public var viewDidAppear: ControlEvent<Base> {
+        return controlEvent(with: .viewDidAppear)
+    }
+    
+    public var viewWillAppear: ControlEvent<Base> {
+        return controlEvent(with: .viewWillAppear)
+    }
+    
+    public var viewDidDisappear: ControlEvent<Base> {
+        return controlEvent(with: .viewDidDisappear)
+    }
+    
+    public var viewWillDisappear: ControlEvent<Base> {
+        return controlEvent(with: .viewWillDisappear)
+    }
 }

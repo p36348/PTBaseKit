@@ -11,26 +11,26 @@ import RxSwift
 
 
 /// CommonTableController的演示页面
-class UIKitTableController: BaseController {
-    
-    var tableView: UITableView!
-    
-    override func performSetup() {
-        testTableController(on: self)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-}
+//class UIKitTableController: BaseController {
+//
+//    var tableView: UITableView!
+//
+//    override func performSetup() {
+//        testTableController(on: self)
+//    }
+//
+//    override func didReceiveMemoryWarning() {
+//        super.didReceiveMemoryWarning()
+//        // Dispose of any resources that can be recreated.
+//    }
+//}
 
-private func testTableController(on controller: UIKitTableController) {
+func createTableController() -> UIViewController {
     let table = CommonTableController()
         .setBackgroungColor(UIColor.tk.background)
-        .setAutoLoading(false)
-        .setupHeader(UILabel() + "Header for table".css)
-        .setupFooter(UILabel() + "Footer for table".css)
+//        .setAutoLoading(false)
+//        .setupHeader(UILabel(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 44)) + "Header for table".css)
+//        .setupFooter(UILabel(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 44)) + "Footer for table".css)
         .setupTableView(with: .sepratorStyle(.singleLine), .allowMultiSelection(true), .automaticallyAdjustsScrollViewInsets(false))
         .setupEmptyPlaceHolder(image: UIImage(named: "empty_tips"), title: "No data yet".attributed())
         .performWhenReload { (_table) in
@@ -48,13 +48,7 @@ private func testTableController(on controller: UIKitTableController) {
                 .disposed(by: _table)
     }
     
-    controller.tableView = table.tableView
-    
-    controller.view += table.view
-    
-    table.view.snp.makeConstraints {$0.edges.equalToSuperview()}
-    
-    controller.addChild(table)
+    return table
     
 }
 

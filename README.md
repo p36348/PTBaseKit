@@ -69,8 +69,8 @@ customLabel += "custom label".css
 CommonTableController()
 	.setBackgroungColor(UIColor.tk.background)
 	.setAutoLoading(false)
-	.setupHeader(UILabel() + "Header for table".css)
-	.setupFooter(UILabel() + "Footer for table".css)
+	.setupHeader(someHeaderView)
+	.setupFooter(someFooterView)
 	.setupTableView(with: .sepratorStyle(.singleLine), .allowMultiSelection(true), .automaticallyAdjustsScrollViewInsets(false))
 	.setupEmptyPlaceHolder(image: UIImage(named: "empty_tips"), title: "No data yet".attributed())
 	.performWhenReload { (_table) in
@@ -92,9 +92,9 @@ CommonTableController()
 
 ### IGListViewController
 
+顾名思义，用IGListKit封装而来，用来显示比TableView更复杂的混排界面，如：反馈列表。
 
-
-## CommonTableCell
+### CommonTableCell
 
   `CommonTableCell`是在`TableController`协议基础上实现的一个UITableViewCell子类, 根据thinker项目总结而来. 
   - 它已经几乎兼容thinker目前所有列表的显示需要, 订单, 用户信息, 活动, 设置, 消息等。
