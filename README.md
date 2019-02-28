@@ -42,6 +42,59 @@ customLabel += "custom label".css
     - 把Observable的销毁绑定到`BaseController`上，在**deinit**的时候，BaseController内部会自己销毁绑定的订阅
   - 函数`dispose(identifier:)`
     - 当部分订阅需要提前手动销毁时，调用此函数。
+- 大部分情况下我们需要创建的页面都是功能雷同的，因此项目中只有少数界面是通过定义一个新的类型来实现，取而代之是使用静态函数去创建一个BaseController的实例。通过此模块对BaseController封装的接口可以在静态函数中实现大部分我们需要做的适配。`这样做可以大大减少重复代码，可以把同一业务模块的代码放在同一个文件中。`*MapController.swift*文件中有一个例子：
+
+```swift
+func createMapController() -> UIViewController {
+    let controller = BaseController()
+    
+    let mapAdapter: MapAdapter = createDefaultMapAdapter()
+    
+    mapAdapter
+        .didUpdateUserLocation
+        .take(1)
+        .subscribe(onNext: { $0.adapter.moveCenter(to: $0.location) })
+        .disposed(by: controller)
+    
+    mapAdapter
+        .didTapAtLocation
+        .subscribe(onNext: { $0.adapter.moveCenter(to: $0.location) })
+        .disposed(by: controller)
+    
+    mapAdapter
+        .didIdleAtLocation
+        .subscribe()
+        .disposed(by: controller)
+    
+    controller.rx.viewDidLoad
+        .subscribe(onNext: { (_controller) in
+            _controller.view.addSubview(mapAdapter.map.viewValue)
+            mapAdapter.map.viewValue.snp.makeConstraints {$0.edges.equalToSuperview()}
+        })
+        .disposed(by: controller)
+    
+    controller.rx.viewDidAppear
+        .subscribe(onNext: { (_controller) in
+            mapAdapter.enable(false)
+        })
+        .disposed(by: controller)
+    
+    controller.rx.viewDidDisappear
+        .subscribe(onNext: { (_controller) in
+            mapAdapter.enable(true)
+        })
+        .disposed(by: controller)
+    
+    return controller
+}
+
+func createDefaultMapAdapter() -> MapAdapter {
+    return GoogleMapsAdapter(googleApiKey: "yourKey",
+                             defaultLocation: CLLocationCoordinate2D(latitude: 1.420612, longitude: 103.862463))
+}
+```
+
+
 
 ## ListController
 
@@ -49,7 +102,9 @@ customLabel += "custom label".css
 
 - 抽象协议ListController
   - 声明了列表界面必需具备的行为`reload`和`loadMore`函数。
-  - 声明列表类型，列表数据类型。
+  - 泛型声明列表View类型，列表数据ViewModel类型。
+- Section作为ListController的data单位
+- Cell作为Section的data单位
 
 而实际上开发中真正用到的是以下两个类型：
 
@@ -90,10 +145,6 @@ CommonTableController()
  ```
  其中`performWhenReload`和`performWhenLoadMore`分别用于传入加载操作, 需要调用者自己结束加载. 回调闭包中有一个参数正是`CommonTableController`本身.例子中使用了`RxSwift`三方框架配合展示了这个加载过程, `fakeFetchData`替代了项目中的网络请求以及Model->ViewModel的操作, 实际上thinker的项目中就是按照这个方式实现, 实现这一步操作的是各个业务模块对应的`Service`.
 
-### IGListViewController
-
-顾名思义，用IGListKit封装而来，用来显示比TableView更复杂的混排界面，如：反馈列表。
-
 ### CommonTableCell
 
   `CommonTableCell`是在`TableController`协议基础上实现的一个UITableViewCell子类, 根据thinker项目总结而来. 
@@ -103,6 +154,10 @@ CommonTableController()
   - 由于iOS 12以后增强了Autolayout的性能，日后可以更省心了。: P
 
   为了遵守高内聚低耦合, 在使用的时候应该把Model->ViewModel这一步操作抽出，不要添加`init`函数到`CommonTableCell`的ViewModel代码中。
+
+### IGListViewController
+
+顾名思义，用IGListKit封装而来，用来显示比TableView更复杂的混排界面，如：反馈列表。**（实际上可以用IGListViewController来替代原来已经实现的CommonTableController）**
 
 ## Reactive extensions
 
