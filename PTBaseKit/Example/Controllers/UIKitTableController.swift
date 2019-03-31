@@ -26,7 +26,7 @@ import RxSwift
 //}
 
 func createTableController() -> UIViewController {
-    let table = CommonTableController()
+    let table = PTTableViewController()
         .setBackgroungColor(UIColor.tk.background)
 //        .setAutoLoading(false)
 //        .setupHeader(UILabel(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 44)) + "Header for table".css)

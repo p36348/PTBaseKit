@@ -1,5 +1,5 @@
 //
-//  CommonTableController.swift
+//  PTTableViewController.swift
 //  PTBaseKit
 //
 //  Created by P36348 on 13/12/2017.
@@ -16,28 +16,29 @@ public enum TableViewOptions {
     case allowMultiSelection(Bool)
     case sepratorStyle(UITableViewCell.SeparatorStyle)
 }
+public typealias CommonTableController = PTTableViewController
 
-public class CommonTableController: BaseController, ListController {
+public class PTTableViewController: BaseController, ListController {
     
     public typealias ListView = UITableView
     
     public var sectionViewModels: [TableSectionViewModel] = []
     
-    public var selectItemAction: ((CommonTableController, IndexPath) -> Void)?
+    public var selectItemAction: ((PTTableViewController, IndexPath) -> Void)?
     
-    public var willSelectItemAction: ((CommonTableController, IndexPath) -> IndexPath?)?
+    public var willSelectItemAction: ((PTTableViewController, IndexPath) -> IndexPath?)?
     
-    fileprivate var reloadAction: ((CommonTableController)->Void)? = nil
+    fileprivate var reloadAction: ((PTTableViewController)->Void)? = nil
     
-    fileprivate var loadMoreAction: ((CommonTableController)->Void)? = nil
+    fileprivate var loadMoreAction: ((PTTableViewController)->Void)? = nil
     
-    fileprivate var tableDidCommitEditing: ((CommonTableController, UITableViewCell.EditingStyle, IndexPath) -> Void)? = nil
+    fileprivate var tableDidCommitEditing: ((PTTableViewController, UITableViewCell.EditingStyle, IndexPath) -> Void)? = nil
     
     fileprivate var loadAutomaticlly: Bool = true
     
     fileprivate var backgroundColor: UIColor = UIColor.tk.background
     
-    fileprivate var tableViewSetupAction: ((CommonTableController) -> Void)? = nil
+    fileprivate var tableViewSetupAction: ((PTTableViewController) -> Void)? = nil
     
     // view
     
@@ -165,7 +166,7 @@ public class CommonTableController: BaseController, ListController {
     }
 }
 
-extension CommonTableController {
+extension PTTableViewController {
     fileprivate func setEmptyTipsHidden(_ hidden: Bool) {
         UIView.animate(withDuration: 0.25) {
             self.emptyTipsImage.alpha = hidden ? 0 : 1
@@ -174,7 +175,7 @@ extension CommonTableController {
     }
 }
 
-extension CommonTableController: UITableViewDelegate {
+extension PTTableViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return self.sectionViewModels[indexPath.section].cellViewModels[indexPath.row].height
@@ -254,7 +255,7 @@ extension CommonTableController: UITableViewDelegate {
     }
 }
 
-extension CommonTableController: UITableViewDataSource {
+extension PTTableViewController: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let viewModels = self.sectionViewModels[indexPath.section].cellViewModels
@@ -279,7 +280,7 @@ extension CommonTableController: UITableViewDataSource {
     }
 }
 
-extension CommonTableController {
+extension PTTableViewController {
     
     public func close() {
         if self.navigationController != nil {
@@ -289,53 +290,53 @@ extension CommonTableController {
         }
     }
     
-    public func performWhenWillSelectItem(action: ((CommonTableController, IndexPath) -> IndexPath?)?) -> CommonTableController {
+    public func performWhenWillSelectItem(action: ((PTTableViewController, IndexPath) -> IndexPath?)?) -> PTTableViewController {
         self.willSelectItemAction = action
         return self
     }
     
-    public func performWhenReload(action: ((CommonTableController)->Void)?) -> CommonTableController {
+    public func performWhenReload(action: ((PTTableViewController)->Void)?) -> PTTableViewController {
         self.reloadAction = action
         return self
     }
     
-    public func performWhenLoadMore(action: ((CommonTableController)->Void)?) -> CommonTableController {
+    public func performWhenLoadMore(action: ((PTTableViewController)->Void)?) -> PTTableViewController {
         self.loadMoreAction = action
         return self
     }
     
-    public func performWhenSelectItem(action: @escaping (CommonTableController, IndexPath) -> Void) -> CommonTableController {
+    public func performWhenSelectItem(action: @escaping (PTTableViewController, IndexPath) -> Void) -> PTTableViewController {
         self.selectItemAction = action
         return self
     }
     
-    public func setupHeader(_ header: UIView) -> CommonTableController {
+    public func setupHeader(_ header: UIView) -> PTTableViewController {
         self.header = header
         return self
     }
     
-    public func setupFooter(_ footer: UIView) -> CommonTableController {
+    public func setupFooter(_ footer: UIView) -> PTTableViewController {
         self.footer = footer
         return self
     }
     
-    public func setBackgroungColor(_ color: UIColor) -> CommonTableController {
+    public func setBackgroungColor(_ color: UIColor) -> PTTableViewController {
         self.backgroundColor = color
         return self
     }
     
-    public func setAutoLoading(_ flag: Bool) -> CommonTableController {
+    public func setAutoLoading(_ flag: Bool) -> PTTableViewController {
         self.loadAutomaticlly = flag
         return self
     }
     
-    public func setupEmptyPlaceHolder(image: UIImage?, title: NSAttributedString?) -> CommonTableController {
+    public func setupEmptyPlaceHolder(image: UIImage?, title: NSAttributedString?) -> PTTableViewController {
         self.emptyTipsImage.image = image
         self.emptyTipsLabel.attributedText = title
         return self
     }
     
-    public func setupTableView(with options: TableViewOptions ...) -> CommonTableController {
+    public func setupTableView(with options: TableViewOptions ...) -> PTTableViewController {
         options.forEach { (option) in
             switch option {
             case .allowMultiSelection(let allow):
@@ -378,7 +379,7 @@ extension CommonTableController {
     }
 }
 
-extension CommonTableController {
+extension PTTableViewController {
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         self.tableDidCommitEditing?(self, editingStyle, indexPath)
     }
@@ -392,7 +393,7 @@ extension CommonTableController {
     }
 }
 
-extension CommonTableController {
+extension PTTableViewController {
     
     public func reload(withCellViewModels viewModels: [TableCellViewModel], isLast: Bool = false) -> Void {
         let section = CommonTableSectionViewModel(header: nil, footer: nil, cellViewModels: viewModels)
@@ -434,6 +435,10 @@ extension CommonTableController {
                     _action(weakSelf)
                 })
                 .disposed(by: self)
+        }
+        
+        if (self.tableView.mj_footer != nil) {
+            self.tableView.mj_footer.resetNoMoreData()
         }
         self.sectionViewModels = viewModels
         self.reloadTableView()

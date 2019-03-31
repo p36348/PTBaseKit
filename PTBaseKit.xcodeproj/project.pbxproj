@@ -50,7 +50,7 @@
 		959BBF332111F4B400106646 /* UIBarButtonItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBEDF2111F4B400106646 /* UIBarButtonItem+Extension.swift */; };
 		959BBF342111F4B400106646 /* runtime+UIControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBEE02111F4B400106646 /* runtime+UIControl.swift */; };
 		959BBF392111F4B500106646 /* DefaultTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBEE82111F4B400106646 /* DefaultTableCell.swift */; };
-		959BBF3A2111F4B500106646 /* CommonTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBEEA2111F4B400106646 /* CommonTableController.swift */; };
+		959BBF3A2111F4B500106646 /* PTTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBEEA2111F4B400106646 /* PTTableViewController.swift */; };
 		959BBF3B2111F4B500106646 /* DefaultTableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBEEC2111F4B400106646 /* DefaultTableSection.swift */; };
 		959BBF3F2111F4B500106646 /* DefaultTableCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBEF42111F4B400106646 /* DefaultTableCellNode.swift */; };
 		959BBF402111F4B500106646 /* DefaultTableSectionNodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBEF52111F4B400106646 /* DefaultTableSectionNodeModel.swift */; };
@@ -140,7 +140,7 @@
 		959BBEDF2111F4B400106646 /* UIBarButtonItem+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extension.swift"; sourceTree = "<group>"; };
 		959BBEE02111F4B400106646 /* runtime+UIControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "runtime+UIControl.swift"; sourceTree = "<group>"; };
 		959BBEE82111F4B400106646 /* DefaultTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableCell.swift; sourceTree = "<group>"; };
-		959BBEEA2111F4B400106646 /* CommonTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonTableController.swift; sourceTree = "<group>"; };
+		959BBEEA2111F4B400106646 /* PTTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTTableViewController.swift; sourceTree = "<group>"; };
 		959BBEEC2111F4B400106646 /* DefaultTableSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableSection.swift; sourceTree = "<group>"; };
 		959BBEF42111F4B400106646 /* DefaultTableCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableCellNode.swift; sourceTree = "<group>"; };
 		959BBEF52111F4B400106646 /* DefaultTableSectionNodeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableSectionNodeModel.swift; sourceTree = "<group>"; };
@@ -424,7 +424,7 @@
 		959BBEE92111F4B400106646 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				959BBEEA2111F4B400106646 /* CommonTableController.swift */,
+				959BBEEA2111F4B400106646 /* PTTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -864,7 +864,7 @@
 				959BBF4A2111F4B500106646 /* DispatchQueue+RxSwift.swift in Sources */,
 				951520EB221F96DF0020B80A /* ListController.swift in Sources */,
 				959BBF392111F4B500106646 /* DefaultTableCell.swift in Sources */,
-				959BBF3A2111F4B500106646 /* CommonTableController.swift in Sources */,
+				959BBF3A2111F4B500106646 /* PTTableViewController.swift in Sources */,
 				95FB4E07215A36C200518489 /* DynamicNavigationBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
