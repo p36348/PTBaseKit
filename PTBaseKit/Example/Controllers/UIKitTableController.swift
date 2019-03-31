@@ -54,7 +54,7 @@ func createTableController() -> UIViewController {
 
 private func fakeFetchData() -> [TableSectionViewModel] {
     let numberOfSection = 20
-    return (0..<numberOfSection).map { _ in CommonTableSectionViewModel(header: DefaultTableSectionHeaderFooterViewModel(),
+    return (0..<numberOfSection).map { _ in DefaultTableSectionViewModel(header: DefaultTableSectionHeaderFooterViewModel(),
                                                                         footer: DefaultTableSectionHeaderFooterViewModel(),
                                                                         cellViewModels: createCellViewModels()) }
 }

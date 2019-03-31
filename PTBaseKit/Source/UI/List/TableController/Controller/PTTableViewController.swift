@@ -371,7 +371,7 @@ extension PTTableViewController {
     }
     
     public func setupData(cellViewModels: [TableCellViewModel]) {
-        self.setupData(sectionViewModels: [CommonTableSectionViewModel(header: nil, footer: nil, cellViewModels: cellViewModels)])
+        self.setupData(sectionViewModels: [DefaultTableSectionViewModel(header: nil, footer: nil, cellViewModels: cellViewModels)])
     }
     
     public func setupData(sectionViewModels: [TableSectionViewModel]) {
@@ -396,7 +396,7 @@ extension PTTableViewController {
 extension PTTableViewController {
     
     public func reload(withCellViewModels viewModels: [TableCellViewModel], isLast: Bool = false) -> Void {
-        let section = CommonTableSectionViewModel(header: nil, footer: nil, cellViewModels: viewModels)
+        let section = DefaultTableSectionViewModel(header: nil, footer: nil, cellViewModels: viewModels)
         self.reload(withSectionViewModels: viewModels.count == 0 ? [] : [section], isLast: isLast)
     }
     
@@ -406,7 +406,7 @@ extension PTTableViewController {
         case 0: // error, not gonna happen
             fatalError()
         default: // one row, insert
-            let section = CommonTableSectionViewModel(header: self.sectionViewModels.last!.header,
+            let section = DefaultTableSectionViewModel(header: self.sectionViewModels.last!.header,
                                                       footer: self.sectionViewModels.last!.footer,
                                                       cellViewModels: self.sectionViewModels.last!.cellViewModels + viewModels)
             self.sectionViewModels[self.sectionViewModels.count-1] = section
@@ -459,7 +459,7 @@ extension PTTableViewController {
     }
 }
 
-public struct CommonTableSectionViewModel: TableSectionViewModel {
+public struct DefaultTableSectionViewModel: TableSectionViewModel {
     
     public var header: TableSectionHeaderFooterViewModel?
     
