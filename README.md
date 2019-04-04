@@ -2,6 +2,11 @@
 
 Thinker系列项目通用模块，适用于Thinker开发的iOS客户端全系列项目。
 
+**Install**
+```ruby
+pod 'PTBaseKit', :git => 'https://github.com/p36348/PTBaseKit.git'
+```
+
 ## CssKit
 
 用运算符"+"、"+="把CssKit对象添加给UIKit组件，
