@@ -21,7 +21,7 @@ class IndexController: BaseController {
         return item
     }()
     
-    var uikitTable: UIViewController = createTableController()
+    var uikitTable: UIViewController = new_createTableController()
     
     var asdkTable: CustomTableNodeController = CustomTableNodeController()
     

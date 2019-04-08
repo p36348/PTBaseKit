@@ -58,10 +58,6 @@ func createDefaultMapAdapter() -> MapAdapter {
                              defaultLocation: CLLocationCoordinate2D(latitude: 1.420612, longitude: 103.862463))
 }
 
-//func createAMapAdapter() -> MapAdapter {
-//    return AMapAdapter()
-//}
-
 private class MapController: BaseController {
     
     let mapAdapter: MapAdapter

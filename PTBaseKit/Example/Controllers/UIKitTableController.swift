@@ -10,21 +10,6 @@ import UIKit
 import RxSwift
 
 
-/// CommonTableController的演示页面
-//class UIKitTableController: BaseController {
-//
-//    var tableView: UITableView!
-//
-//    override func performSetup() {
-//        testTableController(on: self)
-//    }
-//
-//    override func didReceiveMemoryWarning() {
-//        super.didReceiveMemoryWarning()
-//        // Dispose of any resources that can be recreated.
-//    }
-//}
-
 func createTableController() -> UIViewController {
     let table = PTTableViewController()
         .setBackgroungColor(UIColor.tk.background)
@@ -51,6 +36,26 @@ func createTableController() -> UIViewController {
     return table
     
 }
+
+func new_createTableController() -> UIViewController {
+    
+    let table = PTTableViewController()
+    
+    table.rx
+        .bindRefresh { _ in Observable.of((viewModels: fakeFetchData(), isLast: false)) }
+        .disposed(by: table)
+    
+    table.rx
+        .bindLoadMore { _ in Observable.of((viewModels: fakeFetchData(), isLast: true)) }
+        .disposed(by: table)
+
+    
+    return table
+        .setBackgroungColor(UIColor.tk.background)
+        .setupTableView(with: .sepratorStyle(.singleLine), .allowMultiSelection(true), .automaticallyAdjustsScrollViewInsets(false))
+        .setupEmptyPlaceHolder(image: UIImage(named: "empty_tips"), title: "No data yet".attributed())
+}
+
 
 private func fakeFetchData() -> [TableSectionViewModel] {
     let numberOfSection = 20

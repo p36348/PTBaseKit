@@ -1,5 +1,5 @@
 //
-//  MJRefresh+Extension.swift
+//  MJRefresh+Rx.swift
 //  PTBaseKit
 //
 //  Created by P36348 on 14/08/2018.
