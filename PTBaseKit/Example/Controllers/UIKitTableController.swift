@@ -42,11 +42,11 @@ func new_createTableController() -> UIViewController {
     let table = PTTableViewController()
     
     table.rx
-        .bindRefresh { _ in Observable.of((viewModels: fakeFetchData(), isLast: false)) }
+        .bindRefresh(toGenerator: fakeViewModelRefreshGenerator)
         .disposed(by: table)
     
     table.rx
-        .bindLoadMore { _ in Observable.of((viewModels: fakeFetchData(), isLast: true)) }
+        .bindLoadMore(toGenerator: fakeViewModelLoadMoreGenerator)
         .disposed(by: table)
 
     
@@ -56,6 +56,13 @@ func new_createTableController() -> UIViewController {
         .setupEmptyPlaceHolder(image: UIImage(named: "empty_tips"), title: "No data yet".attributed())
 }
 
+private func fakeViewModelRefreshGenerator(_ listController: PTTableViewController) -> Observable<(viewModels: [TableSectionViewModel], isLast: Bool)> {
+    return Observable.of((viewModels: fakeFetchData(), isLast: false)).subscribeOn(ConcurrentDispatchQueueScheduler(qos: DispatchQoS.default))
+}
+
+private func fakeViewModelLoadMoreGenerator(_ listController: PTTableViewController) -> Observable<(viewModels: [TableSectionViewModel], isLast: Bool)> {
+   return Observable.of((viewModels: fakeFetchData(), isLast: true)).subscribeOn(ConcurrentDispatchQueueScheduler(qos: DispatchQoS.default))
+}
 
 private func fakeFetchData() -> [TableSectionViewModel] {
     let numberOfSection = 20

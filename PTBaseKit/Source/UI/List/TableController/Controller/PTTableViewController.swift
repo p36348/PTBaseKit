@@ -413,6 +413,7 @@ extension PTTableViewController {
             if self.tableView.mj_footer.state == .refreshing {
                 (viewModels.count == 0 || isLast) ? self.tableView.mj_footer.endRefreshingWithNoMoreData() : self.tableView.mj_footer.endRefreshing()
             }
+            // TODO: 性能不高, 需要改成insert
             self.reloadTableView()
         }
     }
