@@ -77,6 +77,7 @@
 		95BC7E2A225B0ECA00C22836 /* ListController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BC7E29225B0ECA00C22836 /* ListController+Rx.swift */; };
 		95BC7E2D225B117F00C22836 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BC7E2C225B117F00C22836 /* UIViewController+Rx.swift */; };
 		95D0F21F2198573000F74187 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D0F21E2198573000F74187 /* Global.swift */; };
+		95D29AE4225C54D300F5B98F /* ListController+Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D29AE3225C54D300F5B98F /* ListController+Table.swift */; };
 		95FB4E07215A36C200518489 /* DynamicNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FB4E06215A36C200518489 /* DynamicNavigationBar.swift */; };
 		98929904E29583B5DA516CC9 /* Pods_PTBaseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2B02495693B8E88A88D1991 /* Pods_PTBaseKit.framework */; };
 /* End PBXBuildFile section */
@@ -170,6 +171,7 @@
 		95BC7E29225B0ECA00C22836 /* ListController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListController+Rx.swift"; sourceTree = "<group>"; };
 		95BC7E2C225B117F00C22836 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		95D0F21E2198573000F74187 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		95D29AE3225C54D300F5B98F /* ListController+Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListController+Table.swift"; sourceTree = "<group>"; };
 		95FB4E06215A36C200518489 /* DynamicNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicNavigationBar.swift; sourceTree = "<group>"; };
 		C22F7CD723FF55B896D2E9C0 /* Pods-PTBaseKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PTBaseKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PTBaseKitTests/Pods-PTBaseKitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E2B02495693B8E88A88D1991 /* Pods_PTBaseKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PTBaseKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -208,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				951520EA221F96DE0020B80A /* ListController.swift */,
+				95D29AE3225C54D300F5B98F /* ListController+Table.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -877,6 +880,7 @@
 				959BBF312111F4B400106646 /* UIImage+Extensions.swift in Sources */,
 				95D0F21F2198573000F74187 /* Global.swift in Sources */,
 				959BBF232111F4B400106646 /* AMap+MapAdapter.swift in Sources */,
+				95D29AE4225C54D300F5B98F /* ListController+Table.swift in Sources */,
 				959300342154D4070084AF9C /* UIFont.swift in Sources */,
 				959BBF4A2111F4B500106646 /* DispatchQueue+RxSwift.swift in Sources */,
 				951520EB221F96DF0020B80A /* ListController.swift in Sources */,

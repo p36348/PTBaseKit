@@ -49,6 +49,11 @@ func new_createTableController() -> UIViewController {
         .bindLoadMore(toGenerator: fakeViewModelLoadMoreGenerator)
         .disposed(by: table)
 
+    table.rx.updateError
+        .subscribe(onNext: { err in
+            print("update Error:")
+        })
+        .disposed(by: table)
     
     return table
         .setBackgroungColor(UIColor.tk.background)
