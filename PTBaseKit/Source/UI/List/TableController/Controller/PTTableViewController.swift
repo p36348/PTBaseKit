@@ -276,6 +276,7 @@ extension PTTableViewController: UITableViewDataSource {
     }
     
     public func numberOfSections(in tableView: UITableView) -> Int {
+        print("call numberOfSections")
         return self.sectionViewModels.count
     }
 }
@@ -406,15 +407,25 @@ extension PTTableViewController {
         case 0: // error, not gonna happen
             fatalError()
         default: // one row, insert
-            let section = DefaultTableSectionViewModel(header: self.sectionViewModels.last!.header,
-                                                      footer: self.sectionViewModels.last!.footer,
-                                                      cellViewModels: self.sectionViewModels.last!.cellViewModels + viewModels)
+            let originalLastSection = self.sectionViewModels.last!
+            let section = DefaultTableSectionViewModel(header: originalLastSection.header,
+                                                      footer: originalLastSection.footer,
+                                                      cellViewModels: originalLastSection.cellViewModels + viewModels)
             self.sectionViewModels[self.sectionViewModels.count-1] = section
             if self.tableView.mj_footer.state == .refreshing {
                 (viewModels.count == 0 || isLast) ? self.tableView.mj_footer.endRefreshingWithNoMoreData() : self.tableView.mj_footer.endRefreshing()
             }
-            // TODO: 性能不高, 需要改成insert
-            self.reloadTableView()
+            
+            self.tableView.ptPerformBatchUpdates({ [weak self] in
+                
+                guard let strongSelf = self else {return}
+                
+                let indexPaths = (originalLastSection.cellViewModels.count..<section.cellViewModels.count)
+                    .map({row in IndexPath(row: row, section: strongSelf.sectionViewModels.count-1)})
+                
+                strongSelf.tableView.insertRows(at: indexPaths, with: .automatic)
+                
+            })
         }
     }
     
@@ -450,9 +461,14 @@ extension PTTableViewController {
         if self.tableView.mj_footer.state == .refreshing {
             (viewModels.count == 0 || isLast) ? self.tableView.mj_footer.endRefreshingWithNoMoreData() : self.tableView.mj_footer.endRefreshing()
         }
-        let newSections = self.sectionViewModels + viewModels
-        self.sectionViewModels = newSections
-        self.reloadTableView()
+        
+        let orignalCount = self.sectionViewModels.count
+        self.sectionViewModels.append(contentsOf: viewModels)
+        
+        self.tableView.ptPerformBatchUpdates({ [weak self] in
+            guard let strongSelf = self else {return}
+            strongSelf.tableView.insertSections(IndexSet(integersIn: orignalCount..<strongSelf.sectionViewModels.count), with: .automatic)
+        })
     }
     
     private func reloadTableView() {

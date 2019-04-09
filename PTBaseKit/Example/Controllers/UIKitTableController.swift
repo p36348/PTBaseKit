@@ -13,9 +13,9 @@ import RxSwift
 func createTableController() -> UIViewController {
     let table = PTTableViewController()
         .setBackgroungColor(UIColor.tk.background)
-//        .setAutoLoading(false)
-//        .setupHeader(UILabel(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 44)) + "Header for table".css)
-//        .setupFooter(UILabel(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 44)) + "Footer for table".css)
+        .setAutoLoading(false)
+        .setupHeader(UILabel(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 44)) + "Header for table".css)
+        .setupFooter(UILabel(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 44)) + "Footer for table".css)
         .setupTableView(with: .sepratorStyle(.singleLine), .allowMultiSelection(true), .automaticallyAdjustsScrollViewInsets(false))
         .setupEmptyPlaceHolder(image: UIImage(named: "empty_tips"), title: "No data yet".attributed())
         .performWhenReload { (_table) in
@@ -51,7 +51,7 @@ func new_createTableController() -> UIViewController {
 
     table.rx.updateError
         .subscribe(onNext: { err in
-            print("update Error:")
+            print("update Error:", err)
         })
         .disposed(by: table)
     
@@ -70,7 +70,7 @@ private func fakeViewModelLoadMoreGenerator(_ listController: PTTableViewControl
 }
 
 private func fakeFetchData() -> [TableSectionViewModel] {
-    let numberOfSection = 20
+    let numberOfSection = 5
     return (0..<numberOfSection).map { _ in DefaultTableSectionViewModel(header: DefaultTableSectionHeaderFooterViewModel(),
                                                                         footer: DefaultTableSectionHeaderFooterViewModel(),
                                                                         cellViewModels: createCellViewModels()) }

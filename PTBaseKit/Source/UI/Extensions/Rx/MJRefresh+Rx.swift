@@ -91,6 +91,7 @@ extension Reactive where Base: UIScrollView {
             base.mj_header.refreshingBlock = {
                 self.internal_rx_refreshing.onNext(true)
                 self.internal_rx_pullToRefresh.onNext(self.base)
+                self.base.mj_footer?.isHidden = false
             }
         }
         
@@ -104,6 +105,7 @@ extension Reactive where Base: UIScrollView {
                 self.internal_rx_refreshing.onNext(true)
                 self.internal_rx_pullToLoadMore.onNext(self.base)
             }
+            base.mj_footer.isHidden = true
         }
         
         return internal_rx_pullToLoadMore.share()

@@ -78,6 +78,7 @@
 		95BC7E2D225B117F00C22836 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BC7E2C225B117F00C22836 /* UIViewController+Rx.swift */; };
 		95D0F21F2198573000F74187 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D0F21E2198573000F74187 /* Global.swift */; };
 		95D29AE4225C54D300F5B98F /* ListController+Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D29AE3225C54D300F5B98F /* ListController+Table.swift */; };
+		95DEABED225C98980042E32B /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DEABEC225C98980042E32B /* UITableView+Extensions.swift */; };
 		95FB4E07215A36C200518489 /* DynamicNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FB4E06215A36C200518489 /* DynamicNavigationBar.swift */; };
 		98929904E29583B5DA516CC9 /* Pods_PTBaseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2B02495693B8E88A88D1991 /* Pods_PTBaseKit.framework */; };
 /* End PBXBuildFile section */
@@ -172,6 +173,7 @@
 		95BC7E2C225B117F00C22836 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		95D0F21E2198573000F74187 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		95D29AE3225C54D300F5B98F /* ListController+Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListController+Table.swift"; sourceTree = "<group>"; };
+		95DEABEC225C98980042E32B /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		95FB4E06215A36C200518489 /* DynamicNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicNavigationBar.swift; sourceTree = "<group>"; };
 		C22F7CD723FF55B896D2E9C0 /* Pods-PTBaseKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PTBaseKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PTBaseKitTests/Pods-PTBaseKitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E2B02495693B8E88A88D1991 /* Pods_PTBaseKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PTBaseKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -405,6 +407,7 @@
 				95313C1521A3B67900920B09 /* UIViewController+Navigation.swift */,
 				959BBEDF2111F4B400106646 /* UIBarButtonItem+Extension.swift */,
 				959BBEE02111F4B400106646 /* runtime+UIControl.swift */,
+				95DEABEC225C98980042E32B /* UITableView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -881,6 +884,7 @@
 				95D0F21F2198573000F74187 /* Global.swift in Sources */,
 				959BBF232111F4B400106646 /* AMap+MapAdapter.swift in Sources */,
 				95D29AE4225C54D300F5B98F /* ListController+Table.swift in Sources */,
+				95DEABED225C98980042E32B /* UITableView+Extensions.swift in Sources */,
 				959300342154D4070084AF9C /* UIFont.swift in Sources */,
 				959BBF4A2111F4B500106646 /* DispatchQueue+RxSwift.swift in Sources */,
 				951520EB221F96DF0020B80A /* ListController.swift in Sources */,
