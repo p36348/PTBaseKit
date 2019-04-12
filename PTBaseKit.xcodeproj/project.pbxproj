@@ -218,6 +218,7 @@
 		954B52E622606E1300CD9F14 /* ToBeSeperated */ = {
 			isa = PBXGroup;
 			children = (
+				95927C3D221A9C5C009CA9D4 /* IGListViewController */,
 				959BBEDE2111F4B400106646 /* TextFieldController.swift */,
 				959BBF1B2111F4B400106646 /* Data */,
 				959BBEF92111F4B400106646 /* Tips */,
@@ -413,7 +414,6 @@
 			isa = PBXGroup;
 			children = (
 				951520E9221F96DE0020B80A /* Protocol */,
-				95927C3D221A9C5C009CA9D4 /* IGListViewController */,
 				959BBEE22111F4B400106646 /* TableController */,
 			);
 			path = List;
