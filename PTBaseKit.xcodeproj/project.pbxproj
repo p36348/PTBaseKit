@@ -37,7 +37,6 @@
 		959BBF232111F4B400106646 /* AMap+MapAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBEC72111F4B400106646 /* AMap+MapAdapter.swift */; };
 		959BBF242111F4B400106646 /* GoogleMaps+MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBEC82111F4B400106646 /* GoogleMaps+MapManager.swift */; };
 		959BBF252111F4B400106646 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBEC92111F4B400106646 /* Map.swift */; };
-		959BBF262111F4B400106646 /* GlobalValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBECD2111F4B400106646 /* GlobalValues.swift */; };
 		959BBF282111F4B400106646 /* LoadingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBED02111F4B400106646 /* LoadingController.swift */; };
 		959BBF292111F4B400106646 /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBED22111F4B400106646 /* WebController.swift */; };
 		959BBF2C2111F4B400106646 /* ImageSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BBED72111F4B400106646 /* ImageSource.swift */; };
@@ -132,7 +131,6 @@
 		959BBEC72111F4B400106646 /* AMap+MapAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AMap+MapAdapter.swift"; sourceTree = "<group>"; };
 		959BBEC82111F4B400106646 /* GoogleMaps+MapManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GoogleMaps+MapManager.swift"; sourceTree = "<group>"; };
 		959BBEC92111F4B400106646 /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
-		959BBECD2111F4B400106646 /* GlobalValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalValues.swift; sourceTree = "<group>"; };
 		959BBED02111F4B400106646 /* LoadingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingController.swift; sourceTree = "<group>"; };
 		959BBED22111F4B400106646 /* WebController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebController.swift; sourceTree = "<group>"; };
 		959BBED72111F4B400106646 /* ImageSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSource.swift; sourceTree = "<group>"; };
@@ -217,6 +215,18 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
+		954B52E622606E1300CD9F14 /* ToBeSeperated */ = {
+			isa = PBXGroup;
+			children = (
+				959BBEDE2111F4B400106646 /* TextFieldController.swift */,
+				959BBF1B2111F4B400106646 /* Data */,
+				959BBEF92111F4B400106646 /* Tips */,
+				959BBF002111F4B400106646 /* Share */,
+				959BBECF2111F4B400106646 /* Loading */,
+			);
+			path = ToBeSeperated;
+			sourceTree = "<group>";
+		};
 		95927C3D221A9C5C009CA9D4 /* IGListViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -283,6 +293,7 @@
 		959BBEA02111EE9300106646 /* PTBaseKit */ = {
 			isa = PBXGroup;
 			children = (
+				954B52E622606E1300CD9F14 /* ToBeSeperated */,
 				959BBECA2111F4B400106646 /* Source */,
 				959BBF1D2111F4B400106646 /* Application */,
 				95FAFBC5211346F800FEA6F5 /* Frameworks */,
@@ -334,13 +345,12 @@
 		959BBECA2111F4B400106646 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				95D0F21E2198573000F74187 /* Global.swift */,
 				9593001E2154D4070084AF9C /* CssKit */,
 				959BBECB2111F4B400106646 /* UI */,
 				959BBF032111F4B400106646 /* Foundation */,
 				959BBF172111F4B400106646 /* Map */,
 				959BBF192111F4B400106646 /* SystemInfo */,
-				959BBF1B2111F4B400106646 /* Data */,
-				95D0F21E2198573000F74187 /* Global.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -348,26 +358,14 @@
 		959BBECB2111F4B400106646 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				959BBECC2111F4B400106646 /* GlobalValues */,
-				959BBECF2111F4B400106646 /* Loading */,
 				959BBED12111F4B400106646 /* Web */,
 				959BBED62111F4B400106646 /* Image */,
 				959BBED92111F4B400106646 /* Extensions */,
 				959BBEE12111F4B400106646 /* List */,
-				959BBEF92111F4B400106646 /* Tips */,
 				959BBEFB2111F4B400106646 /* Helpers */,
 				959BBEFD2111F4B400106646 /* Base */,
-				959BBF002111F4B400106646 /* Share */,
 			);
 			path = UI;
-			sourceTree = "<group>";
-		};
-		959BBECC2111F4B400106646 /* GlobalValues */ = {
-			isa = PBXGroup;
-			children = (
-				959BBECD2111F4B400106646 /* GlobalValues.swift */,
-			);
-			path = GlobalValues;
 			sourceTree = "<group>";
 		};
 		959BBECF2111F4B400106646 /* Loading */ = {
@@ -403,7 +401,6 @@
 				959BBEDB2111F4B400106646 /* UIView+Extensions.swift */,
 				959BBEDC2111F4B400106646 /* UIButton+Extension.swift */,
 				959BBEDD2111F4B400106646 /* UIImage+Extensions.swift */,
-				959BBEDE2111F4B400106646 /* TextFieldController.swift */,
 				95313C1521A3B67900920B09 /* UIViewController+Navigation.swift */,
 				959BBEDF2111F4B400106646 /* UIBarButtonItem+Extension.swift */,
 				959BBEE02111F4B400106646 /* runtime+UIControl.swift */,
@@ -879,7 +876,6 @@
 				9593002D2154D4070084AF9C /* CssOperator.swift in Sources */,
 				959BBF342111F4B400106646 /* runtime+UIControl.swift in Sources */,
 				959BBF2E2111F4B400106646 /* UIViewController+Extensions.swift in Sources */,
-				959BBF262111F4B400106646 /* GlobalValues.swift in Sources */,
 				959BBF312111F4B400106646 /* UIImage+Extensions.swift in Sources */,
 				95D0F21F2198573000F74187 /* Global.swift in Sources */,
 				959BBF232111F4B400106646 /* AMap+MapAdapter.swift in Sources */,

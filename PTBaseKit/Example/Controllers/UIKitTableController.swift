@@ -12,7 +12,7 @@ import RxSwift
 
 func createTableController() -> UIViewController {
     let table = PTTableViewController()
-        .setBackgroungColor(UIColor.tk.background)
+        .setBackgroungColor(UIColor.pt.background)
         .setAutoLoading(false)
         .setupHeader(UILabel(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 44)) + "Header for table".css)
         .setupFooter(UILabel(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 44)) + "Footer for table".css)
@@ -56,7 +56,7 @@ func new_createTableController() -> UIViewController {
         .disposed(by: table)
     
     return table
-        .setBackgroungColor(UIColor.tk.background)
+        .setBackgroungColor(UIColor.pt.background)
         .setupTableView(with: .sepratorStyle(.singleLine), .allowMultiSelection(true), .automaticallyAdjustsScrollViewInsets(false))
         .setupEmptyPlaceHolder(image: UIImage(named: "empty_tips"), title: "No data yet".attributed())
 }
@@ -98,9 +98,9 @@ var images: [UIImage?] {
 
 private func genButtonContentOptions() -> ButtonContentOptions {
     if arc4random_uniform(2) == 1 {
-        return .imageSource(imageSource(with: testPicUrls[Int(arc4random_uniform(15))].interceptImageUrl(width: Int32(45*UIScreen.main.scale), height: Int32(45*UIScreen.main.scale)), css: UIColor.tk.gray.bgCss + (45/2).cornerRadiusCss, targetSize: CGSize(width: 45, height: 45)))
+        return .imageSource(imageSource(with: testPicUrls[Int(arc4random_uniform(15))], css: UIColor.pt.gray.bgCss + (45/2).cornerRadiusCss, targetSize: CGSize(width: 45, height: 45)))
     }else {
-        return .attributedString("click me".attributed([.font(17.customMediumFont), .textColor(UIColor.tk.main)]))
+        return .attributedString("click me".attributed([.font(17.customMediumFont), .textColor(UIColor.pt.main)]))
     }
 }
 
@@ -109,14 +109,14 @@ var cellTitles: [NSMutableAttributedString] {
     return ["long long long long long long long long long long long long long long long long cell title aligent natural".attributed([.paragraphStyle(lineSpacing: nil, alignment: .natural)]),
             "cell title aligent center".attributed([.paragraphStyle(lineSpacing: nil, alignment: .center)]),
             "cell title aligent right".attributed([.paragraphStyle(lineSpacing: nil, alignment: .right)]),
-            "cell title red".attributed([.textColor(UIColor.tk.noticeRed), .paragraphStyle(lineSpacing: nil, alignment: .natural)])]
+            "cell title red".attributed([.textColor(UIColor.pt.noticeRed), .paragraphStyle(lineSpacing: nil, alignment: .natural)])]
 }
 
 var subTitles: [NSMutableAttributedString] {
     return ["\nsub title aligent natural".attributed([.paragraphStyle(lineSpacing: nil, alignment: .natural)]),
             "\nsub title aligent center".attributed([.paragraphStyle(lineSpacing: nil, alignment: .center)]),
             "\nsub title aligent right".attributed([.paragraphStyle(lineSpacing: nil, alignment: .right)]),
-            "\nlong long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long sub title ".attributed([.textColor(UIColor.tk.lightGray), .paragraphStyle(lineSpacing: nil, alignment: .natural)])]
+            "\nlong long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long sub title ".attributed([.textColor(UIColor.pt.lightGray), .paragraphStyle(lineSpacing: nil, alignment: .natural)])]
 }
 
 private let testPicUrls: [String] = [

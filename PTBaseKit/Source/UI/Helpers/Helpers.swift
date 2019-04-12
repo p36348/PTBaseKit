@@ -9,7 +9,7 @@
 import UIKit
 
 public enum OSSImageOptions {
-    case resize
+    case resize(width: Numberable, height: Numberable)
     case crop(width: Numberable, height: Numberable, x:  Numberable, y: Numberable)
     case autoOrient
     case format
@@ -72,10 +72,6 @@ extension Double: Numberable {
 }
 
 extension String {
-    public func interceptImageUrl(width:Int32,height:Int32,suffix:String = "") -> String {
-        return "\(self)_\(width*Int32(UIScreen.main.scale))x\(height*Int32(UIScreen.main.scale))\(suffix)"
-    }
-    
     public func ossImageUrl(options: OSSImageOptions) -> String {
         return self + "?x-oss-process=image" + options.paddingValue
     }

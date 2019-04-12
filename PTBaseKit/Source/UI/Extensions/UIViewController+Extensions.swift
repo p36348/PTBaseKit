@@ -53,6 +53,24 @@ extension UIViewController {
     }
 }
 
+extension UIViewController {
+    public func setupLeftBarItems(_ buttons:UIView...) {
+        let negativeIM = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        negativeIM.width = -5
+        var barButtons = buttons.map{UIBarButtonItem(customView: $0)}
+        barButtons.insert(negativeIM, at: 0)
+        self.navigationItem.leftBarButtonItems = barButtons
+    }
+    
+    public func setupRightBarItems(_ buttons:UIView...) {
+        let negativeIM = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        negativeIM.width = -5
+        var barButtons = buttons.map{UIBarButtonItem(customView: $0)}
+        barButtons.insert(negativeIM, at: 0)
+        self.navigationItem.rightBarButtonItems = barButtons
+    }
+}
+
 // MARK: - alert
 extension UIViewController{
     
@@ -74,7 +92,7 @@ extension UIViewController{
             controller.addAction(UIAlertAction(title: PTBaseKit.Resource.alertCancelTitle, style: UIAlertAction.Style.cancel, handler: nil))
         }
         
-        !warning ? confirmAction.setValue(UIColor.tk.main, forKey: "_titleTextColor") : nil
+        !warning ? confirmAction.setValue(UIColor.pt.main, forKey: "_titleTextColor") : nil
         
         controller.addAction(confirmAction)
         

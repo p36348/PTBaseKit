@@ -13,7 +13,7 @@ public class DefaultTableSectionView: UITableViewHeaderFooterView, TableSectionH
     
     public override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        self.contentView.backgroundColor = UIColor.tk.background
+        self.contentView.backgroundColor = UIColor.pt.background
     }
     
     required public init?(coder aDecoder: NSCoder) {

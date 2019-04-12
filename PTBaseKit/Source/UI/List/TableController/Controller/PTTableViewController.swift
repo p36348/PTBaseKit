@@ -36,7 +36,7 @@ public class PTTableViewController: BaseController, ListController {
     
     fileprivate var loadAutomaticlly: Bool = true
     
-    fileprivate var backgroundColor: UIColor = UIColor.tk.background
+    fileprivate var backgroundColor: UIColor = UIColor.pt.background
     
     fileprivate var tableViewSetupAction: ((PTTableViewController) -> Void)? = nil
     

@@ -13,46 +13,46 @@ func setup(mainColorHex: Int, normalGradientStartHex: Int, normalGradientEndHex:
     
     // update base colors
     
-    UIColor.tk.main                          = mainColorHex.hexColor
-    UIColor.tk.noticeRed                     = noticeRedColorHex.hexColor
-    UIColor.tk.normalGradientStart           = normalGradientStartHex.hexColor
-    UIColor.tk.normalGradientEnd             = normalGradientEndHex.hexColor
-    UIColor.tk.disableGradientStart          = normalGradientStartHex.hexColor.withAlphaComponent(0.5)
-    UIColor.tk.disableGradientEnd            = normalGradientEndHex.hexColor.withAlphaComponent(0.5)
-    UIColor.tk.highlightedGradientStart      = highlightedGradientStartHex.hexColor
-    UIColor.tk.highlightedGradientEnd        = highlightedGradientEndHex.hexColor
-    UIColor.tk.emptyHighlightedGradientStart = emptyHighlightedGradientStartHex.hexColor.withAlphaComponent(0.2)
-    UIColor.tk.emptyHighlightedGradientEnd   = emptyHighlightedGradientEndHex.hexColor.withAlphaComponent(0.2)
+    UIColor.pt.main                          = mainColorHex.hexColor
+    UIColor.pt.noticeRed                     = noticeRedColorHex.hexColor
+    UIColor.pt.normalGradientStart           = normalGradientStartHex.hexColor
+    UIColor.pt.normalGradientEnd             = normalGradientEndHex.hexColor
+    UIColor.pt.disableGradientStart          = normalGradientStartHex.hexColor.withAlphaComponent(0.5)
+    UIColor.pt.disableGradientEnd            = normalGradientEndHex.hexColor.withAlphaComponent(0.5)
+    UIColor.pt.highlightedGradientStart      = highlightedGradientStartHex.hexColor
+    UIColor.pt.highlightedGradientEnd        = highlightedGradientEndHex.hexColor
+    UIColor.pt.emptyHighlightedGradientStart = emptyHighlightedGradientStartHex.hexColor.withAlphaComponent(0.2)
+    UIColor.pt.emptyHighlightedGradientEnd   = emptyHighlightedGradientEndHex.hexColor.withAlphaComponent(0.2)
     // update additional css
     
     // uiview css
-    spliteCss          = UIColor.tk.splite.bgCss + CGRect(x: 0, y: 0, width: kScreenWidth, height: onepixel).css
+    spliteCss          = UIColor.pt.splite.bgCss + CGRect(x: 0, y: 0, width: kScreenWidth, height: onepixel).css
     
-    boardCss           = onepixel.borderCss + UIColor.tk.gray.borderCss
+    boardCss           = onepixel.borderCss + UIColor.pt.gray.borderCss
     
     //textFieldCss
-    textFieldCss        = UIColor.tk.black.textColorCss + NSTextAlignment.left.css + 15.fontCss
+    textFieldCss        = UIColor.pt.black.textColorCss + NSTextAlignment.left.css + 15.fontCss
     
     //labelCss
-    labelCss            = UIColor.tk.black.textColorCss + NSTextAlignment.center.css + 15.fontCss + lableFitSizeCss
+    labelCss            = UIColor.pt.black.textColorCss + NSTextAlignment.center.css + 15.fontCss + lableFitSizeCss
     
-    labelLCss           = UIColor.tk.black.textColorCss + NSTextAlignment.left.css + 15.fontCss + lableFitSizeCss
+    labelLCss           = UIColor.pt.black.textColorCss + NSTextAlignment.left.css + 15.fontCss + lableFitSizeCss
     
     border              = 3.cornerRadiusCss + onepixel.borderCss + NSTextAlignment.center.css
     
-    labelSelectedCss    = UIColor.tk.main.borderCss + UIColor.tk.main.textColorCss + (0xE6EFFF.hexColor).bgCss + border
+    labelSelectedCss    = UIColor.pt.main.borderCss + UIColor.pt.main.textColorCss + (0xE6EFFF.hexColor).bgCss + border
     
-    labeNormalCss       = UIColor.tk.gray.borderCss + UIColor.tk.black.textColorCss + UIColor.tk.white.bgCss + border
+    labeNormalCss       = UIColor.pt.gray.borderCss + UIColor.pt.black.textColorCss + UIColor.pt.white.bgCss + border
     
     // button css
     
-    buttonNormalImg      = CAGradientLayer([UIColor.tk.normalGradientStart, UIColor.tk.normalGradientEnd], windowsFrame).toImage
+    buttonNormalImg      = CAGradientLayer([UIColor.pt.normalGradientStart, UIColor.pt.normalGradientEnd], windowsFrame).toImage
     
-    buttonhighlightedImg = CAGradientLayer([UIColor.tk.highlightedGradientStart, UIColor.tk.highlightedGradientEnd], windowsFrame).toImage
+    buttonhighlightedImg = CAGradientLayer([UIColor.pt.highlightedGradientStart, UIColor.pt.highlightedGradientEnd], windowsFrame).toImage
     
-    buttonDisableImg     = CAGradientLayer([UIColor.tk.disableGradientStart, UIColor.tk.disableGradientEnd], windowsFrame).toImage
+    buttonDisableImg     = CAGradientLayer([UIColor.pt.disableGradientStart, UIColor.pt.disableGradientEnd], windowsFrame).toImage
     
-    emptyButtonSelectedImg = CAGradientLayer([UIColor.tk.emptyHighlightedGradientStart, UIColor.tk.emptyHighlightedGradientEnd], windowsFrame).toImage
+    emptyButtonSelectedImg = CAGradientLayer([UIColor.pt.emptyHighlightedGradientStart, UIColor.pt.emptyHighlightedGradientEnd], windowsFrame).toImage
     
     buttonImgCss        = buttonNormalImg.bgCss + buttonhighlightedImg.bgHCss + buttonDisableImg.bgDisableCss
     
@@ -65,76 +65,38 @@ func setup(mainColorHex: Int, normalGradientStartHex: Int, normalGradientEndHex:
     buttonDisableCss    = buttonCss + enable(false)
 }
 
-// MARK: - base colors
-extension UIColor {
-    public struct tk {
-        /// 主题色
-        static public fileprivate(set) var main                     = 0xffbb4a.hexColor
-        /// 背景色
-        static public fileprivate(set) var background               = 0xf5f5f5.hexColor
-        /// 分割线
-        static public fileprivate(set) var splite                   = 0xe5e5e5.hexColor
-        /// 辅助灰
-        static public fileprivate(set) var lightGray                = 0xb2b2b2.hexColor
-        /// 黑色
-        static public fileprivate(set) var black                    = UIColor.black
-        /// 深灰色
-        static public fileprivate(set) var gray                     = 0x888888.hexColor
-        /// 提示红
-        static public fileprivate(set) var noticeRed                = 0xFF4200.hexColor
-        /// 提示红
-        static public fileprivate(set) var red                      = 0xFF4200.hexColor
-        /// 可操作渐变起始
-        static public fileprivate(set) var normalGradientStart      = 0x000000.hexColor
-        /// 可操作渐变结束
-        static public fileprivate(set) var normalGradientEnd        = 0x000000.hexColor
-        /// 不可操作渐变起始
-        static public fileprivate(set) var disableGradientStart     = 0x000000.hexColor
-        /// 不可操作渐变起始
-        static public fileprivate(set) var disableGradientEnd       = 0x000000.hexColor
-        /// 点击状渐变起始
-        static public fileprivate(set) var highlightedGradientStart = 0x000000.hexColor
-        /// 点击状渐变起始
-        static public fileprivate(set) var highlightedGradientEnd   = 0x000000.hexColor
-        /// 空心渐变起始
-        static public fileprivate(set) var emptyHighlightedGradientStart = 0x000000.hexColor
-        /// 空心渐变结束
-        static public fileprivate(set) var emptyHighlightedGradientEnd = 0x000000.hexColor
-        
-        static public fileprivate(set) var white                    = UIColor.white
-    }
-}
+
 
 // uiview css
-public private(set) var spliteCss: UIViewCss = UIColor.tk.splite.bgCss + CGRect(x: 0, y: 0, width: kScreenWidth, height: onepixel).css
+public private(set) var spliteCss: UIViewCss = UIColor.pt.splite.bgCss + CGRect(x: 0, y: 0, width: kScreenWidth, height: onepixel).css
 
-public private(set) var boardCss: UIViewCss = onepixel.borderCss + UIColor.tk.gray.borderCss
+public private(set) var boardCss: UIViewCss = onepixel.borderCss + UIColor.pt.gray.borderCss
 
 //textFieldCss
-public private(set) var textFieldCss: UITextFieldCss = UIColor.tk.black.textColorCss + NSTextAlignment.left.css + 15.fontCss
+public private(set) var textFieldCss: UITextFieldCss = UIColor.pt.black.textColorCss + NSTextAlignment.left.css + 15.fontCss
 
 //labelCss
-public private(set) var labelCss: UILabelCss = UIColor.tk.black.textColorCss + NSTextAlignment.center.css + 15.fontCss + lableFitSizeCss
+public private(set) var labelCss: UILabelCss = UIColor.pt.black.textColorCss + NSTextAlignment.center.css + 15.fontCss + lableFitSizeCss
 
-public private(set) var labelLCss: UILabelCss = UIColor.tk.black.textColorCss + NSTextAlignment.left.css + 15.fontCss + lableFitSizeCss
+public private(set) var labelLCss: UILabelCss = UIColor.pt.black.textColorCss + NSTextAlignment.left.css + 15.fontCss + lableFitSizeCss
 
 public private(set) var border = 3.cornerRadiusCss + onepixel.borderCss + NSTextAlignment.center.css
 
-public private(set) var labelSelectedCss: UIViewCss = UIColor.tk.main.borderCss + UIColor.tk.main.textColorCss + (0xE6EFFF.hexColor).bgCss + border
+public private(set) var labelSelectedCss: UIViewCss = UIColor.pt.main.borderCss + UIColor.pt.main.textColorCss + (0xE6EFFF.hexColor).bgCss + border
 
-public private(set) var labeNormalCss       = UIColor.tk.gray.borderCss + UIColor.tk.black.textColorCss + UIColor.tk.white.bgCss + border
+public private(set) var labeNormalCss       = UIColor.pt.gray.borderCss + UIColor.pt.black.textColorCss + UIColor.pt.white.bgCss + border
 
 // button css
 
-public private(set) var buttonNormalImg: UIImage      = CAGradientLayer([UIColor.tk.normalGradientStart, UIColor.tk.normalGradientEnd], windowsFrame).toImage
+public private(set) var buttonNormalImg: UIImage      = CAGradientLayer([UIColor.pt.normalGradientStart, UIColor.pt.normalGradientEnd], windowsFrame).toImage
 
-public private(set) var buttonhighlightedImg: UIImage = CAGradientLayer([UIColor.tk.highlightedGradientStart, UIColor.tk.highlightedGradientEnd], windowsFrame).toImage
+public private(set) var buttonhighlightedImg: UIImage = CAGradientLayer([UIColor.pt.highlightedGradientStart, UIColor.pt.highlightedGradientEnd], windowsFrame).toImage
 
-public private(set) var buttonDisableImg: UIImage     = CAGradientLayer([UIColor.tk.disableGradientStart, UIColor.tk.disableGradientEnd], windowsFrame).toImage
+public private(set) var buttonDisableImg: UIImage     = CAGradientLayer([UIColor.pt.disableGradientStart, UIColor.pt.disableGradientEnd], windowsFrame).toImage
 
 public private(set) var emptyButtonNormalImg: UIImage = CAGradientLayer([UIColor.white, UIColor.white], windowsFrame).toImage
 
-public private(set) var emptyButtonSelectedImg: UIImage = CAGradientLayer([UIColor.tk.emptyHighlightedGradientStart, UIColor.tk.emptyHighlightedGradientEnd], windowsFrame).toImage
+public private(set) var emptyButtonSelectedImg: UIImage = CAGradientLayer([UIColor.pt.emptyHighlightedGradientStart, UIColor.pt.emptyHighlightedGradientEnd], windowsFrame).toImage
 
 public private(set) var buttonImgCss: UIButtonCss = buttonNormalImg.bgCss + buttonhighlightedImg.bgHCss + buttonDisableImg.bgDisableCss
 
@@ -146,8 +108,4 @@ public private(set) var buttonNormalCss    = buttonCss + enable(true)
 
 public private(set) var buttonDisableCss   = buttonCss + enable(false)
 
-extension Int {
-    public var hexColor: UIColor {
-        return UIColor(red:CGFloat((self & 0xFF0000) >> 16) / 255 , green: CGFloat((self & 0x00FF00) >> 8) / 255, blue: CGFloat((self & 0x0000FF) ) / 255, alpha: 1.0)
-    }
-}
+

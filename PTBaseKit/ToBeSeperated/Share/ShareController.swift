@@ -28,7 +28,7 @@ public class ShareController: BaseController {
         collection.delegate = self
         collection.dataSource = self
         collection.register(ShareItemCell.self, forCellWithReuseIdentifier: ShareItemCell.description())
-        collection.backgroundColor = UIColor.tk.white
+        collection.backgroundColor = UIColor.pt.white
         return collection
     }()
     
@@ -53,17 +53,17 @@ public class ShareController: BaseController {
     }
     
     override public func performPreSetup() {
-        self.view.backgroundColor = UIColor.tk.black.withAlphaComponent(0.6)
+        self.view.backgroundColor = UIColor.pt.black.withAlphaComponent(0.6)
         
         self.view += [self.wrapper, self.cancelBtn]
         
         self.wrapper += [self.titleLabel, self.collectionView]
-        self.wrapper.backgroundColor = UIColor.tk.white
+        self.wrapper.backgroundColor = UIColor.pt.white
         self.wrapper += 12.cornerRadiusCss
         
-        self.titleLabel.attributedText = "分享到".attributed([.font(14.customRegularFont), .textColor(UIColor.tk.gray)])
+        self.titleLabel.attributedText = "分享到".attributed([.font(14.customRegularFont), .textColor(UIColor.pt.gray)])
         
-        self.cancelBtn.setAttributedTitle("取消".attributed([.font(20.customRegularFont), .textColor(UIColor.tk.main)]), for: UIControl.State.normal)
+        self.cancelBtn.setAttributedTitle("取消".attributed([.font(20.customRegularFont), .textColor(UIColor.pt.main)]), for: UIControl.State.normal)
         self.cancelBtn.backgroundColor = UIColor.white
         self.cancelBtn += 12.cornerRadiusCss
         self.cancelBtn.performWhenClick { [weak self] in

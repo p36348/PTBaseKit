@@ -119,7 +119,7 @@ public class IGListViewController: BaseController, ListController {
     
     lazy var collectionView: UICollectionView = {
         let _item = UICollectionView(frame: .zero, collectionViewLayout: self.layout)
-        _item.backgroundColor = UIColor.tk.white
+        _item.backgroundColor = UIColor.pt.white
         return _item
     }()
     
@@ -140,7 +140,7 @@ public class IGListViewController: BaseController, ListController {
         return _adapter
     }()
     
-    private var backgroundColor: UIColor = UIColor.tk.background
+    private var backgroundColor: UIColor = UIColor.pt.background
     
     public var items: [IGListSectionViewModel] = []
     

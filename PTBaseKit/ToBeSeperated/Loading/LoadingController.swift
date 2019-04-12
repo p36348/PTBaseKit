@@ -21,7 +21,7 @@ public class LoadingController: BaseController {
     fileprivate lazy var progressBar: UIProgressView = {
         let bar = UIProgressView(frame: CGRect.zero)
         bar.trackTintColor = UIColor.clear
-        bar.progressTintColor = UIColor.tk.main
+        bar.progressTintColor = UIColor.pt.main
         bar.progressViewStyle = UIProgressView.Style.bar
         return bar
     }()

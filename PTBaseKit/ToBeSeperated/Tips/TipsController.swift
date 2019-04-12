@@ -15,7 +15,7 @@ public class TipsController: BaseController {
     
     fileprivate let wrapper: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.tk.white
+        view.backgroundColor = UIColor.pt.white
         view += 5.cornerRadiusCss
         return view
     }()
@@ -48,7 +48,7 @@ public class TipsController: BaseController {
     }
     
     func setupUI() {
-        self.view.backgroundColor = UIColor.tk.black.withAlphaComponent(0.6)
+        self.view.backgroundColor = UIColor.pt.black.withAlphaComponent(0.6)
         
         self.wrapper += [self.contentLabel, self.dismissBtn, self.confirmBtn]
         self.view += [self.wrapper, self.imageView]

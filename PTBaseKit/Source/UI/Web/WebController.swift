@@ -40,7 +40,7 @@ public class WebController: BaseController {
     
     lazy var progressBar: UIProgressView = {
         let bar = UIProgressView(progressViewStyle: UIProgressView.Style.bar)
-        bar.tintColor = UIColor.tk.main
+        bar.tintColor = UIColor.pt.main
         return bar
     }()
     
@@ -99,7 +99,7 @@ public class WebController: BaseController {
             make.leading.trailing.top.equalTo(self.webView)
         }
         
-        self.webView.backgroundColor = UIColor.tk.background
+        self.webView.backgroundColor = UIColor.pt.background
         
         self.navigationItem.setRightBarButton(self.rightButtonItem, animated: true)
     }

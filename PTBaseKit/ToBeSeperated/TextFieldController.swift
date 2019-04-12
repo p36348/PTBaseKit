@@ -15,9 +15,9 @@ public class TextFieldController: BaseController {
     
     public let textField: UITextField = {
         let tf = UITextField()
-        tf.textColor = UIColor.tk.gray
-        tf.tintColor = UIColor.tk.main
-        tf.backgroundColor = UIColor.tk.white
+        tf.textColor = UIColor.pt.gray
+        tf.tintColor = UIColor.pt.main
+        tf.backgroundColor = UIColor.pt.white
         tf += 3.cornerRadiusCss
         tf.textAlignment = .left
         let leftGapView = UIView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 15, height: 44)))
@@ -27,8 +27,8 @@ public class TextFieldController: BaseController {
         return tf
     }()
     
-    let doneButton: UIButton = ViewFactory.createBarButton(title: PTBaseKit.Resource.textFieldDoneTitle.attributed([.textColor(UIColor.tk.main)]),
-                                                           disabledTitle: PTBaseKit.Resource.textFieldDoneTitle.attributed([.textColor(UIColor.tk.lightGray)]))
+    let doneButton: UIButton = ViewFactory.createBarButton(title: PTBaseKit.Resource.textFieldDoneTitle.attributed([.textColor(UIColor.pt.main)]),
+                                                           disabledTitle: PTBaseKit.Resource.textFieldDoneTitle.attributed([.textColor(UIColor.pt.lightGray)]))
     
     var doneAction: ((TextFieldController, String?)->Void)? = nil
     
@@ -100,8 +100,8 @@ extension TextFieldController {
         self.textField.keyboardType = keyboardType
         self.maximumLength = maximumLength
         if let _doneBtnTitle = doneBtnTitle {
-            self.doneButton.setAttributedTitle(_doneBtnTitle.attributed([.textColor(UIColor.tk.main)]), for: UIControl.State.normal)
-            self.doneButton.setAttributedTitle(_doneBtnTitle.attributed([.textColor(UIColor.tk.lightGray)]), for: UIControl.State.disabled)
+            self.doneButton.setAttributedTitle(_doneBtnTitle.attributed([.textColor(UIColor.pt.main)]), for: UIControl.State.normal)
+            self.doneButton.setAttributedTitle(_doneBtnTitle.attributed([.textColor(UIColor.pt.lightGray)]), for: UIControl.State.disabled)
         }
         return self
     }

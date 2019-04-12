@@ -118,7 +118,7 @@ extension UIButton {
         
         self.countDownTitle = countDownTitle
         
-        self.setAttributedTitle("\(self.countDownTitle ?? "")(\(self.timeCount))".attributed([.textColor(UIColor.tk.lightGray)]), for: UIControl.State.disabled)
+        self.setAttributedTitle("\(self.countDownTitle ?? "")(\(self.timeCount))".attributed([.textColor(UIColor.pt.lightGray)]), for: UIControl.State.disabled)
         
         self.preEnable = self.isEnabled
         self.isEnabled = false
@@ -139,7 +139,7 @@ extension UIButton {
         if
             self.timeCount >= 0
         {
-            self.setAttributedTitle("\(self.countDownTitle ?? "")(\(self.timeCount))".attributed([.textColor(UIColor.tk.lightGray)]), for: UIControl.State.disabled)
+            self.setAttributedTitle("\(self.countDownTitle ?? "")(\(self.timeCount))".attributed([.textColor(UIColor.pt.lightGray)]), for: UIControl.State.disabled)
         }
         else
         {

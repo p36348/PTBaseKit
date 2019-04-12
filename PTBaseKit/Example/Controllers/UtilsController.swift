@@ -39,11 +39,11 @@ private func testCss() {
     // old method
     let label: UILabel = UILabel()
     label += 13.customFont
-    label += UIColor.tk.main.textColorCss
+    label += UIColor.pt.main.textColorCss
     label += "custom label"
     
     // new method
-    let customLabel: UILabel = UILabel() + 13.customFont.css + UIColor.tk.main.textColorCss + "custom label".css
+    let customLabel: UILabel = UILabel() + 13.customFont.css + UIColor.pt.main.textColorCss + "custom label".css
     
     customLabel.sizeToFit()
     

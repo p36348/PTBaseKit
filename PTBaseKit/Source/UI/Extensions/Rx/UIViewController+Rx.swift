@@ -58,3 +58,26 @@ extension Reactive where Base: UIViewController {
         return controlEvent(with: .viewWillDisappear)
     }
 }
+
+
+extension Reactive where Base: UIViewController {
+    public func present(viewController: UIViewController) -> Observable<Base> {
+        return Observable.create({  (observer) -> Disposable in
+            self.base.present(viewController, animated: true, completion: {
+                observer.onNext(self.base)
+                observer.onCompleted()
+            })
+            return Disposables.create()
+        })
+    }
+    
+    public func dismiss() -> Observable<Base> {
+        return Observable.create({ (observer) -> Disposable in
+            self.base.dismiss(animated: true, completion: {
+                observer.onNext(self.base)
+                observer.onCompleted()
+            })
+            return Disposables.create()
+        })
+    }
+}

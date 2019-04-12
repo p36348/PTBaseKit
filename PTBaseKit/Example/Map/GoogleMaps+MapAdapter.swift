@@ -282,8 +282,8 @@ extension GoogleMapsAdapter {
         switch option {
         case .circle(let location, let radius):
             let circ = GMSCircle(position: location, radius: radius)
-            circ.fillColor = UIColor.tk.main.withAlphaComponent(0.2)
-            circ.strokeColor = UIColor.tk.main
+            circ.fillColor = UIColor.pt.main.withAlphaComponent(0.2)
+            circ.strokeColor = UIColor.pt.main
             circ.map = self.googleMap
             self.overlays.append(circ)
         case .polygon(let locations):
@@ -291,8 +291,8 @@ extension GoogleMapsAdapter {
             locations.forEach {path.add($0)}
             
             let overlay = GMSPolygon(path: path)
-            overlay.fillColor = UIColor.tk.main.withAlphaComponent(0.2)
-            overlay.strokeColor = UIColor.tk.main
+            overlay.fillColor = UIColor.pt.main.withAlphaComponent(0.2)
+            overlay.strokeColor = UIColor.pt.main
             overlay.strokeWidth = 2
             overlay.map = self.googleMap
             self.overlays.append(overlay)

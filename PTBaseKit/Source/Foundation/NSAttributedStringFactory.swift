@@ -28,11 +28,11 @@ public enum AttributedStringOptions {
 
 extension String {
     
-    public func attributed(_ options: [AttributedStringOptions] = [.font(15.customRegularFont), .textColor(UIColor.tk.black), .paragraphStyle(lineSpacing: nil, alignment: nil)]) -> NSMutableAttributedString {
+    public func attributed(_ options: [AttributedStringOptions] = [.font(15.customRegularFont), .textColor(UIColor.pt.black), .paragraphStyle(lineSpacing: nil, alignment: nil)]) -> NSMutableAttributedString {
         
         var attributes: [NSAttributedString.Key: Any] = [:]
         
-        var textColor: UIColor = UIColor.tk.black
+        var textColor: UIColor = UIColor.pt.black
         
         var textFont: UIFont = 15.customRegularFont
         

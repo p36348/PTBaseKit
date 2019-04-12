@@ -10,7 +10,7 @@ import UIKit
 
 
 public struct ViewFactory {
-    public static func createTextField(font: UIFont = 17.customFont, tintColor: UIColor = UIColor.tk.main, keyboardType: UIKeyboardType = .default, isSecureTextEntry: Bool = false) -> UITextField {
+    public static func createTextField(font: UIFont = 17.customFont, tintColor: UIColor = UIColor.pt.main, keyboardType: UIKeyboardType = .default, isSecureTextEntry: Bool = false) -> UITextField {
         let textField = UITextField()
         textField.backgroundColor = UIColor.white
         textField.font = font
@@ -20,14 +20,14 @@ public struct ViewFactory {
         return textField
     }
     
-    public static func createLabel(font: UIFont = 15.customFont, color: UIColor = UIColor.tk.black) -> UILabel {
+    public static func createLabel(font: UIFont = 15.customFont, color: UIColor = UIColor.pt.black) -> UILabel {
         let label = UILabel()
         label.font = font
         label.textColor = color
         return label
     }
     
-    public static func createEmptyButton(tintColor: UIColor = UIColor.tk.gray, radius: CGFloat = PTBaseKit.buttonRadius) -> UIButton {
+    public static func createEmptyButton(tintColor: UIColor = UIColor.pt.gray, radius: CGFloat = PTBaseKit.buttonRadius) -> UIButton {
         let btn = UIButton(type: UIButton.ButtonType.system)
         btn += tintColor.textColorCss
         btn += 1.borderCss
@@ -45,7 +45,7 @@ public struct ViewFactory {
         return button
     }
     
-    public static func createRoundButton(tintColor: UIColor = UIColor.tk.white, radius: CGFloat = PTBaseKit.buttonRadius) -> UIButton {
+    public static func createRoundButton(tintColor: UIColor = UIColor.pt.white, radius: CGFloat = PTBaseKit.buttonRadius) -> UIButton {
         let btn = UIButton(type: UIButton.ButtonType.system)
         btn += radius.cornerRadiusCss
         btn += buttonImgCss

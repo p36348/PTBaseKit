@@ -53,7 +53,7 @@ open class BaseController: UIViewController {
      * 非耗时界面初始化操作
      */
     open func performPreSetup() {
-        self.view.backgroundColor = UIColor.tk.background
+        self.view.backgroundColor = UIColor.pt.background
         self.automaticallyAdjustsScrollViewInsets = true
     }
     
@@ -69,50 +69,11 @@ open class BaseController: UIViewController {
     }
 }
 
-extension BaseController {
-    public func setupLeftBarItems(_ buttons:UIView...) {
-        let negativeIM = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        negativeIM.width = -5
-        var barButtons = buttons.map{UIBarButtonItem(customView: $0)}
-        barButtons.insert(negativeIM, at: 0)
-        self.navigationItem.leftBarButtonItems = barButtons
-    }
-    
-    public func setupRightBarItems(_ buttons:UIView...) {
-        let negativeIM = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        negativeIM.width = -5
-        var barButtons = buttons.map{UIBarButtonItem(customView: $0)}
-        barButtons.insert(negativeIM, at: 0)
-        self.navigationItem.rightBarButtonItems = barButtons
-    }
-    
-}
+
 
 extension BaseController {
     public func dispose(identifier: String = BaseController.DisposeIdentifiers.default) {
         self.disposeBags[identifier] = nil
-    }
-    
-    public func rx_present(viewController: UIViewController) -> Observable<BaseController> {
-        return Observable.create({ [unowned self] (observer) -> Disposable in
-            self.present(viewController, animated: true, completion: {
-                observer.onNext(self)
-                observer.onCompleted()
-            })
-            return Disposables.create()
-        })
-    }
-    
-    public func rx_dismiss() -> Observable<BaseController> {
-        return Observable.create({ [weak self] (observer) -> Disposable in
-            self?.dismiss(animated: true, completion: {
-                if let weakSelf = self {
-                    observer.onNext(weakSelf)
-                    observer.onCompleted()
-                }
-            })
-            return Disposables.create()
-        })
     }
 }
 
