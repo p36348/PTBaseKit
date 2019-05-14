@@ -49,6 +49,6 @@ private func createCellNodeModels() -> [TableCellNodeModel] {
             .map {_ in
                 return DefaultTableCellNodeModel(head: images[Int(arc4random_uniform(4))],
                                                  title: cellTitles[Int(arc4random_uniform(4))].appending(subTitles[Int(arc4random_uniform(4))]),
-                                                 tail: ButtonContentOptions.attributedString("Click Me".attributed([.font(17.customMediumFont), .textColor(UIColor.pt.main)])),
+                                                 tail: ButtonContentOptions.attributedString("Click Me".attributed([.font(17.customMediumFont), .colorUIColor.pt.main)])),
                                                  accessorable: Int(arc4random_uniform(4))%2 == 1)}
 }

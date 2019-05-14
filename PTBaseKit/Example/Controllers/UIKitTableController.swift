@@ -100,7 +100,7 @@ private func genButtonContentOptions() -> ButtonContentOptions {
     if arc4random_uniform(2) == 1 {
         return .imageSource(imageSource(with: testPicUrls[Int(arc4random_uniform(15))], css: UIColor.pt.gray.bgCss + (45/2).cornerRadiusCss, targetSize: CGSize(width: 45, height: 45)))
     }else {
-        return .attributedString("click me".attributed([.font(17.customMediumFont), .textColor(UIColor.pt.main)]))
+        return .attributedString("click me".attributed([.font(17.customMediumFont), .colorUIColor.pt.main)]))
     }
 }
 
@@ -109,14 +109,14 @@ var cellTitles: [NSMutableAttributedString] {
     return ["long long long long long long long long long long long long long long long long cell title aligent natural".attributed([.paragraphStyle(lineSpacing: nil, alignment: .natural)]),
             "cell title aligent center".attributed([.paragraphStyle(lineSpacing: nil, alignment: .center)]),
             "cell title aligent right".attributed([.paragraphStyle(lineSpacing: nil, alignment: .right)]),
-            "cell title red".attributed([.textColor(UIColor.pt.noticeRed), .paragraphStyle(lineSpacing: nil, alignment: .natural)])]
+            "cell title red".attributed([.colorUIColor.pt.noticeRed), .paragraphStyle(lineSpacing: nil, alignment: .natural)])]
 }
 
 var subTitles: [NSMutableAttributedString] {
     return ["\nsub title aligent natural".attributed([.paragraphStyle(lineSpacing: nil, alignment: .natural)]),
             "\nsub title aligent center".attributed([.paragraphStyle(lineSpacing: nil, alignment: .center)]),
             "\nsub title aligent right".attributed([.paragraphStyle(lineSpacing: nil, alignment: .right)]),
-            "\nlong long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long sub title ".attributed([.textColor(UIColor.pt.lightGray), .paragraphStyle(lineSpacing: nil, alignment: .natural)])]
+            "\nlong long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long sub title ".attributed([.colorUIColor.pt.lightGray), .paragraphStyle(lineSpacing: nil, alignment: .natural)])]
 }
 
 private let testPicUrls: [String] = [

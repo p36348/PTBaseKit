@@ -8,19 +8,19 @@
 
 import Foundation
 import UIKit
-public protocol AttributeStringSource {
+public protocol AttributedStringSource {
     var attr: NSMutableAttributedString {get}
     var hasDefaultStyle: Bool {get}
 }
 
-extension String: AttributeStringSource {
+extension String: AttributedStringSource {
     public var attr: NSMutableAttributedString {
         return self.attributed()
     }
     public var hasDefaultStyle: Bool {return false}
 }
 
-extension NSAttributedString: AttributeStringSource {
+extension NSAttributedString: AttributedStringSource {
     public var attr: NSMutableAttributedString {
         if let _mAttr = self as? NSMutableAttributedString {
             return _mAttr
