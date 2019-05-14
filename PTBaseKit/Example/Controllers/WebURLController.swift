@@ -16,8 +16,8 @@ class WebURLController: BaseController {
     
     lazy var submit: UIButton = {
         let item = UIButton(type: UIButton.ButtonType.system)
-        item.setAttributedTitle("Browse".attributed([.colorUIColor.pt.main)]), for: .normal)
-        item.setAttributedTitle("Browse".attributed([.colorUIColor.pt.lightGray)]), for: .disabled)
+        item.setAttributedTitle("Browse".attributed([.color(UIColor.pt.main)]), for: .normal)
+        item.setAttributedTitle("Browse".attributed([.color(UIColor.pt.lightGray)]), for: .disabled)
         return item
     }()
     

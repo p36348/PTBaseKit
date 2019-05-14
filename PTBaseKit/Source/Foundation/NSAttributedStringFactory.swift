@@ -49,13 +49,13 @@ public enum AttributedStringOptions {
 
 extension String {
     
-    public func attributed(_ options: [AttributedStringOptions] = [.font(15.pingFangRegularFont), .color(UIColor.yn.titleNormal), .paragraphStyle(lineSpacing: nil, alignment: nil)]) -> NSMutableAttributedString {
+    public func attributed(_ options: [AttributedStringOptions] = [.font(15.customRegularFont), .color(UIColor.pt.gray), .paragraphStyle(lineSpacing: nil, alignment: nil)]) -> NSMutableAttributedString {
         
         var attributes: [NSAttributedString.Key: Any] = [:]
         
-        var textColor: UIColor = UIColor.yn.titleNormal
+        var textColor: UIColor = UIColor.pt.gray
         
-        var textFont: UIFont = 15.pingFangRegularFont
+        var textFont: UIFont = 15.customRegularFont
         
         let paragraphStyle = NSMutableParagraphStyle()
         
