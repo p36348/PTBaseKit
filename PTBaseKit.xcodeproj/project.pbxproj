@@ -218,6 +218,8 @@
 		954B52E622606E1300CD9F14 /* ToBeSeperated */ = {
 			isa = PBXGroup;
 			children = (
+				959BBEE02111F4B400106646 /* runtime+UIControl.swift */,
+				959BBF172111F4B400106646 /* Map */,
 				95927C3D221A9C5C009CA9D4 /* IGListViewController */,
 				959BBEDE2111F4B400106646 /* TextFieldController.swift */,
 				959BBF1B2111F4B400106646 /* Data */,
@@ -347,10 +349,9 @@
 			isa = PBXGroup;
 			children = (
 				95D0F21E2198573000F74187 /* Global.swift */,
+				95DCAA9B228A712700E1B9D6 /* Utility */,
 				9593001E2154D4070084AF9C /* CssKit */,
 				959BBECB2111F4B400106646 /* UI */,
-				959BBF032111F4B400106646 /* Foundation */,
-				959BBF172111F4B400106646 /* Map */,
 				959BBF192111F4B400106646 /* SystemInfo */,
 			);
 			path = Source;
@@ -397,14 +398,12 @@
 		959BBED92111F4B400106646 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				95BC7E2B225B115800C22836 /* Rx */,
 				959BBEDA2111F4B400106646 /* UIViewController+Extensions.swift */,
 				959BBEDB2111F4B400106646 /* UIView+Extensions.swift */,
 				959BBEDC2111F4B400106646 /* UIButton+Extension.swift */,
 				959BBEDD2111F4B400106646 /* UIImage+Extensions.swift */,
 				95313C1521A3B67900920B09 /* UIViewController+Navigation.swift */,
 				959BBEDF2111F4B400106646 /* UIBarButtonItem+Extension.swift */,
-				959BBEE02111F4B400106646 /* runtime+UIControl.swift */,
 				95DEABEC225C98980042E32B /* UITableView+Extensions.swift */,
 			);
 			path = Extensions;
@@ -505,19 +504,6 @@
 			path = Share;
 			sourceTree = "<group>";
 		};
-		959BBF032111F4B400106646 /* Foundation */ = {
-			isa = PBXGroup;
-			children = (
-				959BBF042111F4B400106646 /* NSAttributedStringFactory.swift */,
-				959BBF052111F4B400106646 /* BlockOpreation+Utils.swift */,
-				959BBF062111F4B400106646 /* DispatchQueue+RxSwift.swift */,
-				959BBF072111F4B400106646 /* UserDefaultsUtils.swift */,
-				959BBF082111F4B400106646 /* Optional+RxSwift.swift */,
-				95B373C72186D49900608E53 /* Date+Utils.swift */,
-			);
-			path = Foundation;
-			sourceTree = "<group>";
-		};
 		959BBF172111F4B400106646 /* Map */ = {
 			isa = PBXGroup;
 			children = (
@@ -561,7 +547,29 @@
 			path = Example;
 			sourceTree = "<group>";
 		};
-		95BC7E2B225B115800C22836 /* Rx */ = {
+		95BCCAA92159E3F800CA571D /* TableCell */ = {
+			isa = PBXGroup;
+			children = (
+				959BBEE82111F4B400106646 /* DefaultTableCell.swift */,
+			);
+			path = TableCell;
+			sourceTree = "<group>";
+		};
+		95DCAA9B228A712700E1B9D6 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				959BBF042111F4B400106646 /* NSAttributedStringFactory.swift */,
+				959BBF052111F4B400106646 /* BlockOpreation+Utils.swift */,
+				959BBF062111F4B400106646 /* DispatchQueue+RxSwift.swift */,
+				959BBF072111F4B400106646 /* UserDefaultsUtils.swift */,
+				959BBF082111F4B400106646 /* Optional+RxSwift.swift */,
+				95B373C72186D49900608E53 /* Date+Utils.swift */,
+				95DCAA9C228A713100E1B9D6 /* Rx */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		95DCAA9C228A713100E1B9D6 /* Rx */ = {
 			isa = PBXGroup;
 			children = (
 				95BC7E26225B0EAE00C22836 /* MJRefresh+Rx.swift */,
@@ -569,14 +577,6 @@
 				95BC7E2C225B117F00C22836 /* UIViewController+Rx.swift */,
 			);
 			path = Rx;
-			sourceTree = "<group>";
-		};
-		95BCCAA92159E3F800CA571D /* TableCell */ = {
-			isa = PBXGroup;
-			children = (
-				959BBEE82111F4B400106646 /* DefaultTableCell.swift */,
-			);
-			path = TableCell;
 			sourceTree = "<group>";
 		};
 		95FAFBC4211339CF00FEA6F5 /* Views */ = {

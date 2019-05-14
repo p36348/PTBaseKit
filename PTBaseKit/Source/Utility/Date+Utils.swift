@@ -8,11 +8,12 @@
 
 import Foundation
 
+private let kFormatter = DateFormatter()
+
 extension Date {
     public func string(withFormat format: String = "yyyy-MM-dd") -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = format
-        formatter.timeZone = TimeZone.current
-        return formatter.string(from: self)
+        kFormatter.dateFormat = format
+        kFormatter.timeZone = TimeZone.current
+        return kFormatter.string(from: self)
     }
 }
