@@ -8,16 +8,37 @@
 
 import Foundation
 import UIKit
+public protocol AttributeStringSource {
+    var attr: NSMutableAttributedString {get}
+    var hasDefaultStyle: Bool {get}
+}
+
+extension String: AttributeStringSource {
+    public var attr: NSMutableAttributedString {
+        return self.attributed()
+    }
+    public var hasDefaultStyle: Bool {return false}
+}
+
+extension NSAttributedString: AttributeStringSource {
+    public var attr: NSMutableAttributedString {
+        if let _mAttr = self as? NSMutableAttributedString {
+            return _mAttr
+        }
+        return NSMutableAttributedString(attributedString: self)
+    }
+    public var hasDefaultStyle: Bool {return true}
+}
 
 
 /// 富文本样式枚举
 ///
-/// - textColor: 文本颜色
+/// - color: 文本颜色
 /// - font: 文本字体
 /// - paragraphStyle: 段落样式
 /// - underLine: 下划线
 public enum AttributedStringOptions {
-    case textColor(UIColor)
+    case color(UIColor)
     case font(UIFont)
     case paragraphStyle(lineSpacing: CGFloat?, alignment: NSTextAlignment?)
     case lineBreakMode(NSLineBreakMode)
@@ -28,13 +49,13 @@ public enum AttributedStringOptions {
 
 extension String {
     
-    public func attributed(_ options: [AttributedStringOptions] = [.font(15.customRegularFont), .textColor(UIColor.pt.black), .paragraphStyle(lineSpacing: nil, alignment: nil)]) -> NSMutableAttributedString {
+    public func attributed(_ options: [AttributedStringOptions] = [.font(15.pingFangRegularFont), .color(UIColor.yn.titleNormal), .paragraphStyle(lineSpacing: nil, alignment: nil)]) -> NSMutableAttributedString {
         
         var attributes: [NSAttributedString.Key: Any] = [:]
         
-        var textColor: UIColor = UIColor.pt.black
+        var textColor: UIColor = UIColor.yn.titleNormal
         
-        var textFont: UIFont = 15.customRegularFont
+        var textFont: UIFont = 15.pingFangRegularFont
         
         let paragraphStyle = NSMutableParagraphStyle()
         
@@ -42,7 +63,7 @@ extension String {
             switch option {
             case .spacing(let spacing):
                 attributes[NSAttributedString.Key.kern] = spacing
-            case .textColor(let color):
+            case .color(let color):
                 textColor = color
             case .font(let font):
                 textFont = font
@@ -100,7 +121,7 @@ public func +<T: NSMutableAttributedString>(left: T, option: AttributedStringOpt
         switch option {
         case .spacing(let spacing):
             newAttribute[NSAttributedString.Key.kern] = spacing
-        case .textColor(let color):
+        case .color(let color):
             newAttribute[NSAttributedString.Key.foregroundColor] = color
         case .font(let font):
             newAttribute[NSAttributedString.Key.font] = font

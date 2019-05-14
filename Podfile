@@ -7,12 +7,12 @@ target 'PTBaseKit' do
   inhibit_all_warnings!
   # Pods for PTBaseKit
     pod 'SnapKit'
-    pod 'RxCocoa'
-    pod 'RxSwift'
+    pod 'RxCocoa', '~> 4.5'
+    pod 'RxSwift', '~> 4.5'
     pod 'MJRefresh'
     pod 'MBProgressHUD'
     pod 'Kingfisher'
-    pod 'Texture'
+    pod 'Texture', '= 2.7'
     pod 'IGListKit'
 
     # amap
@@ -20,7 +20,7 @@ target 'PTBaseKit' do
     pod 'AMapSearch-NO-IDFA' #搜索功能
     
     # BaiduMap
-    pod 'BaiduMapKit'
+    pod 'BaiduMapKit', '= 4.2.0'
     
     # google map
     pod 'GoogleMaps'
@@ -28,9 +28,9 @@ target 'PTBaseKit' do
     pod 'GooglePlacePicker'
     
     pod 'Alamofire'
-    pod 'SwiftyJSON'
+    pod 'SwiftyJSON', '~> 4.1.0'
     
-    pod 'RealmSwift'
+    pod 'RealmSwift', '= 3.11.1'
   target 'PTBaseKitTests' do
     inherit! :search_paths
     # Pods for testing
