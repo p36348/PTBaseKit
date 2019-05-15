@@ -65,6 +65,9 @@ public let kScreenWidth: CGFloat  = UIScreen.main.bounds.width
 
 // MARK: - base colors
 extension UIColor {
+    
+    
+    
     public struct pt {
         /// 主题色
         static public  var main                     = 0xffbb4a.hexColor
@@ -108,3 +111,22 @@ extension Int {
         return UIColor(red:CGFloat((self & 0xFF0000) >> 16) / 255 , green: CGFloat((self & 0x00FF00) >> 8) / 255, blue: CGFloat((self & 0x0000FF) ) / 255, alpha: 1.0)
     }
 }
+
+
+public struct PTBaseKitConfig {
+    public static var color: ColorConfig = kDefaultColorConfig
+    public static var font: FontConfig = kDefaultFontConfig
+}
+
+public struct ColorConfig {
+    public let textDefault: UIColor
+}
+
+public struct FontConfig {
+    public let textDefault: UIFont
+}
+
+private let kDefaultColorConfig: ColorConfig = ColorConfig(textDefault: UIColor.pt.black)
+
+private let kDefaultFontConfig: FontConfig = FontConfig(textDefault: 15.customRegularFont)
+
