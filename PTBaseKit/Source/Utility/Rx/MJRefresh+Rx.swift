@@ -87,7 +87,7 @@ extension Reactive where Base: UIScrollView {
     
     public var pullToRefresh: Observable<Base> {
         if base.mj_header == nil {
-            base.mj_header = MJRefreshNormalHeader()
+            base.mj_header = PTBaseKitConfig.scrollRefresh.headerCreator()
             base.mj_header.refreshingBlock = {
                 self.internal_rx_refreshing.onNext(true)
                 self.internal_rx_pullToRefresh.onNext(self.base)
@@ -100,7 +100,7 @@ extension Reactive where Base: UIScrollView {
     
     public var pullToLoadMore: Observable<Base> {
         if base.mj_footer == nil {
-            base.mj_footer = MJRefreshAutoStateFooter()
+            base.mj_footer = PTBaseKitConfig.scrollRefresh.footerCreator()
             base.mj_footer.refreshingBlock = {
                 self.internal_rx_refreshing.onNext(true)
                 self.internal_rx_pullToLoadMore.onNext(self.base)

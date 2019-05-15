@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MJRefresh
 
 public struct PTBaseKit {
    public static func setupCss(mainColorHex: Int, normalGradientStartHex: Int, normalGradientEndHex: Int, highlightedGradientStartHex: Int, highlightedGradientEndHex: Int, noticeRedColorHex: Int, emptyHighlightedGradientStartHex: Int, emptyHighlightedGradientEndHex: Int) {
@@ -116,6 +117,7 @@ extension Int {
 public struct PTBaseKitConfig {
     public static var color: ColorConfig = kDefaultColorConfig
     public static var font: FontConfig = kDefaultFontConfig
+    public static var scrollRefresh: ScrollRefreshConfig = kDefaultScrollRefreshConfig
 }
 
 public struct ColorConfig {
@@ -126,7 +128,15 @@ public struct FontConfig {
     public let textDefault: UIFont
 }
 
+public struct ScrollRefreshConfig {
+    public let headerCreator: () -> MJRefreshHeader
+    public let footerCreator: () -> MJRefreshFooter
+}
+
 private let kDefaultColorConfig: ColorConfig = ColorConfig(textDefault: UIColor.pt.black)
 
 private let kDefaultFontConfig: FontConfig = FontConfig(textDefault: 15.customRegularFont)
+
+private let kDefaultScrollRefreshConfig = ScrollRefreshConfig(headerCreator: {MJRefreshNormalHeader()},
+                                                              footerCreator: {MJRefreshAutoFooter()})
 
