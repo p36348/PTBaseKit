@@ -15,9 +15,13 @@ private var updateErrorKey = ""
 
 extension Reactive where Base: ListController {
     
-    public typealias ListUpdater = (viewModels: [Base.ListSectionViewModel], isLast: Bool)
+    public typealias SectionUpdater = (viewModels: [Base.ListSectionViewModel], isLast: Bool)
     
-    public typealias ViewModelGenerator = (Base) -> Observable<ListUpdater>
+    public typealias CellUpdater = (viewModels: [Base.ListCellViewModel], isLast: Bool)
+    
+    public typealias SectionViewModelGenerator = (Base) -> Observable<SectionUpdater>
+    
+    public typealias CellViewModelGenerator = (Base) -> Observable<CellUpdater>
     
     /// 是否正在刷新状态
     public var refreshing: Observable<Bool> {
@@ -49,7 +53,7 @@ extension Reactive where Base: ListController {
         return internal_updateError.share()
     }
     
-    public func bindRefresh(toGenerator viewModelsGenerator: @escaping ViewModelGenerator) -> Disposable {
+    public func bindRefresh(toGenerator viewModelsGenerator: @escaping SectionViewModelGenerator) -> Disposable {
         return pullToRefresh.flatMap({(_base) in
             viewModelsGenerator(_base).observeOn(MainScheduler.asyncInstance)
                 .map { (result) -> Base in
@@ -66,11 +70,44 @@ extension Reactive where Base: ListController {
             .subscribe()
     }
     
-    public func bindLoadMore(toGenerator viewModelsGenerator: @escaping ViewModelGenerator) -> Disposable {
+    public func bindLoadMore(toGenerator viewModelsGenerator: @escaping SectionViewModelGenerator) -> Disposable {
         return pullToLoadMore.flatMap({ (_base) in
             viewModelsGenerator(_base).observeOn(MainScheduler.asyncInstance)
                 .map { (result) -> Base in
                     self.base.loadMore(withSectionViewModels: result.viewModels, isLast: result.isLast)
+                    return self.base
+                }
+                .catchError({ (err) -> Observable<Base> in
+                    self.base.endUpdating()
+                    self.internal_loadMoreError.onNext(err)
+                    self.internal_updateError.onError(err)
+                    return Observable.of(self.base)
+                })
+        })            .subscribe()
+    }
+    
+    public func bindRefresh(toGenerator viewModelsGenerator: @escaping CellViewModelGenerator) -> Disposable {
+        return pullToRefresh.flatMap({(_base) in
+            viewModelsGenerator(_base).observeOn(MainScheduler.asyncInstance)
+                .map { (result) -> Base in
+                    self.base.reload(withCellViewModels: result.viewModels, isLast: result.isLast)
+                    return self.base
+                }
+                .catchError({ (err) -> Observable<Base> in
+                    self.base.endUpdating()
+                    self.internal_refreshError.onNext(err)
+                    self.internal_updateError.onError(err)
+                    return Observable.of(self.base)
+                })
+        })
+            .subscribe()
+    }
+    
+    public func bindLoadMore(toGenerator viewModelsGenerator: @escaping CellViewModelGenerator) -> Disposable {
+        return pullToLoadMore.flatMap({ (_base) in
+            viewModelsGenerator(_base).observeOn(MainScheduler.asyncInstance)
+                .map { (result) -> Base in
+                    self.base.loadMore(withCellViewModels: result.viewModels, isLast: result.isLast)
                     return self.base
                 }
                 .catchError({ (err) -> Observable<Base> in

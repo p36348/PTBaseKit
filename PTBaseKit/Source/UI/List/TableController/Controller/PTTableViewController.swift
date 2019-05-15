@@ -89,14 +89,7 @@ public class PTTableViewController: BaseController, ListController {
         
         if let action = self.tableViewSetupAction {
             action(self)
-        }else {
-            //            if #available(iOS 11, *) {
-            //                self.tableView.contentInsetAdjustmentBehavior = .always
-            //            }else {
-            //                self.automaticallyAdjustsScrollViewInsets = true
-            //            }
         }
-        
         
         self.view.backgroundColor = self.backgroundColor
         
@@ -123,7 +116,7 @@ public class PTTableViewController: BaseController, ListController {
             self.view.addSubview(_footer)
             _footer.snp.makeConstraints({ (make) in
                 make.leading.trailing.equalToSuperview()
-                make.bottom.equalToSuperview().offset(-kSafeAreInsets.bottom)
+                make.bottom.equalToSuperview()//.offset(-kSafeAreInsets.bottom)
                 make.height.equalTo(_footer.frame.height)
             })
         }
@@ -276,7 +269,6 @@ extension PTTableViewController: UITableViewDataSource {
     }
     
     public func numberOfSections(in tableView: UITableView) -> Int {
-        print("call numberOfSections")
         return self.sectionViewModels.count
     }
 }
