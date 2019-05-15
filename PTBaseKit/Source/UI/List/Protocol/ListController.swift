@@ -20,6 +20,8 @@ public protocol ListController: class {
     
     var listView: ListView {get}
     
+    func beginReload() -> Void
+    
     func endUpdating() -> Void
     
     func reload(withCellViewModels viewModels: [ListCellViewModel], isLast: Bool) -> Void
@@ -29,6 +31,8 @@ public protocol ListController: class {
     func reload(withSectionViewModels viewModels: [ListSectionViewModel], isLast: Bool) -> Void
     
     func loadMore(withSectionViewModels viewModels: [ListSectionViewModel], isLast: Bool) -> Void
+    
+    func bindItemSelection(action: @escaping (Self, IndexPath) -> Void) -> Void
 }
 
 extension ListController {
@@ -39,6 +43,12 @@ extension ListController {
         
         if let refresh = self.listView.mj_footer, refresh.isRefreshing {
             refresh.endRefreshing()
+        }
+    }
+    
+    public func beginReload() {
+        if let refresh = self.listView.mj_header {
+            refresh.beginRefreshing()
         }
     }
 }

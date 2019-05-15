@@ -18,7 +18,7 @@ public enum TableViewOptions {
 }
 public typealias CommonTableController = PTTableViewController
 
-public class PTTableViewController: BaseController, ListController {
+final public class PTTableViewController: BaseController, ListController {
     
     public typealias ListView = UITableView
     
@@ -299,8 +299,12 @@ extension PTTableViewController {
     }
     
     public func performWhenSelectItem(action: @escaping (PTTableViewController, IndexPath) -> Void) -> PTTableViewController {
-        self.selectItemAction = action
+        self.bindItemSelection(action: action)
         return self
+    }
+    
+    public func bindItemSelection(action: @escaping (PTTableViewController, IndexPath) -> Void) {
+        self.selectItemAction = action
     }
     
     public func setupHeader(_ header: UIView) -> PTTableViewController {

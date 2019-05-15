@@ -54,7 +54,7 @@ extension Reactive where Base: ListController {
     }
     
     public func bindRefresh(toGenerator viewModelsGenerator: @escaping SectionViewModelGenerator) -> Disposable {
-        return pullToRefresh.flatMap({(_base) in
+        return pullToRefresh.flatMap({ (_base) in
             viewModelsGenerator(_base).observeOn(MainScheduler.asyncInstance)
                 .map { (result) -> Base in
                     self.base.reload(withSectionViewModels: result.viewModels, isLast: result.isLast)
@@ -117,6 +117,15 @@ extension Reactive where Base: ListController {
                     return Observable.of(self.base)
                 })
         })            .subscribe()
+    }
+    
+    public var didSelectItem: Observable<IndexPath> {
+        return Observable.create({ (observer) -> Disposable in
+            self.base.bindItemSelection(action: { (_, indexPath) in
+                observer.onNext(indexPath)
+            })
+            return Disposables.create()
+        })
     }
     
     // MARK: private

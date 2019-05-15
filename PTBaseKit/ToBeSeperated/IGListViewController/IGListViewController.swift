@@ -103,7 +103,7 @@ extension IGListSectionHeaderFooterViewModel {
 
 typealias IGListUpdateParams = (items: [IGListSectionViewModel], isLast: Bool)
 
-public class IGListViewController: BaseController, ListController {
+public final class IGListViewController: BaseController, ListController {
     
     public typealias ListView = UICollectionView
     
@@ -337,6 +337,10 @@ extension IGListViewController {
     public func setAutoLoading(_ flag: Bool) -> IGListViewController {
         self.loadAutomaticlly = flag
         return self
+    }
+    
+    public func bindItemSelection(action: @escaping (IGListViewController, IndexPath) -> Void) {
+        
     }
 }
 
