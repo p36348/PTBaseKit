@@ -131,6 +131,11 @@ public struct FontConfig {
 public struct ScrollRefreshConfig {
     public let headerCreator: () -> MJRefreshHeader
     public let footerCreator: () -> MJRefreshFooter
+    
+    public init(headerCreator: @escaping () -> MJRefreshHeader, footerCreator: @escaping () -> MJRefreshFooter) {
+        self.headerCreator = headerCreator
+        self.footerCreator = footerCreator
+    }
 }
 
 private let kDefaultColorConfig: ColorConfig = ColorConfig(textDefault: UIColor.pt.black)
