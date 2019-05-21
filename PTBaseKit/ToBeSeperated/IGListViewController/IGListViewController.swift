@@ -12,27 +12,6 @@ import RxSwift
 import RxCocoa
 import MJRefresh
 
-public protocol CollectionCell {
-    var viewModel: CollectionCellViewModel? {get set}
-    func setup(viewModel: CollectionCellViewModel)
-}
-
-public protocol CollectionCellViewModel {
-    var cellClass: AnyClass {get}
-    var size: CGSize {get}
-    var performWhenSelect: ((IndexPath)->Void)? {get}
-}
-
-extension CollectionCellViewModel {
-    public var performWhenSelect: ((IndexPath)->Void)? {
-        return nil
-    }
-}
-
-
-public protocol CollectionSectionViewModel {
-    var cellViewModels: [CollectionCellViewModel] {get}
-}
 
 
 public protocol IGListSectionViewModel: ListDiffable {
@@ -41,7 +20,7 @@ public protocol IGListSectionViewModel: ListDiffable {
     
     var footer: IGListSectionHeaderFooterViewModel? {get}
     
-    var cellItems: [CollectionCellViewModel] {get}
+    var cellItems: [ReusableCellViewModel] {get}
     
     var sectionController: ListSectionController {get}
     
@@ -109,7 +88,7 @@ public final class IGListViewController: BaseController, ListController {
     
     public typealias ListSectionViewModel = IGListSectionViewModel
     
-    public typealias ListCellViewModel = CollectionCellViewModel
+    public typealias ListCellViewModel = ReusableCellViewModel
     
     public var listView: UICollectionView {
         return self.collectionView
@@ -256,11 +235,11 @@ public final class IGListViewController: BaseController, ListController {
         self.updateList(items: newItems)
     }
     
-    public func reload(withCellViewModels viewModels: [CollectionCellViewModel], isLast: Bool) {
+    public func reload(withCellViewModels viewModels: [ReusableCellViewModel], isLast: Bool) {
         fatalError("暂未实现")
     }
     
-    public func loadMore(withCellViewModels viewModels: [CollectionCellViewModel], isLast: Bool) {
+    public func loadMore(withCellViewModels viewModels: [ReusableCellViewModel], isLast: Bool) {
         fatalError("暂未实现")
     }
     
@@ -430,7 +409,7 @@ public class DefaultIGListSectionController: ListSectionController, ListDisplayD
     }
     
     public func listAdapter(_ listAdapter: ListAdapter, willDisplay sectionController: ListSectionController, cell: UICollectionViewCell, at index: Int) {
-        (cell as? CollectionCell)?.setup(viewModel: self.viewModel.cellItems[index])
+        (cell as? ReusableCell)?.setup(viewModel: self.viewModel.cellItems[index])
     }
     
     public func listAdapter(_ listAdapter: ListAdapter, didEndDisplaying sectionController: ListSectionController, cell: UICollectionViewCell, at index: Int) {

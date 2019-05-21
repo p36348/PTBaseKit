@@ -12,6 +12,7 @@
 		95313C1621A3B67900920B09 /* UIViewController+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95313C1521A3B67900920B09 /* UIViewController+Navigation.swift */; };
 		95353D1F2153C85100E8436E /* BaiduMap+MapAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95353D1E2153C85100E8436E /* BaiduMap+MapAdapter.swift */; };
 		95409114212C098D00A82C7F /* IndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95409113212C098D00A82C7F /* IndexController.swift */; };
+		9551F0622293C00D00A488A7 /* ListController+Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9551F0612293C00D00A488A7 /* ListController+Collection.swift */; };
 		956CAB4A212D51BB00020D6E /* UtilsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956CAB49212D51BB00020D6E /* UtilsController.swift */; };
 		95927C3F221A9C68009CA9D4 /* IGListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95927C3E221A9C68009CA9D4 /* IGListViewController.swift */; };
 		9593002C2154D4070084AF9C /* OtherOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959300202154D4070084AF9C /* OtherOperator.swift */; };
@@ -102,6 +103,7 @@
 		95353D1E2153C85100E8436E /* BaiduMap+MapAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaiduMap+MapAdapter.swift"; sourceTree = "<group>"; };
 		95409113212C098D00A82C7F /* IndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexController.swift; sourceTree = "<group>"; };
 		955062392250FC5B00412284 /* PTBaseKit-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PTBaseKit-Bridging-Header.h"; sourceTree = "<group>"; };
+		9551F0612293C00D00A488A7 /* ListController+Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListController+Collection.swift"; sourceTree = "<group>"; };
 		956CAB49212D51BB00020D6E /* UtilsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsController.swift; sourceTree = "<group>"; };
 		95927C3E221A9C68009CA9D4 /* IGListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGListViewController.swift; sourceTree = "<group>"; };
 		959300202154D4070084AF9C /* OtherOperator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherOperator.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 			children = (
 				951520EA221F96DE0020B80A /* ListController.swift */,
 				95D29AE3225C54D300F5B98F /* ListController+Table.swift */,
+				9551F0612293C00D00A488A7 /* ListController+Collection.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -851,6 +854,7 @@
 				956CAB4A212D51BB00020D6E /* UtilsController.swift in Sources */,
 				9593002F2154D4070084AF9C /* GlobalCss.swift in Sources */,
 				959BBF452111F4B500106646 /* BaseController.swift in Sources */,
+				9551F0622293C00D00A488A7 /* ListController+Collection.swift in Sources */,
 				959BBF3F2111F4B500106646 /* DefaultTableCellNode.swift in Sources */,
 				959BBF5A2111F4B500106646 /* SystemInfo.swift in Sources */,
 				959BBF592111F4B500106646 /* MapAdapter.swift in Sources */,
