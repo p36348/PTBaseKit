@@ -446,7 +446,7 @@ extension PTTableViewController {
         }
         
         if (self.tableView.mj_footer != nil) {
-            self.tableView.mj_footer.resetNoMoreData()
+            isLast ? self.tableView.mj_footer.endRefreshingWithNoMoreData() : self.tableView.mj_footer.resetNoMoreData()
         }
         self.sectionViewModels = viewModels
         self.reloadTableView()
