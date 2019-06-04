@@ -65,7 +65,8 @@ class IndexController: BaseController {
     }
     
     private func navigateWeb(url: String) {
-        self.navigationController?.pushViewController(WebController().setupURL(URL(string: url)), animated: true)
+        let jsSCript = "window.duckCustomJson = { \"token\" : \"I am token!!!!\"}"
+        self.navigationController?.pushViewController(WebController(url: URL(string: url), header: nil, jsScript: jsSCript), animated: true)
     }
     
     private func setup(controller: UIViewController, segmentIndex: Int) {

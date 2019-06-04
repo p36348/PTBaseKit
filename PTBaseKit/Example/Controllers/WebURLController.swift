@@ -58,9 +58,9 @@ class WebURLController: BaseController {
             .disposed(by: self)
         
         self.submit.rx.controlEvent(UIControl.Event.touchUpInside)
-            .flatMap({[unowned self] in self.input.rx.text.orEmpty })
-            .subscribe (onNext: {  [weak self] (text) in
-                self?.internalSubmit.onNext(text)
+            .filter {[unowned self] _ in self.input.text != nil}
+            .subscribe (onNext: {  [unowned self] (_) in
+                self.internalSubmit.onNext(self.input.text!)
             })
             .disposed(by: self)
     }
