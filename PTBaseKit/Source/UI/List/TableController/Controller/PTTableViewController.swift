@@ -16,6 +16,7 @@ public enum TableViewOptions {
     case allowMultiSelection(Bool)
     case sepratorStyle(UITableViewCell.SeparatorStyle)
 }
+
 public typealias CommonTableController = PTTableViewController
 
 final public class PTTableViewController: BaseController, ListController {

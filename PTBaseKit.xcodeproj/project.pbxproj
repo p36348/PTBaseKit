@@ -222,9 +222,9 @@
 			isa = PBXGroup;
 			children = (
 				959BBEE02111F4B400106646 /* runtime+UIControl.swift */,
-				959BBF172111F4B400106646 /* Map */,
-				95927C3D221A9C5C009CA9D4 /* IGListViewController */,
 				959BBEDE2111F4B400106646 /* TextFieldController.swift */,
+				95927C3D221A9C5C009CA9D4 /* IGListViewController */,
+				959BBF172111F4B400106646 /* Map */,
 				959BBF1B2111F4B400106646 /* Data */,
 				959BBEF92111F4B400106646 /* Tips */,
 				959BBF002111F4B400106646 /* Share */,

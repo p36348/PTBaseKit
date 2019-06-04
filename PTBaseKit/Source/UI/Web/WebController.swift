@@ -36,10 +36,14 @@ public class WebController: BaseController {
     
     // MARK: view
     
-    public private(set) lazy var webView: WKWebView = WKWebView(frame: .zero)
+    public private(set) lazy var webView: WKWebView = {
+        return WKWebView(frame: .zero, configuration: configuration)
+    }()
+    
+    private var configuration: WKWebViewConfiguration = WKWebViewConfiguration()
     
     lazy var progressBar: UIProgressView = {
-        let bar = UIProgressView(progressViewStyle: UIProgressView.Style.bar)
+        let bar = UIProgressView(progressViewStyle: .bar)
         bar.tintColor = UIColor.pt.main
         return bar
     }()
@@ -63,6 +67,15 @@ public class WebController: BaseController {
     public fileprivate(set) var header: [String: String]?
     
     public fileprivate(set) var scriptMessageHandlers: [MessageHandler] = []
+    
+    public convenience init(url: URL? = nil, header: [String: String]? = nil, jsScript: String? = nil) {
+        self.init(nibName: nil, bundle: nil)
+        self.url = url
+        self.header = header
+        if let _jsScript = jsScript {
+            configuration.userContentController.addUserScript(WKUserScript(source: _jsScript, injectionTime: .atDocumentStart, forMainFrameOnly: false))
+        }
+    }
     
     public override func performPreSetup() {
         self.addObservers(for: self.webView)
@@ -105,9 +118,9 @@ public class WebController: BaseController {
     }
     
     private func addObservers(for webView: WKWebView) {
-        webView.addObserver(self, forKeyPath: "title", options: NSKeyValueObservingOptions.new, context: nil)
-        webView.addObserver(self, forKeyPath: "estimatedProgress", options: NSKeyValueObservingOptions.new, context: nil)
-        webView.addObserver(self, forKeyPath: "canGoBack", options: NSKeyValueObservingOptions.new, context: nil)
+        webView.addObserver(self, forKeyPath: "title", options: .new, context: nil)
+        webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
+        webView.addObserver(self, forKeyPath: "canGoBack", options: .new, context: nil)
         self.scriptMessageHandlers.forEach { webView.configuration.userContentController.add($0, name: $0.identifier) }
     }
     

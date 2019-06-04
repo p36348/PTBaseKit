@@ -61,6 +61,12 @@ func new_createTableController() -> UIViewController {
         .setupEmptyPlaceHolder(image: UIImage(named: "empty_tips"), title: "No data yet".attributed())
 }
 
+func createIGListViewController() -> UIViewController {
+    let viewController = IGListViewController()
+    
+    return viewController
+}
+
 private func fakeViewModelRefreshGenerator(_ listController: PTTableViewController) -> Observable<(viewModels: [TableSectionViewModel], isLast: Bool)> {
     return Observable.of((viewModels: fakeFetchData(), isLast: false)).subscribeOn(ConcurrentDispatchQueueScheduler(qos: DispatchQoS.default))
 }

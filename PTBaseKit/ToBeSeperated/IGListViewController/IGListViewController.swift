@@ -13,7 +13,6 @@ import RxCocoa
 import MJRefresh
 
 
-
 public protocol IGListSectionViewModel: ListDiffable {
     
     var header: IGListSectionHeaderFooterViewModel? {get}
