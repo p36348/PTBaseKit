@@ -213,16 +213,10 @@ public final class IGListViewController: BaseController, ListController {
             self.collectionView.mj_header.endRefreshing()
         }
         
-        if
-            let _ = self.loadMoreAction,
-            self.collectionView.mj_footer == nil,
-            !isLast
-        {
-            self.collectionView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: { [weak self] in
-                guard let weakSelf = self else {return}
-                weakSelf.loadMoreAction?(weakSelf)
-            })
+        if (self.collectionView.mj_footer != nil) {
+            isLast ? self.collectionView.mj_footer.endRefreshingWithNoMoreData() : self.collectionView.mj_footer.resetNoMoreData()
         }
+        
         self.updateList(items: items, finished: finished)
     }
     

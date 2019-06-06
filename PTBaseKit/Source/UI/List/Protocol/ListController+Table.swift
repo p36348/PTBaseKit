@@ -55,13 +55,17 @@ public protocol TableCellViewModel {
     var performWhenSelect: ((UITableView, IndexPath)->Void)? {get}
 }
 
+// MARK: - 默认实现
 extension TableCellViewModel {
     
+    /// 不响应选择操作
     public var performWhenSelect: ((UITableView, IndexPath)->Void)? {
         return nil
     }
     
+    /// 不可编辑
     public var canEdit: Bool { return false }
     
+    /// 没有编辑行为
     public var editActions: [UITableViewRowAction]? {return nil}
 }

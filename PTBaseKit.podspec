@@ -17,4 +17,5 @@ Pod::Spec.new do |s|
   s.dependency 'MJRefresh'
   s.dependency 'MBProgressHUD'
   s.dependency 'Kingfisher', '~> 4.10.1' 
+  s.dependency 'IGListKit'
 end

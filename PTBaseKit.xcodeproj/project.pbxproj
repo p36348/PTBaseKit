@@ -223,7 +223,6 @@
 			children = (
 				959BBEE02111F4B400106646 /* runtime+UIControl.swift */,
 				959BBEDE2111F4B400106646 /* TextFieldController.swift */,
-				95927C3D221A9C5C009CA9D4 /* IGListViewController */,
 				959BBF172111F4B400106646 /* Map */,
 				959BBF1B2111F4B400106646 /* Data */,
 				959BBEF92111F4B400106646 /* Tips */,
@@ -417,6 +416,7 @@
 			children = (
 				951520E9221F96DE0020B80A /* Protocol */,
 				959BBEE22111F4B400106646 /* TableController */,
+				95927C3D221A9C5C009CA9D4 /* IGListViewController */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -561,13 +561,13 @@
 		95DCAA9B228A712700E1B9D6 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				95DCAA9C228A713100E1B9D6 /* Rx */,
 				959BBF042111F4B400106646 /* NSAttributedStringFactory.swift */,
 				959BBF052111F4B400106646 /* BlockOpreation+Utils.swift */,
 				959BBF062111F4B400106646 /* DispatchQueue+RxSwift.swift */,
 				959BBF072111F4B400106646 /* UserDefaultsUtils.swift */,
 				959BBF082111F4B400106646 /* Optional+RxSwift.swift */,
 				95B373C72186D49900608E53 /* Date+Utils.swift */,
-				95DCAA9C228A713100E1B9D6 /* Rx */,
 			);
 			path = Utility;
 			sourceTree = "<group>";

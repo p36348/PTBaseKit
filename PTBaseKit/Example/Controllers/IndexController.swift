@@ -9,11 +9,13 @@
 import UIKit
 import RxCocoa
 import RxSwift
+import SwiftyJSON
+
 
 class IndexController: BaseController {
     
     lazy var segmented: UISegmentedControl = {
-        let item = UISegmentedControl(items: ["UIKitTable", "ASDKTable", "GoogleMaps", "Utils", "Web"])
+        let item = UISegmentedControl(items: ["UIKitTable", "ASDKTable", "IG", "Map", "Utils", "Web"])
         item.tintColor = UIColor.clear
         item.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.pt.main], for: UIControl.State.normal)
         item.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.pt.main, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], for: UIControl.State.selected)
@@ -25,11 +27,15 @@ class IndexController: BaseController {
     
     var asdkTable: CustomTableNodeController = CustomTableNodeController()
     
+    var igList: UIViewController = createIGListViewController()
+    
     var map: UIViewController = createMapController()
     
     var utils: UtilsController = UtilsController()
     
     lazy var web: WebURLController = WebURLController()
+    
+    var webDelegate: WebDelegate = WebDelegate()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,16 +63,20 @@ class IndexController: BaseController {
         
         self.setup(controller: self.uikitTable, segmentIndex: 0)
         self.setup(controller: self.asdkTable, segmentIndex: 1)
-        self.setup(controller: self.map, segmentIndex: 2)
-        self.setup(controller: self.utils, segmentIndex: 3)
-        self.setup(controller: self.web, segmentIndex: 4)
+        self.setup(controller: self.igList, segmentIndex: 2)
+        self.setup(controller: self.map, segmentIndex: 3)
+        self.setup(controller: self.utils, segmentIndex: 4)
+        self.setup(controller: self.web, segmentIndex: 5)
         
         self.web.rx_submit.subscribe(onNext: { [weak self] in self?.navigateWeb(url: $0) }).disposed(by: self)
     }
     
     private func navigateWeb(url: String) {
-        let jsSCript = "window.duckCustomJson = { \"token\" : \"I am token!!!!\"}"
-        self.navigationController?.pushViewController(WebController(url: URL(string: url), header: nil, jsScript: jsSCript), animated: true)
+        let customJson: JSON = ["token": "I am token!!!!"]
+        let jsSCript = "window.duckCustomJson = \(customJson.rawString()!)"
+        let destination = WebController(url: URL(string: url), header: nil, jsScript: jsSCript)
+        destination.webView.navigationDelegate = webDelegate
+        self.navigationController?.pushViewController(destination, animated: true)
     }
     
     private func setup(controller: UIViewController, segmentIndex: Int) {
@@ -75,5 +85,110 @@ class IndexController: BaseController {
         controller.view.snp.makeConstraints{$0.edges.equalToSuperview()}
         // 把显示与否绑定到对应的index上
         self.segmented.rx.value.map { $0 != segmentIndex }.bind(to: controller.view.rx.isHidden).disposed(by: self)
+    }
+}
+import WebKit
+
+class WebDelegate: NSObject, WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        let params = "\"I am token!!!\""
+        webView.evaluateJavaScript("getDuckAppData(\(params))") { (val, error) in
+            
+        }
+    }
+}
+
+
+func createIGListViewController() -> UIViewController {
+    let viewController = IGListViewController()
+    viewController.rx.bindRefresh(toGenerator: reloadIGListViewModels).disposed(by: viewController)
+    viewController.rx.bindLoadMore(toGenerator: loadMoreIGListViewModels).disposed(by: viewController)
+    return viewController
+}
+
+func reloadIGListViewModels(for viewController: IGListViewController) -> Observable<(viewModels: [IGListSectionViewModel], isLast: Bool)> {
+    return Observable.of((viewModels: fakeFetchData(), isLast: false)).subscribeOn(ConcurrentDispatchQueueScheduler(qos: DispatchQoS.default))
+}
+
+func loadMoreIGListViewModels(for viewController: IGListViewController) -> Observable<(viewModels: [IGListSectionViewModel], isLast: Bool)> {
+    return Observable.of((viewModels: fakeFetchData(), isLast: true)).subscribeOn(ConcurrentDispatchQueueScheduler(qos: DispatchQoS.default))
+}
+
+private func fakeFetchData() -> [IGListSectionViewModel] {
+    let numberOfSection = 5
+    return (0..<numberOfSection).map { DefaultIGSectionViewModel(index: $0, cellItems: createCellViewModels()) }
+}
+
+private func createCellViewModels() -> [DefaultCollectionCellViewModel] {
+    return (0...Int(arc4random_uniform(200))).map(createViewModel)
+}
+
+private func createViewModel(index: Int) -> DefaultCollectionCellViewModel {
+    return DefaultCollectionCellViewModel(title: "\(index)")
+}
+
+import IGListKit
+
+class DefaultIGSectionViewModel: IGListSectionViewModel {
+    var cellItems: [ReusableCellViewModel]
+    
+    let identifier: String
+    
+    init(index: Int, cellItems: [ReusableCellViewModel]) {
+        identifier = "\(index)"
+        self.cellItems = cellItems
+    }
+    
+    func diffIdentifier() -> NSObjectProtocol {
+        return identifier as NSObjectProtocol
+    }
+    
+    func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
+        guard let _object = object as? DefaultIGSectionViewModel else {return false}
+        return _object.identifier == identifier
+    }
+    
+    
+}
+
+class DefaultCollectionCell: UICollectionViewCell, ReusableCell {
+    
+    var viewModel: ReusableCellViewModel?
+    
+    let label: UILabel = UILabel()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        contentView.addSubview(label)
+        label.snp.makeConstraints {$0.edges.equalToSuperview()}
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setup(viewModel: ReusableCellViewModel) {
+        guard let _viewModel = viewModel as? DefaultCollectionCellViewModel else {return}
+        label.attributedText = _viewModel.title
+    }
+}
+
+class DefaultCollectionCellViewModel: ReusableCellViewModel {
+    var cellClass: AnyClass = DefaultCollectionCell.self
+    
+    var size: CGSize
+    
+    let title: NSAttributedString
+    
+    init(title: String) {
+        let fontSize = Int(arc4random_uniform(50)) + 5
+        self.title = title.attributed([.font(fontSize.customMediumFont)])
+        self.size =
+            self.title.boundingRect(
+                with: CGSize(width: CGFloat.greatestFiniteMagnitude,
+                             height: CGFloat.greatestFiniteMagnitude),
+                options: .usesLineFragmentOrigin,
+                context: nil)
+                .size
     }
 }
