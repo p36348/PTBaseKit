@@ -221,8 +221,8 @@
 		954B52E622606E1300CD9F14 /* ToBeSeperated */ = {
 			isa = PBXGroup;
 			children = (
-				959BBEDB2111F4B400106646 /* UIView+Extensions.swift */,
 				959BBEDA2111F4B400106646 /* UIViewController+Extensions.swift */,
+				959BBEDC2111F4B400106646 /* UIButton+Extension.swift */,
 				959BBEE02111F4B400106646 /* runtime+UIControl.swift */,
 				959BBEDE2111F4B400106646 /* TextFieldController.swift */,
 				959BBF172111F4B400106646 /* Map */,
@@ -402,7 +402,7 @@
 		959BBED92111F4B400106646 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				959BBEDC2111F4B400106646 /* UIButton+Extension.swift */,
+				959BBEDB2111F4B400106646 /* UIView+Extensions.swift */,
 				959BBEDD2111F4B400106646 /* UIImage+Extensions.swift */,
 				95313C1521A3B67900920B09 /* UIViewController+Navigation.swift */,
 				959BBEDF2111F4B400106646 /* UIBarButtonItem+Extension.swift */,
