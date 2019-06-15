@@ -15,6 +15,6 @@ Pod::Spec.new do |s|
   s.dependency 'RxCocoa'
   s.dependency 'RxSwift'
   s.dependency 'MJRefresh'
-  # s.dependency 'Kingfisher', '~> 4.10.1' 
+  s.dependency 'Kingfisher', '~> 4.10.1' 
   s.dependency 'IGListKit'
 end

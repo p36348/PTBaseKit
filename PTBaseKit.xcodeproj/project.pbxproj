@@ -221,7 +221,6 @@
 		954B52E622606E1300CD9F14 /* ToBeSeperated */ = {
 			isa = PBXGroup;
 			children = (
-				959BBED62111F4B400106646 /* Image */,
 				959BBEDA2111F4B400106646 /* UIViewController+Extensions.swift */,
 				959BBEDC2111F4B400106646 /* UIButton+Extension.swift */,
 				959BBEE02111F4B400106646 /* runtime+UIControl.swift */,
@@ -365,6 +364,7 @@
 		959BBECB2111F4B400106646 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				959BBED62111F4B400106646 /* Image */,
 				959BBED12111F4B400106646 /* Web */,
 				959BBED92111F4B400106646 /* Extensions */,
 				959BBEE12111F4B400106646 /* List */,
