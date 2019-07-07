@@ -59,7 +59,7 @@ final public class PTTableViewController: BaseController, ListController {
     
     public var emptyTipsLabel: UILabel = UILabel()
     
-    convenience init(tableViewStyle: UITableView.Style = .grouped) {
+    public convenience init(tableViewStyle: UITableView.Style = .grouped) {
         self.init(nibName: nil, bundle: nil)
         self.tableView = UITableView(frame: CGRect.zero, style: tableViewStyle)
     }
