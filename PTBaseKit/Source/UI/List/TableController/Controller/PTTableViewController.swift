@@ -47,7 +47,7 @@ final public class PTTableViewController: BaseController, ListController {
         return self.tableView
     }
     
-    public let tableView: UITableView = UITableView(frame: CGRect.zero, style: UITableView.Style.grouped)
+    public var tableView: UITableView!
     
     fileprivate var separatorStyle: UITableViewCell.SeparatorStyle = .none
     
@@ -58,6 +58,11 @@ final public class PTTableViewController: BaseController, ListController {
     public var emptyTipsImage: UIImageView = UIImageView()
     
     public var emptyTipsLabel: UILabel = UILabel()
+    
+    convenience init(tableViewStyle: UITableView.Style = .grouped) {
+        self.init(nibName: nil, bundle: nil)
+        self.tableView = UITableView(frame: CGRect.zero, style: tableViewStyle)
+    }
     
     public override func performPreSetup() {
         super.performPreSetup()
