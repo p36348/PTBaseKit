@@ -9,21 +9,15 @@
 import UIKit
 
 public enum OSSImageOptions {
-    case resize(width: Numberable, height: Numberable)
-    case crop(width: Numberable, height: Numberable, x:  Numberable, y: Numberable)
-    case autoOrient
-    case format
+    case resize(size: CGSize)
+    case crop(rect: CGRect)
     
     fileprivate var paddingValue: String {
         switch self {
         case .resize:
             return ""
-        case .crop(let width, let height, let x, let y):
-            return "/crop,x_\(x.toInt),y_\(y.toInt),w_\(width.toInt),h_\(height.toInt)"
-        case .autoOrient:
-            return ""
-        case .format:
-            return ""
+        case .crop(let rect):
+            return "/crop,x_\(rect.minX.toInt),y_\(rect.minY.toInt),w_\(rect.width.toInt),h_\(rect.height.toInt)"
         }
     }
 }
@@ -72,7 +66,29 @@ extension Double: Numberable {
 }
 
 extension String {
-    public func ossImageUrl(options: OSSImageOptions) -> String {
-        return self + "?x-oss-process=image" + options.paddingValue
+    public func ossImageUrl(options: OSSImageOptions) -> String? {
+        
+        guard
+            let url = URL(string: self)
+            else
+        {
+            return nil
+        }
+        
+        let params = "x-oss-process=image" + options.paddingValue
+        
+        var finalURLString: String
+        
+        let absURL = url.absoluteString
+        
+        if let query = url.query {
+            finalURLString = absURL.replacingOccurrences(of: query, with: params)
+        }
+        else {
+            finalURLString = absURL + "?" + params
+        }
+        
+        return finalURLString
     }
 }
+

@@ -11,7 +11,9 @@ import MJRefresh
 import RxSwift
 
 private var internal_rx_refreshing_key = "internal_rx_refreshing_key"
+
 private var internal_rx_pullToRefresh_key = "internal_rx_pullToRefresh_key"
+
 private var internal_rx_pullToLoadMore_key = "internal_rx_pullToLoadMore_key"
 
 extension Reactive where Base: UIScrollView {

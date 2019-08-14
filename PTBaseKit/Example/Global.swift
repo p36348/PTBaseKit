@@ -48,26 +48,10 @@ extension PTBaseKit {
 
 }
 
-public var kSafeAreInsets: UIEdgeInsets {
-    if #available(iOS 11.0, *) {
-        return UIApplication.shared.delegate?.window??.safeAreaInsets ?? UIEdgeInsets.zero
-    } else {
-        return UIEdgeInsets(top: UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0)
-    }
-}
-
-public let windowsFrame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight)
-
 public let onepixel: CGFloat = 1 / UIScreen.main.scale
-
-public let kScreenHeight: CGFloat = UIScreen.main.bounds.height
-
-public let kScreenWidth: CGFloat  = UIScreen.main.bounds.width
 
 // MARK: - base colors
 extension UIColor {
-    
-    
     
     public struct pt {
         /// 主题色
@@ -114,34 +98,5 @@ extension Int {
 }
 
 
-public struct PTBaseKitConfig {
-    public static var color: ColorConfig = kDefaultColorConfig
-    public static var font: FontConfig = kDefaultFontConfig
-    public static var scrollRefresh: ScrollRefreshConfig = kDefaultScrollRefreshConfig
-}
 
-public struct ColorConfig {
-    public let textDefault: UIColor
-}
-
-public struct FontConfig {
-    public let textDefault: UIFont
-}
-
-public struct ScrollRefreshConfig {
-    public let headerCreator: () -> MJRefreshHeader
-    public let footerCreator: () -> MJRefreshFooter
-    
-    public init(headerCreator: @escaping () -> MJRefreshHeader, footerCreator: @escaping () -> MJRefreshFooter) {
-        self.headerCreator = headerCreator
-        self.footerCreator = footerCreator
-    }
-}
-
-private let kDefaultColorConfig: ColorConfig = ColorConfig(textDefault: UIColor.pt.black)
-
-private let kDefaultFontConfig: FontConfig = FontConfig(textDefault: 15.customRegularFont)
-
-private let kDefaultScrollRefreshConfig = ScrollRefreshConfig(headerCreator: {MJRefreshNormalHeader()},
-                                                              footerCreator: {MJRefreshAutoFooter()})
 

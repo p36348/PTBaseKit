@@ -129,16 +129,4 @@ public class PTTextField: UITextField {
     public override func editingRect(forBounds bounds: CGRect) -> CGRect {
         return self.textContentRect(forBounds: super.editingRect(forBounds: bounds))
     }
-    
-    
-//    public override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
-//        let superResult = super.leftViewRect(forBounds: bounds)
-//        return CGRect(x: superResult.origin.x + contentInsets.left, y: superResult.origin.y + contentInsets.top, width: superResult.width, height: superResult.height - contentInsets.top - contentInsets.bottom)
-//    }
-//    
-//    
-//    public override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
-//        let superResult = super.rightViewRect(forBounds: bounds)
-//        return CGRect(x: superResult.origin.x - contentInsets.right, y: superResult.origin.y + contentInsets.top, width: superResult.width, height: superResult.height - contentInsets.top - contentInsets.bottom)
-//    }
 }
