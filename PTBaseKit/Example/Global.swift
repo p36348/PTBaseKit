@@ -18,13 +18,3 @@ public struct PTBaseKit {
 }
 
 public let onepixel: CGFloat = 1 / UIScreen.main.scale
-
-extension Int {
-    public var hexColor: UIColor {
-        return UIColor(red:CGFloat((self & 0xFF0000) >> 16) / 255 , green: CGFloat((self & 0x00FF00) >> 8) / 255, blue: CGFloat((self & 0x0000FF) ) / 255, alpha: 1.0)
-    }
-}
-
-
-
-

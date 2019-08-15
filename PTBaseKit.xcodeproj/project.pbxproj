@@ -16,6 +16,7 @@
 		955AA65923040E5200C0FFC0 /* String+QN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955AA65823040E5200C0FFC0 /* String+QN.swift */; };
 		955AA65D2304130C00C0FFC0 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955AA65C2304130C00C0FFC0 /* Configuration.swift */; };
 		955AA65F230413AE00C0FFC0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955AA65E230413AE00C0FFC0 /* Constants.swift */; };
+		955AA6612305059100C0FFC0 /* Int+HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955AA6602305059100C0FFC0 /* Int+HexColor.swift */; };
 		956CAB4A212D51BB00020D6E /* UtilsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956CAB49212D51BB00020D6E /* UtilsController.swift */; };
 		95927C3F221A9C68009CA9D4 /* IGListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95927C3E221A9C68009CA9D4 /* IGListViewController.swift */; };
 		9593002C2154D4070084AF9C /* OtherOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959300202154D4070084AF9C /* OtherOperator.swift */; };
@@ -110,6 +111,7 @@
 		955AA65823040E5200C0FFC0 /* String+QN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+QN.swift"; sourceTree = "<group>"; };
 		955AA65C2304130C00C0FFC0 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		955AA65E230413AE00C0FFC0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		955AA6602305059100C0FFC0 /* Int+HexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+HexColor.swift"; sourceTree = "<group>"; };
 		956CAB49212D51BB00020D6E /* UtilsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsController.swift; sourceTree = "<group>"; };
 		95927C3E221A9C68009CA9D4 /* IGListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGListViewController.swift; sourceTree = "<group>"; };
 		959300202154D4070084AF9C /* OtherOperator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherOperator.swift; sourceTree = "<group>"; };
@@ -578,6 +580,7 @@
 				959BBF082111F4B400106646 /* Optional+RxSwift.swift */,
 				959BBF1A2111F4B400106646 /* SystemInfo.swift */,
 				95B373C72186D49900608E53 /* Date+Utils.swift */,
+				955AA6602305059100C0FFC0 /* Int+HexColor.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -827,6 +830,7 @@
 				959BBF5E2111F4F300106646 /* UIKitTableController.swift in Sources */,
 				959300372154D4070084AF9C /* UILabelCss.swift in Sources */,
 				959BBF282111F4B400106646 /* LoadingController.swift in Sources */,
+				955AA6612305059100C0FFC0 /* Int+HexColor.swift in Sources */,
 				959300362154D4070084AF9C /* UIControl.swift in Sources */,
 				959BBF222111F4B400106646 /* GoogleMaps+MapAdapter.swift in Sources */,
 				959BBF292111F4B400106646 /* WebController.swift in Sources */,
