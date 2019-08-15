@@ -6,7 +6,7 @@
 //  Copyright © 2019 P36348. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension ViewFactory {
     public static func createGradientButton(cornerRadius: CGFloat? = nil) -> UIButton {
@@ -16,6 +16,15 @@ extension ViewFactory {
             button += _cornerRadius.cornerRadiusCss
         }
         return button
+    }
+    
+    public static func createEmptyButton(tintColor: UIColor = UIColor.pt.gray, radius: CGFloat = PTBaseKit.buttonRadius) -> UIButton {
+        let btn = UIButton(type: UIButton.ButtonType.system)
+        btn += tintColor.textColorCss
+        btn += 1.borderCss
+        btn += tintColor.borderCss
+        btn += radius.cornerRadiusCss
+        return btn
     }
     
     public static func createRoundButton(tintColor: UIColor = UIColor.pt.white, radius: CGFloat = PTBaseKit.buttonRadius) -> UIButton {

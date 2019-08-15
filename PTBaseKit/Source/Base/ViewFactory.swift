@@ -27,14 +27,7 @@ public struct ViewFactory {
         return label
     }
     
-    public static func createEmptyButton(tintColor: UIColor = UIColor.pt.gray, radius: CGFloat = PTBaseKit.buttonRadius) -> UIButton {
-        let btn = UIButton(type: UIButton.ButtonType.system)
-        btn += tintColor.textColorCss
-        btn += 1.borderCss
-        btn += tintColor.borderCss
-        btn += radius.cornerRadiusCss
-        return btn
-    }
+    
     
     public static func createBarButton(with normalImage: UIImage, hightlightedImage: UIImage? = nil) -> UIButton {
         var button: UIButton!
