@@ -438,7 +438,6 @@
 		959BBEE22111F4B400106646 /* TableController */ = {
 			isa = PBXGroup;
 			children = (
-				95BCCAA92159E3F800CA571D /* TableCell */,
 				959BBEE92111F4B400106646 /* Controller */,
 				959BBEEB2111F4B400106646 /* TableSection */,
 			);
@@ -548,6 +547,7 @@
 		95A45269212E603F00325960 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				95BCCAA92159E3F800CA571D /* TableCell */,
 				959300232154D4070084AF9C /* GlobalCss.swift */,
 				95D0F21E2198573000F74187 /* Global.swift */,
 				959BBEFF2111F4B400106646 /* ViewFactory.swift */,
