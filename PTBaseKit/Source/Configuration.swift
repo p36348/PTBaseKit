@@ -47,3 +47,31 @@ private let kDefaultFontConfig: FontConfig =
 private let kDefaultScrollRefreshConfig: ScrollRefreshConfig =
     ScrollRefreshConfig(headerCreator: { MJRefreshNormalHeader() },
                         footerCreator: { MJRefreshAutoFooter() })
+
+public struct Resource {
+    
+    public static var backIndicatorImage: UIImage? = nil
+    
+    public static var backIndicatorTransitionMaskImage: UIImage? = nil
+    
+    public static var webCancelImage: UIImage? = nil
+    
+    public static var accessory: UIImage? = nil
+    
+    public static var loadingLogo: UIImage? = nil
+    
+    public static var emptyImage: UIImage? = nil
+    
+    public static var alertConfirmTitle: String = "OK"
+    
+    public static var alertCancelTitle: String = "Cancel"
+    
+    public static var textFieldDoneTitle: String = "Done"
+    
+    public static var emptyTips: NSAttributedString = "No Data Yet.".attributed([.font(14.customRegularFont)])
+    
+    public static var loadingProgressTitle: String = "Loading"
+    
+    public static var loadingFinishTitle: String = "Finished"
+    
+}
