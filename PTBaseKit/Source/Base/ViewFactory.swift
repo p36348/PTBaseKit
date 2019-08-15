@@ -36,23 +36,6 @@ public struct ViewFactory {
         return btn
     }
     
-    public static func createGradientButton(cornerRadius: CGFloat? = nil) -> UIButton {
-        let button = UIButton(type: UIButton.ButtonType.system)
-        button += buttonCss
-        if let _cornerRadius = cornerRadius {
-            button += _cornerRadius.cornerRadiusCss
-        }
-        return button
-    }
-    
-    public static func createRoundButton(tintColor: UIColor = UIColor.pt.white, radius: CGFloat = PTBaseKit.buttonRadius) -> UIButton {
-        let btn = UIButton(type: UIButton.ButtonType.system)
-        btn += radius.cornerRadiusCss
-        btn += buttonImgCss
-        btn += tintColor.textColorCss
-        return btn
-    }
-    
     public static func createBarButton(with normalImage: UIImage, hightlightedImage: UIImage? = nil) -> UIButton {
         var button: UIButton!
         if #available(iOS 11, *) {

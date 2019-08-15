@@ -17,6 +17,7 @@
 		955AA65D2304130C00C0FFC0 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955AA65C2304130C00C0FFC0 /* Configuration.swift */; };
 		955AA65F230413AE00C0FFC0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955AA65E230413AE00C0FFC0 /* Constants.swift */; };
 		955AA6612305059100C0FFC0 /* Int+HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955AA6602305059100C0FFC0 /* Int+HexColor.swift */; };
+		955AA6632305083E00C0FFC0 /* ViewFactory+Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955AA6622305083E00C0FFC0 /* ViewFactory+Button.swift */; };
 		956CAB4A212D51BB00020D6E /* UtilsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956CAB49212D51BB00020D6E /* UtilsController.swift */; };
 		95927C3F221A9C68009CA9D4 /* IGListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95927C3E221A9C68009CA9D4 /* IGListViewController.swift */; };
 		9593002C2154D4070084AF9C /* OtherOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959300202154D4070084AF9C /* OtherOperator.swift */; };
@@ -112,6 +113,7 @@
 		955AA65C2304130C00C0FFC0 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		955AA65E230413AE00C0FFC0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		955AA6602305059100C0FFC0 /* Int+HexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+HexColor.swift"; sourceTree = "<group>"; };
+		955AA6622305083E00C0FFC0 /* ViewFactory+Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewFactory+Button.swift"; sourceTree = "<group>"; };
 		956CAB49212D51BB00020D6E /* UtilsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsController.swift; sourceTree = "<group>"; };
 		95927C3E221A9C68009CA9D4 /* IGListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGListViewController.swift; sourceTree = "<group>"; };
 		959300202154D4070084AF9C /* OtherOperator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherOperator.swift; sourceTree = "<group>"; };
@@ -378,10 +380,7 @@
 			children = (
 				955AA65B2304125100C0FFC0 /* RxUtility */,
 				95DCAA9B228A712700E1B9D6 /* Utility */,
-				959BBED12111F4B400106646 /* Web */,
-				959BBED92111F4B400106646 /* Extensions */,
 				959BBEE12111F4B400106646 /* List */,
-				959BBEFB2111F4B400106646 /* NetworkImageURL */,
 				959BBEFD2111F4B400106646 /* Base */,
 				9593001E2154D4070084AF9C /* CssKit */,
 				955AA65C2304130C00C0FFC0 /* Configuration.swift */,
@@ -509,6 +508,8 @@
 		959BBEFD2111F4B400106646 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				959BBEFF2111F4B400106646 /* ViewFactory.swift */,
+				959BBED12111F4B400106646 /* Web */,
 				955AA65A230411CD00C0FFC0 /* BaseViewController */,
 			);
 			path = Base;
@@ -552,7 +553,7 @@
 				95BCCAA92159E3F800CA571D /* TableCell */,
 				959300232154D4070084AF9C /* GlobalCss.swift */,
 				95D0F21E2198573000F74187 /* Global.swift */,
-				959BBEFF2111F4B400106646 /* ViewFactory.swift */,
+				955AA6622305083E00C0FFC0 /* ViewFactory+Button.swift */,
 				959BBED62111F4B400106646 /* Image */,
 				95FAFBC4211339CF00FEA6F5 /* Views */,
 				959BBEC52111F4B400106646 /* Map */,
@@ -573,6 +574,8 @@
 		95DCAA9B228A712700E1B9D6 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				959BBED92111F4B400106646 /* Extensions */,
+				959BBEFB2111F4B400106646 /* NetworkImageURL */,
 				959BBF042111F4B400106646 /* NSAttributedStringFactory.swift */,
 				959BBF052111F4B400106646 /* BlockOpreation+Utils.swift */,
 				959BBF062111F4B400106646 /* DispatchQueue+RxSwift.swift */,
@@ -832,6 +835,7 @@
 				959BBF282111F4B400106646 /* LoadingController.swift in Sources */,
 				955AA6612305059100C0FFC0 /* Int+HexColor.swift in Sources */,
 				959300362154D4070084AF9C /* UIControl.swift in Sources */,
+				955AA6632305083E00C0FFC0 /* ViewFactory+Button.swift in Sources */,
 				959BBF222111F4B400106646 /* GoogleMaps+MapAdapter.swift in Sources */,
 				959BBF292111F4B400106646 /* WebController.swift in Sources */,
 				959BBF4B2111F4B500106646 /* UserDefaultsUtils.swift in Sources */,
