@@ -26,7 +26,7 @@ public class DefaultTableCellNode: ASCellNode, TableCellNode {
     override init() {
         super.init()
         self.tail.addTarget(self, action: #selector(self.clickDetail(sender:)), forControlEvents: ASControlNodeEvent.touchUpInside)
-        self.accessory.image = PTBaseKit.Resource.accessory
+        self.accessory.image = Resource.accessory
         
         self.addSubnode(self.head)
         self.addSubnode(self.title)

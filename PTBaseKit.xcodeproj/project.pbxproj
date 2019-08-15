@@ -279,7 +279,6 @@
 			children = (
 				9593001F2154D4070084AF9C /* Operators */,
 				959300222154D4070084AF9C /* UIColor.swift */,
-				959300232154D4070084AF9C /* GlobalCss.swift */,
 				959300242154D4070084AF9C /* UIViewCss.swift */,
 				959300252154D4070084AF9C /* UIButtonCss.swift */,
 				959300262154D4070084AF9C /* Css.swift */,
@@ -549,6 +548,7 @@
 		95A45269212E603F00325960 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				959300232154D4070084AF9C /* GlobalCss.swift */,
 				95D0F21E2198573000F74187 /* Global.swift */,
 				959BBEFF2111F4B400106646 /* ViewFactory.swift */,
 				959BBED62111F4B400106646 /* Image */,

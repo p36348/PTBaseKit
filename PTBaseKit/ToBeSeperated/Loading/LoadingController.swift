@@ -44,7 +44,7 @@ public class LoadingController: BaseController {
     
     fileprivate var timeoutObservers: [AnyObserver<LoadingController>] = []
     
-    public convenience init(loadingLogo: UIImage? = PTBaseKit.Resource.loadingLogo, progressTitle: String = PTBaseKit.Resource.loadingProgressTitle, timeout: Double = 30) {
+    public convenience init(loadingLogo: UIImage? = Resource.loadingLogo, progressTitle: String = Resource.loadingProgressTitle, timeout: Double = 30) {
         self.init()
         self.logo.image = loadingLogo
         self.progressTitle = progressTitle
@@ -103,7 +103,7 @@ extension LoadingController {
         
         UIView.animate(withDuration: duration, animations: {
             self.progressBar.setProgress(1, animated: true)
-            self.progressLabel.text = PTBaseKit.Resource.loadingFinishTitle
+            self.progressLabel.text = Resource.loadingFinishTitle
             self.progressLabel.alpha = 0
         }, completion: completion)
     }

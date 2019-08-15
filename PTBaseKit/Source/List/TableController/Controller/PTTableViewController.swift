@@ -131,7 +131,7 @@ final public class PTTableViewController: BaseController, ListController {
         self.view += [self.emptyTipsImage, self.emptyTipsLabel]
         
         if self.emptyTipsImage.image == nil, self.emptyTipsLabel.attributedText == nil {
-            _ = self.setupEmptyPlaceHolder(image: PTBaseKit.Resource.emptyImage, title: PTBaseKit.Resource.emptyTips)
+            _ = self.setupEmptyPlaceHolder(image: Resource.emptyImage, title: Resource.emptyTips)
         }
         
         self.tableView.snp.makeConstraints { (make) in
