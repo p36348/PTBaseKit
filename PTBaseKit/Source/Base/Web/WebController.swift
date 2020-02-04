@@ -7,29 +7,8 @@
 //
 
 import UIKit
-
 import WebKit
 import RxSwift
-
-
-/// JS交互处理(消息从JS传递到Native)
-public class MessageHandler: NSObject, WKScriptMessageHandler {
-    
-    /// 处理闭包
-    var handler: (WKScriptMessage)->Void
-    
-    /// 唯一标识
-    var identifier: String
-    
-    public init(identifier: String, handler: @escaping (WKScriptMessage)->Void) {
-        self.identifier = identifier
-        self.handler = handler
-    }
-    
-    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        self.handler(message)
-    }
-}
 
 /// Web容器控制器
 public class WebController: BaseController {
@@ -68,13 +47,21 @@ public class WebController: BaseController {
     
     public fileprivate(set) var scriptMessageHandlers: [MessageHandler] = []
     
-    public convenience init(url: URL? = nil, header: [String: String]? = nil, jsScript: String? = nil) {
+    public convenience init(url: URL? = nil, header: [String: String]? = nil, jsScript: String? = nil, scriptMessageHandlers: [MessageHandler] = []) {
         self.init(nibName: nil, bundle: nil)
         self.url = url
         self.header = header
+        self.scriptMessageHandlers = scriptMessageHandlers
         if let _jsScript = jsScript {
             configuration.userContentController.addUserScript(WKUserScript(source: _jsScript, injectionTime: .atDocumentStart, forMainFrameOnly: false))
         }
+        scriptMessageHandlers.forEach { [unowned self] in self.configuration.userContentController.add($0, name: $0.identifier) }
+    }
+    
+    @available(iOS 11, *)
+    public convenience init(url: URL? = nil, header: [String: String]? = nil, jsScript: [String] = [], scriptMessageHandlers: [MessageHandler] = [], urlSchemeHandlers: [URLSchemeHandler] = []) {
+        self.init(url: url, header: header, jsScript: jsScript.first, scriptMessageHandlers: scriptMessageHandlers)
+        urlSchemeHandlers.forEach { [unowned self] in self.configuration.setURLSchemeHandler($0, forURLScheme: $0.scheme)}
     }
     
     public override func performPreSetup() {
@@ -108,6 +95,7 @@ public class WebController: BaseController {
         self.webView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        
         self.progressBar.snp.makeConstraints { (make) in
             make.leading.trailing.top.equalTo(self.webView)
         }
@@ -121,14 +109,12 @@ public class WebController: BaseController {
         webView.addObserver(self, forKeyPath: "title", options: .new, context: nil)
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         webView.addObserver(self, forKeyPath: "canGoBack", options: .new, context: nil)
-        self.scriptMessageHandlers.forEach { webView.configuration.userContentController.add($0, name: $0.identifier) }
     }
     
     deinit {
         self.webView.removeObserver(self, forKeyPath: "title")
         self.webView.removeObserver(self, forKeyPath: "estimatedProgress")
         self.webView.removeObserver(self, forKeyPath: "canGoBack")
-        self.scriptMessageHandlers.forEach { webView.configuration.userContentController.removeScriptMessageHandler(forName: $0.identifier) }
     }
 }
 
@@ -180,10 +166,4 @@ extension WebController {
         self.rightButtonItem = rightBarItem
         return self
     }
-    
-    public func addScriptMessageHandler(_ handler: MessageHandler) -> WebController {
-        self.scriptMessageHandlers.append(handler)
-        return self
-    }
 }
-

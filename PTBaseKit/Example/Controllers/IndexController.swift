@@ -15,7 +15,7 @@ import SwiftyJSON
 class IndexController: BaseController {
     
     lazy var segmented: UISegmentedControl = {
-        let item = UISegmentedControl(items: ["UIKitTable", "ASDKTable", "IG", "Map", "Utils", "Web"])
+        let item = UISegmentedControl(items: ["UIKitTable", "IGList", "Map", "Web"])
         item.tintColor = UIColor.clear
         item.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.pt.main], for: UIControl.State.normal)
         item.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.pt.main, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], for: UIControl.State.selected)
@@ -24,24 +24,16 @@ class IndexController: BaseController {
     }()
     
     var uikitTable: UIViewController = new_createTableController()
-    
-    var asdkTable: CustomTableNodeController = CustomTableNodeController()
-    
+        
     var igList: UIViewController = createIGListViewController()
     
     var map: UIViewController = createMapController()
     
-    var utils: UtilsController = UtilsController()
+    // var utils: UtilsController = UtilsController()
     
     lazy var web: WebURLController = WebURLController()
     
-    var webDelegate: WebDelegate = WebDelegate()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
+    // var webDelegate: WebDelegate = WebDelegate()
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -62,11 +54,10 @@ class IndexController: BaseController {
             .disposed(by: self)
         
         self.setup(controller: self.uikitTable, segmentIndex: 0)
-        self.setup(controller: self.asdkTable, segmentIndex: 1)
-        self.setup(controller: self.igList, segmentIndex: 2)
-        self.setup(controller: self.map, segmentIndex: 3)
-        self.setup(controller: self.utils, segmentIndex: 4)
-        self.setup(controller: self.web, segmentIndex: 5)
+        self.setup(controller: self.igList, segmentIndex: 1)
+        self.setup(controller: self.map, segmentIndex: 2)
+        // self.setup(controller: self.utils, segmentIndex: 3)
+        self.setup(controller: self.web, segmentIndex: 3)
         
         self.web.rx_submit.subscribe(onNext: { [weak self] in self?.navigateWeb(url: $0) }).disposed(by: self)
     }
@@ -74,8 +65,21 @@ class IndexController: BaseController {
     private func navigateWeb(url: String) {
         let customJson: JSON = ["token": "I am token!!!!"]
         let jsSCript = "window.duckCustomJson = \(customJson.rawString()!)"
-        let destination = WebController(url: URL(string: url), header: nil, jsScript: jsSCript)
-        destination.webView.navigationDelegate = webDelegate
+        
+        let destination: WebController
+        if #available(iOS 13, *) {
+            let urlHandler = URLSchemeHandler(scheme: "ptbasekit", startHandler: { value in
+                
+            })
+            destination = WebController(url: URL(string: url), header: nil, jsScript: [jsSCript], urlSchemeHandlers: [urlHandler])
+            
+        }else if #available(iOS 11, *) {
+            destination = WebController(url: URL(string: url), header: nil, jsScript: jsSCript)
+        }
+        else {
+            destination = WebController(url: URL(string: url), header: nil, jsScript: jsSCript)
+        }
+        // destination.webView.navigationDelegate = webDelegate
         self.navigationController?.pushViewController(destination, animated: true)
     }
     
@@ -86,7 +90,9 @@ class IndexController: BaseController {
         // 把显示与否绑定到对应的index上
         self.segmented.rx.value.map { $0 != segmentIndex }.bind(to: controller.view.rx.isHidden).disposed(by: self)
     }
+    
 }
+
 import WebKit
 
 class WebDelegate: NSObject, WKNavigationDelegate {
@@ -95,6 +101,40 @@ class WebDelegate: NSObject, WKNavigationDelegate {
         webView.evaluateJavaScript("getDuckAppData(\(params))") { (val, error) in
             
         }
+    }
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+        if
+            let response = navigationResponse.response as? HTTPURLResponse,
+            let headers = response.allHeaderFields as? [String : String],
+            let url = response.url
+        {
+            HTTPCookie.cookies(withResponseHeaderFields: headers, for: url)
+            HTTPCookieStorage.shared.cookies(for: url)
+            HTTPCookieStorage.shared.cookies
+            
+            if #available(iOS 11.0, *) {
+                webView.configuration.websiteDataStore.httpCookieStore.getAllCookies { (cookies) in
+                    //
+                    cookies.filter { $0.commentURL?.absoluteString == url.absoluteString }
+                }
+                
+            }
+        }
+        
+        let url = URL(string: "https://www.jianshu.com")!
+        
+        if let cookie = HTTPCookie(properties: [HTTPCookiePropertyKey.commentURL: url]) {
+            
+            HTTPCookieStorage.shared.setCookie(cookie)
+            HTTPCookieStorage.shared.setCookies([cookie], for: url, mainDocumentURL: url)
+            
+            if #available(iOS 11.0, *) {
+                webView.configuration.websiteDataStore.httpCookieStore.setCookie(cookie, completionHandler: nil)
+            }
+        }
+        
+        decisionHandler(.allow)
     }
 }
 

@@ -31,7 +31,7 @@ class WebURLController: BaseController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        input.text =  "https://h5.duck.app.zhuiyinanian.com/#/test/tx"//"http://192.168.10.30:3000"//"https://h5.duck.app.zhuiyinanian.com/#/test/tx"
+        input.text =  "https://www.bungamonkey.com"
     }
     
     override func didReceiveMemoryWarning() {

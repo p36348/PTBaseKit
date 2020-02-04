@@ -1,5 +1,5 @@
 //
-//  DispatchQueue+RxSwift.swift
+//  DispatchQueue+Rx.swift
 //  PTBaseKit
 //
 //  Created by P36348 on 13/03/2018.
@@ -9,11 +9,11 @@
 import Foundation
 import RxSwift
 
-extension DispatchQueue {
-    public func rx_async<T>(with obj: T, afterDelay timeInterval: TimeInterval = 0) -> Observable<T> {
+extension Reactive where Base: DispatchQueue {
+    public func async<T>(with obj: T, afterDelay timeInterval: TimeInterval = 0) -> Observable<T> {
         return Observable
             .create({ (observer) -> Disposable in
-                self.asyncAfter(deadline: DispatchTime.now() + timeInterval,
+                self.base.asyncAfter(deadline: DispatchTime.now() + timeInterval,
                                 execute: {
                                         observer.onNext(obj)
                                         observer.onCompleted()

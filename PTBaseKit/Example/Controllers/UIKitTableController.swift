@@ -39,8 +39,8 @@ func createTableController() -> UIViewController {
 
 func new_createTableController() -> UIViewController {
     
-    let table = PTTableViewController()
-    
+    let table = PTTableViewController(tableViewStyle: .grouped)
+
     table.rx
         .bindRefresh(toGenerator: fakeViewModelRefreshGenerator)
         .disposed(by: table)

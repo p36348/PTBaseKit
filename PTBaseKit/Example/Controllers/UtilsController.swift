@@ -128,8 +128,8 @@ private func testLoopOperation() {
         })
         .disposed(by: disposeBag)
     
-    DispatchQueue.global()
-        .rx_async(with: ())
+    Observable.of(())
+        .subscribeOn(ConcurrentDispatchQueueScheduler(queue: DispatchQueue.global()))
         .flatMap {rx_createLoopOperation(gap: 5, name: "test.loop.operation.in.global.queue")}
         .subscribe(onNext: { (_) in
             print("loop called")

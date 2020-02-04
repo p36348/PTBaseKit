@@ -22,20 +22,16 @@ extension BaseController {
  * 为了增加流畅性, 使用 performSetup 函数替代 viewDidLoad 去执行界面初始化工作
  * 接入facebook的texture框架, 进一步提高滑动性能 (暂时去掉)
  */
-open class BaseController: UIViewController {
+open class BaseController: UIViewController, Disposer {
     
-    public fileprivate(set) lazy var disposeBags: [String: DisposeBag] = [BaseController.DisposeIdentifiers.default: self.defaultDisposeBag]
-    
-    public fileprivate(set) var defaultDisposeBag: DisposeBag! = DisposeBag()
-    
+    var disposableController: DisposableController = DisposableController()
     
     /// 用于配置viewDidLoad行为, 在不继承的场景下可以使用, 相当于继承之后重载performSetup
     public var performOnViewDidLoad: (BaseController)->Void = { _ in }
 
     deinit {
         NotificationCenter.default.removeObserver(self)
-        self.disposeBags.removeAll()
-        self.defaultDisposeBag = nil
+        self.disposableController.disposeAll()
         print("\(#function) -- line[\(#line)] -- \((#file as NSString).lastPathComponent)  -- \(self)")
     }
     
@@ -71,26 +67,15 @@ open class BaseController: UIViewController {
 }
 
 
-
 extension BaseController {
     public func dispose(identifier: String = BaseController.DisposeIdentifiers.default) {
-        self.disposeBags[identifier] = nil
+        self.disposableController.dispose(identifier: identifier)
     }
 }
 
 extension Disposable {
     public func disposed(by controller: BaseController, identifier: String = BaseController.DisposeIdentifiers.default) {
-        if
-            let bag = controller.disposeBags[identifier]
-        {
-            bag.insert(self)
-        }
-        else
-        {
-            let bag = DisposeBag()
-            bag.insert(self)
-            controller.disposeBags[identifier] = bag
-        }
+        controller.disposableController.add(disposable: self, identifier: identifier)
     }
 }
 
